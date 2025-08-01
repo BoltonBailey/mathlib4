@@ -33,7 +33,7 @@ attribute [local instance] enle.isLinearOrder decidable_enle
 
 /-- Explicit encoding function for `Multiset α` -/
 def encodeMultiset (s : Multiset α) : ℕ :=
-  encode (s.sort enle)
+  encode (s.sortBy enle)
 
 /-- Explicit decoding function for `Multiset α` -/
 def decodeMultiset (n : ℕ) : Option (Multiset α) :=
@@ -85,12 +85,12 @@ theorem raise_sorted : ∀ l n, List.Sorted (· ≤ ·) (raise l n)
 in `Multiset.encodable`. -/
 instance multiset : Denumerable (Multiset α) :=
   mk'
-    ⟨fun s : Multiset α => encode <| lower ((s.map encode).sort (· ≤ ·)) 0,
+    ⟨fun s : Multiset α => encode <| lower ((s.map encode).sortBy (· ≤ ·)) 0,
      fun n =>
       Multiset.map (ofNat α) (raise (ofNat (List ℕ) n) 0),
      fun s => by
       have :=
-        raise_lower (List.sorted_cons.2 ⟨fun n _ => Nat.zero_le n, (s.map encode).sort_sorted _⟩)
+        raise_lower (List.sorted_cons.2 ⟨fun n _ => Nat.zero_le n, (s.map encode).sortBy_sorted _⟩)
       simp [-Multiset.map_coe, this],
      fun n => by
       simp [-Multiset.map_coe, List.mergeSort_eq_self _ (raise_sorted _ _), lower_raise]⟩

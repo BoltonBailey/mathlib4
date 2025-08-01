@@ -50,7 +50,7 @@ natural number satisfying `p`), or `0` if there is no such number. See also
 `Subtype.orderIsoOfNat` for the order isomorphism with ℕ when `p` is infinitely often true. -/
 noncomputable def nth (p : ℕ → Prop) (n : ℕ) : ℕ := by
   classical exact
-    if h : Set.Finite (setOf p) then (h.toFinset.sort (· ≤ ·)).getD n 0
+    if h : Set.Finite (setOf p) then (h.toFinset.sortBy (· ≤ ·)).getD n 0
     else @Nat.Subtype.orderIsoOfNat (setOf p) (Set.Infinite.to_subtype h) n
 
 variable {p}
@@ -61,10 +61,10 @@ variable {p}
 
 
 theorem nth_of_card_le (hf : (setOf p).Finite) {n : ℕ} (hn : #hf.toFinset ≤ n) :
-    nth p n = 0 := by rw [nth, dif_pos hf, List.getD_eq_default]; rwa [Finset.length_sort]
+    nth p n = 0 := by rw [nth, dif_pos hf, List.getD_eq_default]; rwa [Finset.length_sortBy]
 
 theorem nth_eq_getD_sort (h : (setOf p).Finite) (n : ℕ) :
-    nth p n = (h.toFinset.sort (· ≤ ·)).getD n 0 :=
+    nth p n = (h.toFinset.sortBy (· ≤ ·)).getD n 0 :=
   dif_pos h
 
 theorem nth_eq_orderEmbOfFin (hf : (setOf p).Finite) {n : ℕ} (hn : n < #hf.toFinset) :
@@ -97,8 +97,8 @@ theorem nth_injOn (hf : (setOf p).Finite) : (Set.Iio #hf.toFinset).InjOn (nth p)
   (nth_strictMonoOn hf).injOn
 
 theorem range_nth_of_finite (hf : (setOf p).Finite) : Set.range (nth p) = insert 0 (setOf p) := by
-  simpa only [← List.getD_eq_getElem?_getD, ← nth_eq_getD_sort hf, mem_sort,
-    Set.Finite.mem_toFinset] using Set.range_list_getD (hf.toFinset.sort (· ≤ ·)) 0
+  simpa only [← List.getD_eq_getElem?_getD, ← nth_eq_getD_sort hf, mem_sortBy,
+    Set.Finite.mem_toFinset] using Set.range_list_getD (hf.toFinset.sortBy (· ≤ ·)) 0
 
 @[simp]
 theorem image_nth_Iio_card (hf : (setOf p).Finite) : nth p '' Set.Iio #hf.toFinset = setOf p :=

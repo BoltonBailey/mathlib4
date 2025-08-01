@@ -87,7 +87,7 @@ product of the elements in this list is the delta function `spanFinBasis C s x`.
 -/
 def factors (x : π C (· ∈ s)) : List (LocallyConstant (π C (· ∈ s)) ℤ) :=
   List.map (fun i ↦ if x.val i = true then e (π C (· ∈ s)) i else (1 - (e (π C (· ∈ s)) i)))
-    (s.sort (· ≥ ·))
+    (s.sortBy (· ≥ ·))
 
 theorem list_prod_apply {I} (C : Set (I → Bool)) (x : C) (l : List (LocallyConstant C ℤ)) :
     l.prod x = (l.map (LocallyConstant.evalMonoidHom x)).prod := by
@@ -108,13 +108,13 @@ theorem factors_prod_eq_basis_of_eq {x y : (π C fun x ↦ x ∈ s)} (h : y = x)
 theorem e_mem_of_eq_true {x : (π C (· ∈ s))} {a : I} (hx : x.val a = true) :
     e (π C (· ∈ s)) a ∈ factors C s x := by
   rcases x with ⟨_, z, hz, rfl⟩
-  simp only [factors, List.mem_map, Finset.mem_sort]
+  simp only [factors, List.mem_map, Finset.mem_sortBy]
   refine ⟨a, ?_, if_pos hx⟩
   aesop (add simp Proj)
 
 theorem one_sub_e_mem_of_false {x y : (π C (· ∈ s))} {a : I} (ha : y.val a = true)
     (hx : x.val a = false) : 1 - e (π C (· ∈ s)) a ∈ factors C s x := by
-  simp only [factors, List.mem_map, Finset.mem_sort]
+  simp only [factors, List.mem_map, Finset.mem_sortBy]
   use a
   simp only [hx]
   rcases y with ⟨_, z, hz, rfl⟩
@@ -173,12 +173,12 @@ theorem GoodProducts.spanFin [WellFoundedLT I] :
   rw [Submodule.span_le]
   rintro _ ⟨x, rfl⟩
   rw [← factors_prod_eq_basis]
-  let l := s.sort (· ≥ ·)
+  let l := s.sortBy (· ≥ ·)
   dsimp [factors]
   suffices l.Chain' (· > ·) → (l.map (fun i ↦ if x.val i = true then e (π C (· ∈ s)) i
       else (1 - (e (π C (· ∈ s)) i)))).prod ∈
       Submodule.span ℤ ((Products.eval (π C (· ∈ s))) '' {m | m.val ≤ l}) from
-    Submodule.span_mono (Set.image_subset_range _ _) (this (Finset.sort_sorted_gt _).chain')
+    Submodule.span_mono (Set.image_subset_range _ _) (this (Finset.sortBy_ge_sorted_gt _).chain')
   induction l with
   | nil =>
     intro _

@@ -24,24 +24,24 @@ namespace Encodable
 
 /-- The elements of a `Fintype` as a sorted list. -/
 def sortedUniv (α) [Fintype α] [Encodable α] : List α :=
-  Finset.univ.sort (Encodable.encode' α ⁻¹'o (· ≤ ·))
+  Finset.univ.sortBy (Encodable.encode' α ⁻¹'o (· ≤ ·))
 
 @[simp]
 theorem mem_sortedUniv {α} [Fintype α] [Encodable α] (x : α) : x ∈ sortedUniv α :=
-  (Finset.mem_sort _).2 (Finset.mem_univ _)
+  (Finset.mem_sortBy _).2 (Finset.mem_univ _)
 
 @[simp]
 theorem length_sortedUniv (α) [Fintype α] [Encodable α] : (sortedUniv α).length = Fintype.card α :=
-  Finset.length_sort _
+  Finset.length_sortBy _
 
 @[simp]
 theorem sortedUniv_nodup (α) [Fintype α] [Encodable α] : (sortedUniv α).Nodup :=
-  Finset.sort_nodup _ _
+  Finset.sortBy_nodup _ _
 
 @[simp]
 theorem sortedUniv_toFinset (α) [Fintype α] [Encodable α] [DecidableEq α] :
     (sortedUniv α).toFinset = Finset.univ :=
-  Finset.sort_toFinset _ _
+  Finset.sortBy_toFinset _ _
 
 /-- An encodable `Fintype` is equivalent to the same size `Fin`. -/
 def fintypeEquivFin {α} [Fintype α] [Encodable α] : α ≃ Fin (Fintype.card α) :=
@@ -97,13 +97,13 @@ def raise'Finset (l : List ℕ) (n : ℕ) : Finset ℕ :=
 in `Finset.encodable`. -/
 instance finset : Denumerable (Finset α) :=
   mk'
-    ⟨fun s : Finset α => encode <| lower' ((s.map (eqv α).toEmbedding).sort (· ≤ ·)) 0, fun n =>
+    ⟨fun s : Finset α => encode <| lower' ((s.map (eqv α).toEmbedding).sortBy (· ≤ ·)) 0, fun n =>
       Finset.map (eqv α).symm.toEmbedding (raise'Finset (ofNat (List ℕ) n) 0), fun s =>
       Finset.eq_of_veq <| by
         simp [-Multiset.map_coe, raise'Finset,
-          raise_lower' (fun n _ => Nat.zero_le n) (Finset.sort_sorted_lt _)],
+          raise_lower' (fun n _ => Nat.zero_le n) (Finset.sortBy_le_sorted_lt _)],
       fun n => by
-      simp [-Multiset.map_coe, Finset.map, raise'Finset, Finset.sort,
+      simp [-Multiset.map_coe, Finset.map, raise'Finset, Finset.sortBy,
         List.mergeSort_eq_self _ (raise'_sorted _ _).le_of_lt, lower_raise']⟩
 
 end Denumerable

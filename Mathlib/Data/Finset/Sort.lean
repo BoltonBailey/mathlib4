@@ -21,143 +21,144 @@ variable {α β : Type*}
 /-! ### sort -/
 
 
-section sort
+section sortBy
 
 variable (r : α → α → Prop) [DecidableRel r] [IsTrans α r] [IsAntisymm α r] [IsTotal α r]
 variable (r' : β → β → Prop) [DecidableRel r'] [IsTrans β r'] [IsAntisymm β r'] [IsTotal β r']
 
 /-- `sort s` constructs a sorted list from the unordered set `s`.
   (Uses merge sort algorithm.) -/
-def sort (s : Finset α) : List α :=
-  Multiset.sort r s.1
+def sortBy (s : Finset α) : List α :=
+  Multiset.sortBy r s.1
 
 @[simp]
-theorem sort_val (s : Finset α) : Multiset.sort r s.val = sort r s :=
+theorem sortBy_val (s : Finset α) : Multiset.sortBy r s.val = sortBy r s :=
   rfl
 
 @[simp]
-theorem sort_mk {s : Multiset α} (h : s.Nodup) : sort r ⟨s, h⟩ = s.sort r := rfl
+theorem sortBy_mk {s : Multiset α} (h : s.Nodup) : sortBy r ⟨s, h⟩ = s.sortBy r := rfl
 
 @[simp]
-theorem sort_sorted (s : Finset α) : List.Sorted r (sort r s) :=
-  Multiset.sort_sorted _ _
+theorem sortBy_sorted (s : Finset α) : List.Sorted r (sortBy r s) :=
+  Multiset.sortBy_sorted _ _
 
 @[simp]
-theorem sort_eq (s : Finset α) : ↑(sort r s) = s.1 :=
-  Multiset.sort_eq _ _
+theorem sortBy_eq (s : Finset α) : ↑(sortBy r s) = s.1 :=
+  Multiset.sortBy_eq _ _
 
 @[simp]
-theorem sort_nodup (s : Finset α) : (sort r s).Nodup :=
-  (by rw [sort_eq]; exact s.2 : @Multiset.Nodup α (sort r s))
+theorem sortBy_nodup (s : Finset α) : (sortBy r s).Nodup :=
+  (by rw [sortBy_eq]; exact s.2 : @Multiset.Nodup α (sortBy r s))
 
 @[simp]
-theorem sort_toFinset [DecidableEq α] (s : Finset α) : (sort r s).toFinset = s :=
-  List.toFinset_eq (sort_nodup r s) ▸ eq_of_veq (sort_eq r s)
+theorem sortBy_toFinset [DecidableEq α] (s : Finset α) : (sortBy r s).toFinset = s :=
+  List.toFinset_eq (sortBy_nodup r s) ▸ eq_of_veq (sortBy_eq r s)
 
 @[simp]
-theorem mem_sort {s : Finset α} {a : α} : a ∈ sort r s ↔ a ∈ s :=
-  Multiset.mem_sort _
+theorem mem_sortBy {s : Finset α} {a : α} : a ∈ sortBy r s ↔ a ∈ s :=
+  Multiset.mem_sortBy _
 
 @[simp]
-theorem length_sort {s : Finset α} : (sort r s).length = s.card :=
-  Multiset.length_sort _
+theorem length_sortBy {s : Finset α} : (sortBy r s).length = s.card :=
+  Multiset.length_sortBy _
 
 @[simp]
-theorem sort_empty : sort r ∅ = [] :=
-  Multiset.sort_zero r
+theorem sortBy_empty : sortBy r ∅ = [] :=
+  Multiset.sortBy_zero r
 
 @[simp]
-theorem sort_singleton (a : α) : sort r {a} = [a] :=
-  Multiset.sort_singleton r a
+theorem sortBy_singleton (a : α) : sortBy r {a} = [a] :=
+  Multiset.sortBy_singleton r a
 
-theorem map_sort (f : α ↪ β) (s : Finset α)
+theorem map_sortBy (f : α ↪ β) (s : Finset α)
     (hs : ∀ a ∈ s, ∀ b ∈ s, r a b ↔ r' (f a) (f b)) :
-    (s.sort r).map f = (s.map f).sort r' :=
-  Multiset.map_sort _ _ _ _ hs
+    (s.sortBy r).map f = (s.map f).sortBy r' :=
+  Multiset.map_sortBy _ _ _ _ hs
 
-theorem _root_.StrictMonoOn.map_finsetSort [LinearOrder α] [LinearOrder β]
+theorem _root_.StrictMonoOn.map_finsetSortBy [LinearOrder α] [LinearOrder β]
     (f : α ↪ β) (s : Finset α) (hf : StrictMonoOn f s) :
-    (s.sort (· ≤ ·)).map f = (s.map f).sort (· ≤ ·) :=
-  Finset.map_sort _ _ _ _ fun _a ha _b hb => (hf.le_iff_le ha hb).symm
+    (s.sortBy (· ≤ ·)).map f = (s.map f).sortBy (· ≤ ·) :=
+  Finset.map_sortBy _ _ _ _ fun _a ha _b hb => (hf.le_iff_le ha hb).symm
 
-theorem sort_cons {a : α} {s : Finset α} (h₁ : ∀ b ∈ s, r a b) (h₂ : a ∉ s) :
-    sort r (cons a s h₂) = a :: sort r s := by
-  rw [sort, cons_val, Multiset.sort_cons r a _ h₁, sort_val]
+theorem sortBy_cons {a : α} {s : Finset α} (h₁ : ∀ b ∈ s, r a b) (h₂ : a ∉ s) :
+    sortBy r (cons a s h₂) = a :: sortBy r s := by
+  rw [sortBy, cons_val, Multiset.sortBy_cons r a _ h₁, sortBy_val]
 
-theorem sort_insert [DecidableEq α] {a : α} {s : Finset α} (h₁ : ∀ b ∈ s, r a b) (h₂ : a ∉ s) :
-    sort r (insert a s) = a :: sort r s := by
-  rw [← cons_eq_insert _ _ h₂, sort_cons r h₁]
+theorem sortBy_insert [DecidableEq α] {a : α} {s : Finset α} (h₁ : ∀ b ∈ s, r a b) (h₂ : a ∉ s) :
+    sortBy r (insert a s) = a :: sortBy r s := by
+  rw [← cons_eq_insert _ _ h₂, sortBy_cons r h₁]
 
 @[simp]
-theorem sort_range (n : ℕ) : sort (· ≤ ·) (range n) = List.range n :=
-  Multiset.sort_range n
+theorem sortBy_le_range (n : ℕ) : sortBy (· ≤ ·) (range n) = List.range n :=
+  Multiset.sortBy_le_range n
 
 open scoped List in
-theorem sort_perm_toList (s : Finset α) : sort r s ~ s.toList := by
+theorem sortBy_perm_toList (s : Finset α) : sortBy r s ~ s.toList := by
   rw [← Multiset.coe_eq_coe]
-  simp only [coe_toList, sort_eq]
+  simp only [coe_toList, sortBy_eq]
 
 theorem _root_.List.toFinset_sort [DecidableEq α] {l : List α} (hl : l.Nodup) :
-    sort r l.toFinset = l ↔ l.Sorted r := by
-  refine ⟨?_, List.eq_of_perm_of_sorted ((sort_perm_toList r _).trans (List.toFinset_toList hl))
-    (sort_sorted r _)⟩
+    sortBy r l.toFinset = l ↔ l.Sorted r := by
+  refine ⟨?_, List.eq_of_perm_of_sorted ((sortBy_perm_toList r _).trans (List.toFinset_toList hl))
+    (sortBy_sorted r _)⟩
   intro h
   rw [← h]
-  exact sort_sorted r _
+  exact sortBy_sorted r _
 
-end sort
+end sortBy
 
-section SortLinearOrder
+section sort
 
 variable [LinearOrder α]
 
-theorem sort_sorted_lt (s : Finset α) : List.Sorted (· < ·) (sort (· ≤ ·) s) :=
-  (sort_sorted _ _).lt_of_le (sort_nodup _ _)
+theorem sortBy_le_sorted_lt (s : Finset α) : List.Sorted (· < ·) (sortBy (· ≤ ·) s) :=
+  (sortBy_sorted _ _).lt_of_le (sortBy_nodup _ _)
 
-theorem sort_sorted_gt (s : Finset α) : List.Sorted (· > ·) (sort (· ≥ ·) s) :=
-  (sort_sorted _ _).gt_of_ge (sort_nodup _ _)
+theorem sortBy_ge_sorted_gt (s : Finset α) : List.Sorted (· > ·) (sortBy (· ≥ ·) s) :=
+  (sortBy_sorted _ _).gt_of_ge (sortBy_nodup _ _)
 
-theorem sorted_zero_eq_min'_aux (s : Finset α) (h : 0 < (s.sort (· ≤ ·)).length) (H : s.Nonempty) :
-    (s.sort (· ≤ ·)).get ⟨0, h⟩ = s.min' H := by
-  let l := s.sort (· ≤ ·)
+theorem sorted_zero_eq_min'_aux (s : Finset α)
+    (h : 0 < (s.sortBy (· ≤ ·)).length) (H : s.Nonempty) :
+    (s.sortBy (· ≤ ·)).get ⟨0, h⟩ = s.min' H := by
+  let l := s.sortBy (· ≤ ·)
   apply le_antisymm
-  · have : s.min' H ∈ l := (Finset.mem_sort (α := α) (· ≤ ·)).mpr (s.min'_mem H)
+  · have : s.min' H ∈ l := (Finset.mem_sortBy (α := α) (· ≤ ·)).mpr (s.min'_mem H)
     obtain ⟨i, hi⟩ : ∃ i, l.get i = s.min' H := List.mem_iff_get.1 this
     rw [← hi]
-    exact (s.sort_sorted (· ≤ ·)).rel_get_of_le (Nat.zero_le i)
-  · have : l.get ⟨0, h⟩ ∈ s := (Finset.mem_sort (α := α) (· ≤ ·)).1 (List.get_mem l _)
+    exact (s.sortBy_sorted (· ≤ ·)).rel_get_of_le (Nat.zero_le i)
+  · have : l.get ⟨0, h⟩ ∈ s := (Finset.mem_sortBy (α := α) (· ≤ ·)).1 (List.get_mem l _)
     exact s.min'_le _ this
 
-theorem sorted_zero_eq_min' {s : Finset α} {h : 0 < (s.sort (· ≤ ·)).length} :
-    (s.sort (· ≤ ·))[0] = s.min' (card_pos.1 <| by rwa [length_sort] at h) :=
+theorem sorted_zero_eq_min' {s : Finset α} {h : 0 < (s.sortBy (· ≤ ·)).length} :
+    (s.sortBy (· ≤ ·))[0] = s.min' (card_pos.1 <| by rwa [length_sortBy] at h) :=
   sorted_zero_eq_min'_aux _ _ _
 
 theorem min'_eq_sorted_zero {s : Finset α} {h : s.Nonempty} :
-    s.min' h = (s.sort (· ≤ ·))[0]'(by rw [length_sort]; exact card_pos.2 h) :=
+    s.min' h = (s.sortBy (· ≤ ·))[0]'(by rw [length_sortBy]; exact card_pos.2 h) :=
   (sorted_zero_eq_min'_aux _ _ _).symm
 
 theorem sorted_last_eq_max'_aux (s : Finset α)
-    (h : (s.sort (· ≤ ·)).length - 1 < (s.sort (· ≤ ·)).length) (H : s.Nonempty) :
-    (s.sort (· ≤ ·))[(s.sort (· ≤ ·)).length - 1] = s.max' H := by
-  let l := s.sort (· ≤ ·)
+    (h : (s.sortBy (· ≤ ·)).length - 1 < (s.sortBy (· ≤ ·)).length) (H : s.Nonempty) :
+    (s.sortBy (· ≤ ·))[(s.sortBy (· ≤ ·)).length - 1] = s.max' H := by
+  let l := s.sortBy (· ≤ ·)
   apply le_antisymm
-  · have : l.get ⟨(s.sort (· ≤ ·)).length - 1, h⟩ ∈ s :=
-      (Finset.mem_sort (α := α) (· ≤ ·)).1 (List.get_mem l _)
+  · have : l.get ⟨(s.sortBy (· ≤ ·)).length - 1, h⟩ ∈ s :=
+      (Finset.mem_sortBy (α := α) (· ≤ ·)).1 (List.get_mem l _)
     exact s.le_max' _ this
-  · have : s.max' H ∈ l := (Finset.mem_sort (α := α) (· ≤ ·)).mpr (s.max'_mem H)
+  · have : s.max' H ∈ l := (Finset.mem_sortBy (α := α) (· ≤ ·)).mpr (s.max'_mem H)
     obtain ⟨i, hi⟩ : ∃ i, l.get i = s.max' H := List.mem_iff_get.1 this
     rw [← hi]
-    exact (s.sort_sorted (· ≤ ·)).rel_get_of_le (Nat.le_sub_one_of_lt i.prop)
+    exact (s.sortBy_sorted (· ≤ ·)).rel_get_of_le (Nat.le_sub_one_of_lt i.prop)
 
 theorem sorted_last_eq_max' {s : Finset α}
-    {h : (s.sort (· ≤ ·)).length - 1 < (s.sort (· ≤ ·)).length} :
-    (s.sort (· ≤ ·))[(s.sort (· ≤ ·)).length - 1] =
-      s.max' (by rw [length_sort] at h; exact card_pos.1 (lt_of_le_of_lt bot_le h)) :=
+    {h : (s.sortBy (· ≤ ·)).length - 1 < (s.sortBy (· ≤ ·)).length} :
+    (s.sortBy (· ≤ ·))[(s.sortBy (· ≤ ·)).length - 1] =
+      s.max' (by rw [length_sortBy] at h; exact card_pos.1 (lt_of_le_of_lt bot_le h)) :=
   sorted_last_eq_max'_aux _ h _
 
 theorem max'_eq_sorted_last {s : Finset α} {h : s.Nonempty} :
     s.max' h =
-      (s.sort (· ≤ ·))[(s.sort (· ≤ ·)).length - 1]'
+      (s.sortBy (· ≤ ·))[(s.sortBy (· ≤ ·)).length - 1]'
         (by simpa using Nat.sub_lt (card_pos.mpr h) Nat.zero_lt_one) :=
   (sorted_last_eq_max'_aux _ (by simpa using Nat.sub_lt (card_pos.mpr h) Nat.zero_lt_one) _).symm
 
@@ -166,8 +167,8 @@ is the increasing bijection between `Fin k` and `s` as an `OrderIso`. Here, `h` 
 the cardinality of `s` is `k`. We use this instead of an iso `Fin s.card ≃o s` to avoid
 casting issues in further uses of this function. -/
 def orderIsoOfFin (s : Finset α) {k : ℕ} (h : s.card = k) : Fin k ≃o s :=
-  OrderIso.trans (Fin.castOrderIso ((length_sort (α := α) (· ≤ ·)).trans h).symm) <|
-    (s.sort_sorted_lt.getIso _).trans <| OrderIso.setCongr _ _ <| Set.ext fun _ => mem_sort _
+  OrderIso.trans (Fin.castOrderIso ((length_sortBy (α := α) (· ≤ ·)).trans h).symm) <|
+    (s.sortBy_le_sorted_lt.getIso _).trans <| OrderIso.setCongr _ _ <| Set.ext fun _ => mem_sortBy _
 
 /-- Given a finset `s` of cardinality `k` in a linear order `α`, the map `orderEmbOfFin s h` is
 the increasing bijection between `Fin k` and `s` as an order embedding into `α`. Here, `h` is a
@@ -182,11 +183,11 @@ theorem coe_orderIsoOfFin_apply (s : Finset α) {k : ℕ} (h : s.card = k) (i : 
   rfl
 
 theorem orderIsoOfFin_symm_apply (s : Finset α) {k : ℕ} (h : s.card = k) (x : s) :
-    ↑((s.orderIsoOfFin h).symm x) = (s.sort (· ≤ ·)).idxOf ↑x :=
+    ↑((s.orderIsoOfFin h).symm x) = (s.sortBy (· ≤ ·)).idxOf ↑x :=
   rfl
 
 theorem orderEmbOfFin_apply (s : Finset α) {k : ℕ} (h : s.card = k) (i : Fin k) :
-    s.orderEmbOfFin h i = (s.sort (· ≤ ·))[i]'(by rw [length_sort, h]; exact i.2) :=
+    s.orderEmbOfFin h i = (s.sortBy (· ≤ ·))[i]'(by rw [length_sortBy, h]; exact i.2) :=
   rfl
 
 @[simp]
@@ -215,9 +216,9 @@ theorem map_orderEmbOfFin_univ (s : Finset α) {k : ℕ} (h : s.card = k) :
 
 @[simp]
 theorem listMap_orderEmbOfFin_finRange (s : Finset α) {k : ℕ} (h : s.card = k) :
-    (List.finRange k).map (s.orderEmbOfFin h) = s.sort (· ≤ ·) := by
-  obtain rfl : k = (s.sort (· ≤ ·)).length := by simp [h]
-  exact List.finRange_map_getElem (s.sort (· ≤ ·))
+    (List.finRange k).map (s.orderEmbOfFin h) = s.sortBy (· ≤ ·) := by
+  obtain rfl : k = (s.sortBy (· ≤ ·)).length := by simp [h]
+  exact List.finRange_map_getElem (s.sortBy (· ≤ ·))
 
 /-- The bijection `orderEmbOfFin s h` sends `0` to the minimum of `s`. -/
 theorem orderEmbOfFin_zero {s : Finset α} {k : ℕ} (h : s.card = k) (hz : 0 < k) :
@@ -298,7 +299,7 @@ lemma orderEmbOfFin_compl_singleton_apply {n : ℕ} {i : Fin (n + 1)} {k : ℕ}
   rw [orderEmbOfFin_compl_singleton]
   simp
 
-end SortLinearOrder
+end sort
 
 unsafe instance [Repr α] : Repr (Finset α) where
   reprPrec s _ :=
@@ -309,11 +310,11 @@ end Finset
 
 namespace Fin
 
-theorem sort_univ (n : ℕ) : Finset.univ.sort (fun x y : Fin n => x ≤ y) = List.finRange n :=
+theorem sortBy_le_univ (n : ℕ) : Finset.univ.sortBy (fun x y : Fin n => x ≤ y) = List.finRange n :=
   List.eq_of_perm_of_sorted
     (List.perm_of_nodup_nodup_toFinset_eq
-      (Finset.univ.sort_nodup _) (List.nodup_finRange n) (by simp))
-    (Finset.univ.sort_sorted LE.le)
+      (Finset.univ.sortBy_nodup _) (List.nodup_finRange n) (by simp))
+    (Finset.univ.sortBy_sorted LE.le)
     (List.pairwise_le_finRange n)
 
 end Fin

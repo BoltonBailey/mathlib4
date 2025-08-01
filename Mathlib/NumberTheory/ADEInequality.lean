@@ -229,13 +229,13 @@ theorem admissible_of_one_lt_sumInv_aux :
 theorem admissible_of_one_lt_sumInv {p q r : ℕ+} (H : 1 < sumInv {p, q, r}) :
     Admissible {p, q, r} := by
   simp only [Admissible]
-  let S := sort ((· ≤ ·) : ℕ+ → ℕ+ → Prop) {p, q, r}
-  have hS : S.Sorted (· ≤ ·) := sort_sorted _ _
-  have hpqr : ({p, q, r} : Multiset ℕ+) = S := (sort_eq LE.le {p, q, r}).symm
+  let S := sortBy ((· ≤ ·) : ℕ+ → ℕ+ → Prop) {p, q, r}
+  have hS : S.Sorted (· ≤ ·) := sortBy_sorted _ _
+  have hpqr : ({p, q, r} : Multiset ℕ+) = S := (sortBy_eq LE.le {p, q, r}).symm
   rw [hpqr]
   rw [hpqr] at H
   apply admissible_of_one_lt_sumInv_aux hS _ H
-  simp only [S, insert_eq_cons, length_sort, card_cons, card_singleton]
+  simp only [S, insert_eq_cons, length_sortBy, card_cons, card_singleton]
 
 /-- A multiset `{p,q,r}` of positive natural numbers
 is a solution to `(p⁻¹ + q⁻¹ + r⁻¹ : ℚ) > 1` if and only if
