@@ -54,6 +54,17 @@ structure PreAbstractSimplicialComplex where
 
 namespace PreAbstractSimplicialComplex
 
+instance : SetLike (PreAbstractSimplicialComplex ι) (Finset ι) where
+  coe K := K.faces
+  coe_injective' K L h := by
+    cases K
+    congr
+
+@[simp]
+lemma mem_faces {K : PreAbstractSimplicialComplex ι} {s : Finset ι} :
+    s ∈ (K : Set (Finset ι)) ↔ s ∈ K :=
+  Iff.rfl
+
 /-- The complex consisting of only the faces present in both of its arguments. -/
 instance : Min (PreAbstractSimplicialComplex ι) where
   min K L :=
