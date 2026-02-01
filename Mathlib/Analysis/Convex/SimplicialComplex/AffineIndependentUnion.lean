@@ -32,14 +32,14 @@ open Finset Set
 
 namespace Geometry
 
-namespace PreAbstractSimplicialComplex
+namespace AbstractSimplicialComplex
 
 /--
 Construct a pre-abstract simplicial complex from a simple graph, where vertices of the graph
 are 0-simplices and edges are 1-simplices.
 -/
 def ofSimpleGraph {ι : Type*} [DecidableEq ι] (G : SimpleGraph ι) :
-    PreAbstractSimplicialComplex ι where
+    AbstractSimplicialComplex ι where
   faces := ((fun v => ({v} : Finset ι)) '' (Set.univ (α := ι))) ∪ Sym2.toFinset '' G.edgeSet
   empty_notMem := by
     simp only [Set.mem_union, Set.mem_image, Set.mem_univ, true_and, Finset.singleton_ne_empty,
@@ -64,8 +64,12 @@ def ofSimpleGraph {ι : Type*} [DecidableEq ι] (G : SimpleGraph ι) :
           have := Sym2.card_toFinset e
           split_ifs at this <;> omega
         exact ⟨e, he, (Finset.eq_of_subset_of_card_le hts hle).symm⟩
+  singleton_mem := by
+    simp only [Set.mem_union, Set.mem_image, Set.mem_univ, true_and]
+    intro v
+    exact Or.inl ⟨v, rfl⟩
 
-end PreAbstractSimplicialComplex
+end AbstractSimplicialComplex
 
 namespace SimplicialComplex
 
@@ -127,7 +131,7 @@ noncomputable def ofSimpleGraph {𝕜 V : Type*} [DecidableEq V] [DecidableEq �
     [Field 𝕜] [LinearOrder 𝕜] [IsStrictOrderedRing 𝕜]
     (G : SimpleGraph V) :
     SimplicialComplex 𝕜 (V →₀ 𝕜) :=
-  onFinsupp (PreAbstractSimplicialComplex.ofSimpleGraph G)
+  onFinsupp (AbstractSimplicialComplex.ofSimpleGraph G).toPreAbstractSimplicialComplex
 
 end SimplicialComplex
 
