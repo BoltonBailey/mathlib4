@@ -4,3 +4,5 @@
 .cache
 # `lake` stores its files here:
 .lake
+# claude uses this directory for various settings and tools
+.claude
