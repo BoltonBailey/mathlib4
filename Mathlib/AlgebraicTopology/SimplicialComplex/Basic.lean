@@ -143,10 +143,11 @@ instance : CompleteLattice (PreAbstractSimplicialComplex ι) where
 
 end PreAbstractSimplicialComplex
 
-@[ext]
+
 /--
 An `AbstractSimplicialComplex` is a `PreAbstractSimplicialComplex` which contains all singletons.
 -/
+@[ext]
 structure AbstractSimplicialComplex extends PreAbstractSimplicialComplex ι where
   /-- every singleton is a face -/
   singleton_mem : ∀ v : ι, {v} ∈ faces
