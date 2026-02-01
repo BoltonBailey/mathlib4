@@ -32,14 +32,14 @@ open Finset Set
 
 namespace Geometry
 
-namespace AbstractSimplicialComplex
+namespace PreAbstractSimplicialComplex
 
 /--
-Construct an abstract simplicial complex from a simple graph, where vertices of the graph
+Construct a pre-abstract simplicial complex from a simple graph, where vertices of the graph
 are 0-simplices and edges are 1-simplices.
 -/
 def ofSimpleGraph {ι : Type*} [DecidableEq ι] (G : SimpleGraph ι) :
-    AbstractSimplicialComplex ι where
+    PreAbstractSimplicialComplex ι where
   faces := ((fun v => ({v} : Finset ι)) '' (Set.univ (α := ι))) ∪ Sym2.toFinset '' G.edgeSet
   empty_notMem := by
     simp only [Set.mem_union, Set.mem_image, Set.mem_univ, true_and, Finset.singleton_ne_empty,
@@ -65,7 +65,7 @@ def ofSimpleGraph {ι : Type*} [DecidableEq ι] (G : SimpleGraph ι) :
           split_ifs at this <;> omega
         exact ⟨e, he, (Finset.eq_of_subset_of_card_le hts hle).symm⟩
 
-end AbstractSimplicialComplex
+end PreAbstractSimplicialComplex
 
 namespace SimplicialComplex
 
@@ -98,7 +98,7 @@ over the `𝕜`-module of finitely supported functions on those points.
 -/
 noncomputable def onFinsupp {𝕜 ι : Type*} [DecidableEq ι]
     [DecidableEq 𝕜] [Field 𝕜] [LinearOrder 𝕜] [IsStrictOrderedRing 𝕜]
-    (abstract : AbstractSimplicialComplex ι) :
+    (abstract : PreAbstractSimplicialComplex ι) :
     SimplicialComplex 𝕜 (ι →₀ 𝕜) :=
   ofAffineIndependent (𝕜 := 𝕜) (E := ι →₀ 𝕜)
     (abstract.faces.image (fun x => x.image (fun i => Finsupp.single i (1 : 𝕜))))
@@ -127,7 +127,7 @@ noncomputable def ofSimpleGraph {𝕜 V : Type*} [DecidableEq V] [DecidableEq �
     [Field 𝕜] [LinearOrder 𝕜] [IsStrictOrderedRing 𝕜]
     (G : SimpleGraph V) :
     SimplicialComplex 𝕜 (V →₀ 𝕜) :=
-  onFinsupp (AbstractSimplicialComplex.ofSimpleGraph G)
+  onFinsupp (PreAbstractSimplicialComplex.ofSimpleGraph G)
 
 end SimplicialComplex
 
