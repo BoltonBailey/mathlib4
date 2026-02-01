@@ -195,6 +195,17 @@ namespace AbstractSimplicialComplex
 
 variable {ι}
 
+instance : SetLike (AbstractSimplicialComplex ι) (Finset ι) where
+  coe K := K.faces
+  coe_injective' K L h := by
+    ext
+    grind
+
+@[simp]
+lemma mem_faces {K : AbstractSimplicialComplex ι} {s : Finset ι} :
+    s ∈ (K : Set (Finset ι)) ↔ s ∈ K :=
+  Iff.rfl
+
 /-- The complex consisting of only the faces present in both of its arguments. -/
 instance : Min (AbstractSimplicialComplex ι) where
   min K L :=
