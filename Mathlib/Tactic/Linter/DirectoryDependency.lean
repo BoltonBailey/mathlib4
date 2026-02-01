@@ -602,7 +602,8 @@ def overrideAllowedImportDirs : NamePrefixRel := .ofArray #[
   (`Mathlib.LinearAlgebra.RootSystem.IsValuedIn, `Mathlib.Topology),
   (`Mathlib.Topology.Algebra, `Mathlib.Algebra),
   (`Mathlib.Topology.Compactification, `Mathlib.Geometry.Manifold),
-  (`Mathlib.Computability.AkraBazzi, `Mathlib.MeasureTheory) -- Akra-Bazzi uses calculus
+  (`Mathlib.Computability.AkraBazzi, `Mathlib.MeasureTheory), -- Akra-Bazzi uses calculus
+  (`Mathlib.Analysis.Convex.SimplicialComplex.Basic, `Mathlib.AlgebraicTopology),
 ]
 
 end DirectoryDependency
