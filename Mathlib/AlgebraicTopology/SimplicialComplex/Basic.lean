@@ -82,8 +82,8 @@ instance : LT (PreAbstractSimplicialComplex ι) where
 instance : PartialOrder (PreAbstractSimplicialComplex ι) :=
   PartialOrder.lift (fun K => K.faces) (fun _ _ => PreAbstractSimplicialComplex.ext)
 
-instance : SupSet (PreAbstractSimplicialComplex ι) :=
-  ⟨fun s =>
+instance : SupSet (PreAbstractSimplicialComplex ι) where
+  sSup s :=
     { faces := ⋃ K ∈ s, K.faces
       empty_notMem := by
         simp only [Set.mem_iUnion, not_exists]
@@ -92,10 +92,10 @@ instance : SupSet (PreAbstractSimplicialComplex ι) :=
         intro s' t hs hst ht
         simp only [Set.mem_iUnion] at hs ⊢
         obtain ⟨K, hK, hsK⟩ := hs
-        exact ⟨K, hK, K.down_closed hsK hst ht⟩ }⟩
+        exact ⟨K, hK, K.down_closed hsK hst ht⟩ }
 
-instance : InfSet (PreAbstractSimplicialComplex ι) :=
-  ⟨fun s =>
+instance : InfSet (PreAbstractSimplicialComplex ι) where
+  sInf s :=
     { faces := (⋂ K ∈ s, K.faces) ∩ { t | t.Nonempty }
       empty_notMem := fun ⟨_, h⟩ => Finset.not_nonempty_empty h
       down_closed := by
@@ -104,17 +104,19 @@ instance : InfSet (PreAbstractSimplicialComplex ι) :=
         · simp only [Set.mem_iInter] at hs ⊢
           intro K hK
           exact K.down_closed (hs K hK) hst ht
-        · exact ht }⟩
+        · exact ht }
 
-instance : Top (PreAbstractSimplicialComplex ι) :=
-  ⟨{ faces := { s | s.Nonempty }
-     empty_notMem := by simp
-     down_closed _ _ ht := ht }⟩
+instance : Top (PreAbstractSimplicialComplex ι) where
+  top :=
+    { faces := { s | s.Nonempty }
+      empty_notMem := by simp
+      down_closed _ _ ht := ht }
 
-instance : Bot (PreAbstractSimplicialComplex ι) :=
-  ⟨{ faces := { s | False }
-     empty_notMem := by simp
-     down_closed hs _ _ := hs.elim }⟩
+instance : Bot (PreAbstractSimplicialComplex ι) where
+  bot :=
+    { faces := { s | False }
+      empty_notMem := by simp
+      down_closed hs _ _ := hs.elim }
 
 instance : CompleteSemilatticeSup (PreAbstractSimplicialComplex ι) where
   le_sSup _ _ hK := Set.subset_biUnion_of_mem hK
@@ -178,22 +180,22 @@ namespace AbstractSimplicialComplex
 variable {ι}
 
 /-- The complex consisting of only the faces present in both of its arguments. -/
-instance : Min (AbstractSimplicialComplex ι) :=
-  ⟨fun K L =>
+instance : Min (AbstractSimplicialComplex ι) where
+  min K L :=
     { K.toPreAbstractSimplicialComplex ⊓ L.toPreAbstractSimplicialComplex with
-      singleton_mem v := ⟨K.singleton_mem v, L.singleton_mem v⟩ }⟩
+      singleton_mem v := ⟨K.singleton_mem v, L.singleton_mem v⟩ }
 
 /-- The complex consisting of all faces present in either of its arguments. -/
-instance : Max (AbstractSimplicialComplex ι) :=
-  ⟨fun K L =>
+instance : Max (AbstractSimplicialComplex ι) where
+  max K L :=
     { K.toPreAbstractSimplicialComplex ⊔ L.toPreAbstractSimplicialComplex with
-      singleton_mem v := Or.inl (K.singleton_mem v) }⟩
+      singleton_mem v := Or.inl (K.singleton_mem v) }
 
-instance : LE (AbstractSimplicialComplex ι) :=
-  ⟨fun K L => K.faces ⊆ L.faces⟩
+instance : LE (AbstractSimplicialComplex ι) where
+  le K L := K.faces ⊆ L.faces
 
-instance : LT (AbstractSimplicialComplex ι) :=
-  ⟨fun K L => K.faces ⊂ L.faces⟩
+instance : LT (AbstractSimplicialComplex ι) where
+  lt K L := K.faces ⊂ L.faces
 
 instance : PartialOrder (AbstractSimplicialComplex ι) :=
   PartialOrder.lift (fun K => K.faces) (fun _ _ => AbstractSimplicialComplex.ext)
@@ -212,8 +214,8 @@ theorem toPreAbstractSimplicialComplex_lt_iff {K L : AbstractSimplicialComplex �
     K.toPreAbstractSimplicialComplex < L.toPreAbstractSimplicialComplex ↔ K < L :=
   Iff.rfl
 
-instance : SupSet (AbstractSimplicialComplex ι) :=
-  ⟨fun s =>
+instance : SupSet (AbstractSimplicialComplex ι) where
+  sSup s :=
     { faces := (⋃ K ∈ s, K.faces) ∪ { t | ∃ v, t = {v} }
       empty_notMem := by
         simp only [Set.mem_union, Set.mem_iUnion, Set.mem_setOf_eq, not_or, not_exists]
@@ -231,10 +233,10 @@ instance : SupSet (AbstractSimplicialComplex ι) :=
           cases ht₁t₂ with
           | inl h => exact (ht₂.ne_empty h).elim
           | inr h => exact Or.inr ⟨v, h⟩
-      singleton_mem v := Or.inr ⟨v, rfl⟩ }⟩
+      singleton_mem v := Or.inr ⟨v, rfl⟩ }
 
-instance : InfSet (AbstractSimplicialComplex ι) :=
-  ⟨fun s =>
+instance : InfSet (AbstractSimplicialComplex ι) where
+  sInf s :=
     { faces := (⋂ K ∈ s, K.faces) ∩ { t | t.Nonempty }
       empty_notMem := by
         simp only [Set.mem_inter_iff, Set.mem_setOf_eq, Finset.not_nonempty_empty, and_false,
@@ -250,22 +252,24 @@ instance : InfSet (AbstractSimplicialComplex ι) :=
         simp only [Set.mem_inter_iff, Set.mem_iInter, Set.mem_setOf_eq,
           Finset.singleton_nonempty, and_true]
         intro K hK
-        exact K.singleton_mem v }⟩
+        exact K.singleton_mem v }
 
-instance : Top (AbstractSimplicialComplex ι) :=
-  ⟨{ (⊤ : PreAbstractSimplicialComplex ι) with
-     singleton_mem _ := Finset.singleton_nonempty _ }⟩
+instance : Top (AbstractSimplicialComplex ι) where
+  top :=
+    { (⊤ : PreAbstractSimplicialComplex ι) with
+      singleton_mem _ := Finset.singleton_nonempty _ }
 
-instance : Bot (AbstractSimplicialComplex ι) :=
-  ⟨{ faces := { s | ∃ v, s = {v} }
-     empty_notMem := by simp
-     down_closed := by
-       intro s t ⟨v, hv⟩ hts ht
-       rw [hv, Finset.subset_singleton_iff] at hts
-       cases hts with
-       | inl h => exact (ht.ne_empty h).elim
-       | inr h => exact ⟨v, h⟩
-     singleton_mem v := ⟨v, rfl⟩ }⟩
+instance : Bot (AbstractSimplicialComplex ι) where
+  bot :=
+    { faces := { s | ∃ v, s = {v} }
+      empty_notMem := by simp
+      down_closed := by
+        intro s t ⟨v, hv⟩ hts ht
+        rw [hv, Finset.subset_singleton_iff] at hts
+        cases hts with
+        | inl h => exact (ht.ne_empty h).elim
+        | inr h => exact ⟨v, h⟩
+      singleton_mem v := ⟨v, rfl⟩ }
 
 instance : CompleteSemilatticeSup (AbstractSimplicialComplex ι) where
   le_sSup _ K hK _ ht := Or.inl (Set.mem_biUnion hK ht)
