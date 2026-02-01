@@ -55,42 +55,35 @@ structure PreAbstractSimplicialComplex where
 namespace PreAbstractSimplicialComplex
 
 /-- The complex consisting of only the faces present in both of its arguments. -/
-instance : Min (PreAbstractSimplicialComplex ι) :=
-  ⟨fun K L =>
+instance : Min (PreAbstractSimplicialComplex ι) where
+  min K L :=
     { faces := K.faces ∩ L.faces
       empty_notMem := fun h => K.empty_notMem (Set.inter_subset_left h)
-      down_closed := fun hs hst ht => ⟨K.down_closed hs.1 hst ht, L.down_closed hs.2 hst ht⟩ }⟩
+      down_closed := fun hs hst ht => ⟨K.down_closed hs.1 hst ht, L.down_closed hs.2 hst ht⟩ }
 
 /-- The complex consisting of all faces present in either of its arguments. -/
-instance : Max (PreAbstractSimplicialComplex ι) :=
-  ⟨fun K L =>
+instance : Max (PreAbstractSimplicialComplex ι) where
+  max K L :=
     { faces := K.faces ∪ L.faces
       empty_notMem := by
         simp only [Set.mem_union, not_or]
         exact ⟨K.empty_notMem, L.empty_notMem⟩
       down_closed := by
         rintro s t (hs | hs) hst ht
-        · grind only [instMax._simp_1, down_closed]
-        · grind only [instMax._simp_1, down_closed]
-      }⟩
+        · exact Or.inl (K.down_closed hs hst ht)
+        · exact Or.inr (L.down_closed hs hst ht) }
 
-instance : LE (PreAbstractSimplicialComplex ι) :=
-  ⟨fun K L => K.faces ⊆ L.faces⟩
+instance : LE (PreAbstractSimplicialComplex ι) where
+  le K L := K.faces ⊆ L.faces
 
-instance : LT (PreAbstractSimplicialComplex ι) :=
-  ⟨fun K L => K.faces ⊂ L.faces⟩
+instance : LT (PreAbstractSimplicialComplex ι) where
+  lt K L := K.faces ⊂ L.faces
 
-instance : CompleteLattice (PreAbstractSimplicialComplex ι) := {
-  PartialOrder.lift (fun K => K.faces) (fun _ _ => PreAbstractSimplicialComplex.ext) with
-  inf := min
-  inf_le_left _ _ := Set.inter_subset_left
-  inf_le_right _ _ := Set.inter_subset_right
-  le_inf _ _ _ h1 h2 := Set.subset_inter h1 h2
-  sup := max
-  le_sup_left _ _ := Set.subset_union_left
-  le_sup_right _ _ := Set.subset_union_right
-  sup_le _ _ _ hK hL := Set.union_subset hK hL
-  sSup s :=
+instance : PartialOrder (PreAbstractSimplicialComplex ι) :=
+  PartialOrder.lift (fun K => K.faces) (fun _ _ => PreAbstractSimplicialComplex.ext)
+
+instance : SupSet (PreAbstractSimplicialComplex ι) :=
+  ⟨fun s =>
     { faces := ⋃ K ∈ s, K.faces
       empty_notMem := by
         simp only [Set.mem_iUnion, not_exists]
@@ -99,35 +92,51 @@ instance : CompleteLattice (PreAbstractSimplicialComplex ι) := {
         intro s' t hs hst ht
         simp only [Set.mem_iUnion] at hs ⊢
         obtain ⟨K, hK, hsK⟩ := hs
-        exact ⟨K, hK, K.down_closed hsK hst ht⟩ }
-  le_sSup _ _ hK := Set.subset_biUnion_of_mem hK
-  sSup_le _ _ hK := Set.iUnion₂_subset hK
-  sInf s :=
+        exact ⟨K, hK, K.down_closed hsK hst ht⟩ }⟩
+
+instance : InfSet (PreAbstractSimplicialComplex ι) :=
+  ⟨fun s =>
     { faces := (⋂ K ∈ s, K.faces) ∩ { t | t.Nonempty }
-      empty_notMem := by
-        simp only [Set.mem_inter_iff, Set.mem_setOf]
-        exact fun ⟨_, h⟩ => Finset.not_nonempty_empty h
+      empty_notMem := fun ⟨_, h⟩ => Finset.not_nonempty_empty h
       down_closed := by
         intro s' t ⟨hs, hs'⟩ hst ht
         constructor
         · simp only [Set.mem_iInter] at hs ⊢
           intro K hK
           exact K.down_closed (hs K hK) hst ht
-        · exact ht }
+        · exact ht }⟩
+
+instance : Top (PreAbstractSimplicialComplex ι) :=
+  ⟨{ faces := { s | s.Nonempty }
+     empty_notMem := by simp
+     down_closed _ _ ht := ht }⟩
+
+instance : Bot (PreAbstractSimplicialComplex ι) :=
+  ⟨{ faces := { s | False }
+     empty_notMem := by simp
+     down_closed hs _ _ := hs.elim }⟩
+
+instance : CompleteSemilatticeSup (PreAbstractSimplicialComplex ι) where
+  le_sSup _ _ hK := Set.subset_biUnion_of_mem hK
+  sSup_le _ _ hK := Set.iUnion₂_subset hK
+
+instance : CompleteSemilatticeInf (PreAbstractSimplicialComplex ι) where
   sInf_le _ _ hK := Set.inter_subset_left.trans (Set.biInter_subset_of_mem hK)
-  le_sInf _ K hK t ht :=
+  le_sInf _ K hK _ ht :=
     ⟨Set.mem_iInter₂.mpr (fun L hL => hK L hL ht),
       Finset.nonempty_iff_ne_empty.mpr (fun h => K.empty_notMem (h ▸ ht))⟩
-  top :=
-    { faces := { s | s.Nonempty }
-      empty_notMem := by simp
-      down_closed _ _ ht := ht }
+
+instance : CompleteLattice (PreAbstractSimplicialComplex ι) where
+  inf := min
+  inf_le_left _ _ := Set.inter_subset_left
+  inf_le_right _ _ := Set.inter_subset_right
+  le_inf _ _ _ h1 h2 := Set.subset_inter h1 h2
+  sup := max
+  le_sup_left _ _ := Set.subset_union_left
+  le_sup_right _ _ := Set.subset_union_right
+  sup_le _ _ _ hK hL := Set.union_subset hK hL
   le_top K _ ht := Finset.nonempty_iff_ne_empty.mpr (fun h => K.empty_notMem (h ▸ ht))
-  bot :=
-    { faces := { s | False }
-      empty_notMem := by simp
-      down_closed hs _ _ := hs.elim }
-  bot_le _ _ ht := ht.elim }
+  bot_le _ _ ht := ht.elim
 
 
 end PreAbstractSimplicialComplex
@@ -186,6 +195,9 @@ instance : LE (AbstractSimplicialComplex ι) :=
 instance : LT (AbstractSimplicialComplex ι) :=
   ⟨fun K L => K.faces ⊂ L.faces⟩
 
+instance : PartialOrder (AbstractSimplicialComplex ι) :=
+  PartialOrder.lift (fun K => K.faces) (fun _ _ => AbstractSimplicialComplex.ext)
+
 theorem toPreAbstractSimplicialComplex_injective :
     Function.Injective (toPreAbstractSimplicialComplex (ι := ι)) :=
   fun _ _ h => AbstractSimplicialComplex.ext (congrArg PreAbstractSimplicialComplex.faces h)
@@ -200,22 +212,8 @@ theorem toPreAbstractSimplicialComplex_lt_iff {K L : AbstractSimplicialComplex �
     K.toPreAbstractSimplicialComplex < L.toPreAbstractSimplicialComplex ↔ K < L :=
   Iff.rfl
 
--- TODO: Ideally the instance for `CompleteLattice (AbstractSimplicialComplex ι)`
--- would be done more parsimoniously by lifting from `PreAbstractSimplicialComplex`,
--- This would require a constructor that allows us to construct a `CompleteLattice` instance
--- from a `CompleteLattice` instance via an injection, and a proof that the operations
--- respect the injection.
-instance : CompleteLattice (AbstractSimplicialComplex ι) := {
-  PartialOrder.lift (fun K => K.faces) (fun _ _ => AbstractSimplicialComplex.ext) with
-  inf := min
-  inf_le_left _ _ := Set.inter_subset_left
-  inf_le_right _ _ := Set.inter_subset_right
-  le_inf _ _ _ h1 h2 := Set.subset_inter h1 h2
-  sup := max
-  le_sup_left _ _ := Set.subset_union_left
-  le_sup_right _ _ := Set.subset_union_right
-  sup_le _ _ _ hK hL := Set.union_subset hK hL
-  sSup s :=
+instance : SupSet (AbstractSimplicialComplex ι) :=
+  ⟨fun s =>
     { faces := (⋃ K ∈ s, K.faces) ∪ { t | ∃ v, t = {v} }
       empty_notMem := by
         simp only [Set.mem_union, Set.mem_iUnion, Set.mem_setOf_eq, not_or, not_exists]
@@ -233,18 +231,10 @@ instance : CompleteLattice (AbstractSimplicialComplex ι) := {
           cases ht₁t₂ with
           | inl h => exact (ht₂.ne_empty h).elim
           | inr h => exact Or.inr ⟨v, h⟩
-      singleton_mem v := Or.inr ⟨v, rfl⟩ }
-  le_sSup _ K hK := by intro t ht; exact Or.inl (Set.mem_biUnion hK ht)
-  sSup_le _ L hL := fun _ ht => by
-    cases ht with
-    | inl ht =>
-      simp only [Set.mem_iUnion] at ht
-      obtain ⟨K, hK, htK⟩ := ht
-      exact hL K hK htK
-    | inr ht =>
-      obtain ⟨v, hv⟩ := ht
-      exact hv ▸ L.singleton_mem v
-  sInf s :=
+      singleton_mem v := Or.inr ⟨v, rfl⟩ }⟩
+
+instance : InfSet (AbstractSimplicialComplex ι) :=
+  ⟨fun s =>
     { faces := (⋂ K ∈ s, K.faces) ∩ { t | t.Nonempty }
       empty_notMem := by
         simp only [Set.mem_inter_iff, Set.mem_setOf_eq, Finset.not_nonempty_empty, and_false,
@@ -260,26 +250,54 @@ instance : CompleteLattice (AbstractSimplicialComplex ι) := {
         simp only [Set.mem_inter_iff, Set.mem_iInter, Set.mem_setOf_eq,
           Finset.singleton_nonempty, and_true]
         intro K hK
-        exact K.singleton_mem v }
-  sInf_le := fun _ K hK => Set.inter_subset_left.trans (Set.biInter_subset_of_mem hK)
-  le_sInf _ K hK t ht :=
+        exact K.singleton_mem v }⟩
+
+instance : Top (AbstractSimplicialComplex ι) :=
+  ⟨{ (⊤ : PreAbstractSimplicialComplex ι) with
+     singleton_mem _ := Finset.singleton_nonempty _ }⟩
+
+instance : Bot (AbstractSimplicialComplex ι) :=
+  ⟨{ faces := { s | ∃ v, s = {v} }
+     empty_notMem := by simp
+     down_closed := by
+       intro s t ⟨v, hv⟩ hts ht
+       rw [hv, Finset.subset_singleton_iff] at hts
+       cases hts with
+       | inl h => exact (ht.ne_empty h).elim
+       | inr h => exact ⟨v, h⟩
+     singleton_mem v := ⟨v, rfl⟩ }⟩
+
+instance : CompleteSemilatticeSup (AbstractSimplicialComplex ι) where
+  le_sSup _ K hK _ ht := Or.inl (Set.mem_biUnion hK ht)
+  sSup_le _ L hL := fun _ ht => by
+    cases ht with
+    | inl ht =>
+      simp only [Set.mem_iUnion] at ht
+      obtain ⟨K, hK, htK⟩ := ht
+      exact hL K hK htK
+    | inr ht =>
+      obtain ⟨v, hv⟩ := ht
+      exact hv ▸ L.singleton_mem v
+
+instance : CompleteSemilatticeInf (AbstractSimplicialComplex ι) where
+  sInf_le _ _ hK := Set.inter_subset_left.trans (Set.biInter_subset_of_mem hK)
+  le_sInf _ K hK _ ht :=
     ⟨Set.mem_iInter₂.mpr (fun L hL => hK L hL ht),
       Finset.nonempty_iff_ne_empty.mpr (fun h => K.empty_notMem (h ▸ ht))⟩
-  top :=
-    { (⊤ : PreAbstractSimplicialComplex ι) with
-      singleton_mem _ := Finset.singleton_nonempty _ }
+
+instance : CompleteLattice (AbstractSimplicialComplex ι) where
+  inf := min
+  inf_le_left _ _ := Set.inter_subset_left
+  inf_le_right _ _ := Set.inter_subset_right
+  le_inf _ _ _ h1 h2 := Set.subset_inter h1 h2
+  sup := max
+  le_sup_left _ _ := Set.subset_union_left
+  le_sup_right _ _ := Set.subset_union_right
+  sup_le _ _ _ hK hL := Set.union_subset hK hL
   le_top K _ ht := Finset.nonempty_iff_ne_empty.mpr (fun h => K.empty_notMem (h ▸ ht))
-  bot :=
-    { faces := { s | ∃ v, s = {v} }
-      empty_notMem := by simp
-      down_closed := by
-        intro s t ⟨v, hv⟩ hts ht
-        rw [hv, Finset.subset_singleton_iff] at hts
-        cases hts with
-        | inl h => exact (ht.ne_empty h).elim
-        | inr h => exact ⟨v, h⟩
-      singleton_mem v := ⟨v, rfl⟩ }
-  bot_le K _ ht := by obtain ⟨v, hv⟩ := ht; exact hv ▸ K.singleton_mem v }
+  bot_le K _ ht := by
+    obtain ⟨v, hv⟩ := ht
+    exact hv ▸ K.singleton_mem v
 
 
 
