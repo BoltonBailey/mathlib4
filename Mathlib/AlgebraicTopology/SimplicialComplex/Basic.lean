@@ -83,14 +83,14 @@ instance : LT (PreAbstractSimplicialComplex ι) :=
 instance : CompleteLattice (PreAbstractSimplicialComplex ι) := {
   PartialOrder.lift (fun K => K.faces) (fun _ _ => PreAbstractSimplicialComplex.ext) with
   inf := min
-  inf_le_left := fun K L => Set.inter_subset_left
-  inf_le_right := fun K L => Set.inter_subset_right
-  le_inf := fun K L M h1 h2 => Set.subset_inter h1 h2
+  inf_le_left _ _ := Set.inter_subset_left
+  inf_le_right _ _ := Set.inter_subset_right
+  le_inf _ _ _ h1 h2 := Set.subset_inter h1 h2
   sup := max
-  le_sup_left := fun K L => Set.subset_union_left
-  le_sup_right := fun K L => Set.subset_union_right
-  sup_le := fun K L M hK hL => Set.union_subset hK hL
-  sSup := fun s =>
+  le_sup_left _ _ := Set.subset_union_left
+  le_sup_right _ _ := Set.subset_union_right
+  sup_le _ _ _ hK hL := Set.union_subset hK hL
+  sSup s :=
     { faces := ⋃ K ∈ s, K.faces
       empty_notMem := by
         simp only [Set.mem_iUnion, not_exists]
@@ -100,9 +100,9 @@ instance : CompleteLattice (PreAbstractSimplicialComplex ι) := {
         simp only [Set.mem_iUnion] at hs ⊢
         obtain ⟨K, hK, hsK⟩ := hs
         exact ⟨K, hK, K.down_closed hsK hst ht⟩ }
-  le_sSup := fun s K hK => Set.subset_biUnion_of_mem hK
-  sSup_le := fun s K hK => Set.iUnion₂_subset hK
-  sInf := fun s =>
+  le_sSup _ _ hK := Set.subset_biUnion_of_mem hK
+  sSup_le _ _ hK := Set.iUnion₂_subset hK
+  sInf s :=
     { faces := (⋂ K ∈ s, K.faces) ∩ { t | t.Nonempty }
       empty_notMem := by
         simp only [Set.mem_inter_iff, Set.mem_setOf]
@@ -114,20 +114,20 @@ instance : CompleteLattice (PreAbstractSimplicialComplex ι) := {
           intro K hK
           exact K.down_closed (hs K hK) hst ht
         · exact ht }
-  sInf_le := fun s K hK => Set.inter_subset_left.trans (Set.biInter_subset_of_mem hK)
-  le_sInf := fun s K hK t ht =>
+  sInf_le _ _ hK := Set.inter_subset_left.trans (Set.biInter_subset_of_mem hK)
+  le_sInf _ K hK t ht :=
     ⟨Set.mem_iInter₂.mpr (fun L hL => hK L hL ht),
       Finset.nonempty_iff_ne_empty.mpr (fun h => K.empty_notMem (h ▸ ht))⟩
   top :=
     { faces := { s | s.Nonempty }
       empty_notMem := by simp
-      down_closed := fun _ _ ht => ht }
-  le_top := fun K t ht => Finset.nonempty_iff_ne_empty.mpr (fun h => K.empty_notMem (h ▸ ht))
+      down_closed _ _ ht := ht }
+  le_top K _ ht := Finset.nonempty_iff_ne_empty.mpr (fun h => K.empty_notMem (h ▸ ht))
   bot :=
     { faces := { s | False }
       empty_notMem := by simp
-      down_closed := fun hs _ _ => hs.elim }
-  bot_le := fun K t ht => ht.elim }
+      down_closed hs _ _ := hs.elim }
+  bot_le _ _ ht := ht.elim }
 
 
 end PreAbstractSimplicialComplex
