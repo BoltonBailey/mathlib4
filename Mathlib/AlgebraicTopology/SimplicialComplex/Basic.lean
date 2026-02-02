@@ -12,7 +12,7 @@ public import Mathlib.LinearAlgebra.AffineSpace.Independent
 
 In this file, we define abstract simplicial complexes.
 An abstract simplicial complex is a downwards-closed collection of nonempty finite sets containing
-every Singleton. These are defined first defining `PreAbstractSimplicialComplex`,
+every singleton. These are defined first defining `PreAbstractSimplicialComplex`,
 which does not require the presence of singletons, and then defining `AbstractSimplicialComplex` as
 an extension.
 
@@ -27,9 +27,8 @@ name `Geometry.SimplicialComplex` using affine combinations in another file.
 
 ## Notation
 
-`s ∈ K` means that `s` is a face of `K`.
-
-`K ≤ L` means that the faces of `K` are faces of `L`.
+* `s ∈ K` means that `s` is a face of `K`.
+* `K ≤ L` means that the faces of `K` are faces of `L`.
 
 -/
 
@@ -56,14 +55,9 @@ namespace PreAbstractSimplicialComplex
 
 instance : SetLike (PreAbstractSimplicialComplex ι) (Finset ι) where
   coe K := K.faces
-  coe_injective' K L h := by
+  coe_injective' K _ _ := by
     cases K
     congr
-
-@[simp]
-lemma mem_faces {K : PreAbstractSimplicialComplex ι} {s : Finset ι} :
-    s ∈ (K : Set (Finset ι)) ↔ s ∈ K :=
-  Iff.rfl
 
 /-- The complex consisting of only the faces present in both of its arguments. -/
 instance : Min (PreAbstractSimplicialComplex ι) where
@@ -197,14 +191,9 @@ variable {ι}
 
 instance : SetLike (AbstractSimplicialComplex ι) (Finset ι) where
   coe K := K.faces
-  coe_injective' K L h := by
+  coe_injective' _ _ _ := by
     ext
     grind
-
-@[simp]
-lemma mem_faces {K : AbstractSimplicialComplex ι} {s : Finset ι} :
-    s ∈ (K : Set (Finset ι)) ↔ s ∈ K :=
-  Iff.rfl
 
 /-- The complex consisting of only the faces present in both of its arguments. -/
 instance : Min (AbstractSimplicialComplex ι) where
@@ -329,8 +318,6 @@ instance : CompleteLattice (AbstractSimplicialComplex ι) where
   bot_le K _ ht := by
     obtain ⟨v, hv⟩ := ht
     exact hv ▸ K.singleton_mem v
-
-
 
 end AbstractSimplicialComplex
 
