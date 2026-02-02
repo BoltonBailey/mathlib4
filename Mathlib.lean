@@ -1431,6 +1431,7 @@ public import Mathlib.AlgebraicTopology.SimplexCategory.Rev
 public import Mathlib.AlgebraicTopology.SimplexCategory.Truncated
 public import Mathlib.AlgebraicTopology.SimplicialCategory.Basic
 public import Mathlib.AlgebraicTopology.SimplicialCategory.SimplicialObject
+public import Mathlib.AlgebraicTopology.SimplicialComplex.Basic
 public import Mathlib.AlgebraicTopology.SimplicialNerve
 public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
 public import Mathlib.AlgebraicTopology.SimplicialObject.Coskeletal
