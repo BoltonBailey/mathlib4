@@ -219,7 +219,7 @@ theorem FinEncoding.card_le_aleph0 {α : Type u} (e : FinEncoding α) : #α ≤ 
   e.toEncoding.card_le_aleph0
 
 /-- A `FinEncoding` of a `List α` in (finite) alphabet `α`, encoded directly. -/
-def finEncodingList (α : Type 0) [Fintype α] : FinEncoding (List α) where
+def finEncodingList (α : Type) [Fintype α] : FinEncoding (List α) where
   Γ := α
   encode := id
   decode := Option.some
