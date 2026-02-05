@@ -238,7 +238,7 @@ def finEncodingPair {α β : Type*} (ea : FinEncoding α) (eb : FinEncoding β) 
   encode x := (ea.encode x.1).map .inl ++ (eb.encode x.2).map .inr
   decode x := Option.map₂ Prod.mk (ea.decode (x.filterMap Sum.getLeft?))
       (eb.decode (x.filterMap Sum.getRight?))
-  decode_encode x := by simp [List.filterMap_append]
+  decode_encode x := by simp
   ΓFin := inferInstance
 
 end Computability
