@@ -42,7 +42,7 @@ section Preorder
 
 /--
 A preorder is a reflexive, transitive relation `≤`.
-A preorder defines a `<` given `a ≤ b ∧ ¬b ≤ a` and defined this way by default.
+In a preorder, `a < b` means `a ≤ b ∧ ¬b ≤ a`, and `<` is defined this way by default.
 You can override this definition to set a better def-eq.
 -/
 class Preorder (α : Type*) extends LE α, LT α where
