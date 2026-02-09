@@ -91,10 +91,8 @@ instance : SupSet (PreAbstractSimplicialComplex ι) where
   sSup s :=
     { faces := ⋃ K ∈ s, K.faces
       empty_notMem := by
-        simp only [Set.mem_iUnion, not_exists]
-        exact fun K hK => K.empty_notMem
-      down_closed := by
-        intro s' t hs hst ht
+        simp [Set.mem_iUnion, empty_notMem]
+      down_closed {s'} {t} hs hst ht := by
         simp only [Set.mem_iUnion] at hs ⊢
         obtain ⟨K, hK, hsK⟩ := hs
         exact ⟨K, hK, K.down_closed hsK hst ht⟩ }
@@ -103,8 +101,8 @@ instance : InfSet (PreAbstractSimplicialComplex ι) where
   sInf s :=
     { faces := (⋂ K ∈ s, K.faces) ∩ { t | t.Nonempty }
       empty_notMem := fun ⟨_, h⟩ => Finset.not_nonempty_empty h
-      down_closed := by
-        intro s' t ⟨hs, hs'⟩ hst ht
+      down_closed {s'} {t} := by
+        intro ⟨hs, hs'⟩ hst ht
         constructor
         · simp only [Set.mem_iInter] at hs ⊢
           intro K hK
@@ -137,7 +135,7 @@ instance : CompleteLattice (PreAbstractSimplicialComplex ι) where
   inf := min
   inf_le_left _ _ := Set.inter_subset_left
   inf_le_right _ _ := Set.inter_subset_right
-  le_inf _ _ _ h1 h2 := Set.subset_inter h1 h2
+  le_inf _ _ _ := Set.subset_inter
   sup := max
   le_sup_left _ _ := Set.subset_union_left
   le_sup_right _ _ := Set.subset_union_right
@@ -173,8 +171,7 @@ def PreAbstractSimplicialComplex.toAbstractSimplicialComplex_union_singleton
     empty_notMem := by
       simp only [Set.mem_union, Set.mem_setOf_eq, not_or]
       exact ⟨K.empty_notMem, fun ⟨_, h⟩ => Finset.singleton_ne_empty _ h.symm⟩
-    down_closed := by
-      intro s t hs hts ht
+    down_closed {s} {t} hs hts ht := by
       cases hs with
       | inl hs => exact Or.inl (K.down_closed hs hts ht)
       | inr hs =>
@@ -236,8 +233,7 @@ instance : SupSet (AbstractSimplicialComplex ι) where
       empty_notMem := by
         simp only [Set.mem_union, Set.mem_iUnion, Set.mem_setOf_eq, not_or, not_exists]
         exact ⟨fun K hK => K.empty_notMem, fun _ h => Finset.singleton_ne_empty _ h.symm⟩
-      down_closed := by
-        intro t₁ t₂ ht ht₁t₂ ht₂
+      down_closed {t₁} {t₂} ht ht₁t₂ ht₂ := by
         cases ht with
         | inl ht =>
           simp only [Set.mem_iUnion] at ht
@@ -275,6 +271,10 @@ instance : Top (AbstractSimplicialComplex ι) where
     { (⊤ : PreAbstractSimplicialComplex ι) with
       singleton_mem _ := Finset.singleton_nonempty _ }
 
+lemma top_toPreAbstractSimplicialComplex :
+    (⊤ : AbstractSimplicialComplex ι).toPreAbstractSimplicialComplex = ⊤ :=
+  rfl
+
 instance : Bot (AbstractSimplicialComplex ι) where
   bot :=
     { faces := { s | ∃ v, s = {v} }
@@ -309,11 +309,11 @@ instance : CompleteLattice (AbstractSimplicialComplex ι) where
   inf := min
   inf_le_left _ _ := Set.inter_subset_left
   inf_le_right _ _ := Set.inter_subset_right
-  le_inf _ _ _ h1 h2 := Set.subset_inter h1 h2
+  le_inf _ _ _ := Set.subset_inter
   sup := max
   le_sup_left _ _ := Set.subset_union_left
   le_sup_right _ _ := Set.subset_union_right
-  sup_le _ _ _ hK hL := Set.union_subset hK hL
+  sup_le _ _ _ := Set.union_subset
   le_top K _ ht := Finset.nonempty_iff_ne_empty.mpr (fun h => K.empty_notMem (h ▸ ht))
   bot_le K _ ht := by
     obtain ⟨v, hv⟩ := ht
