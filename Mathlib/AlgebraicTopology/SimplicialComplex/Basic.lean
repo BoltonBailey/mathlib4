@@ -63,8 +63,8 @@ instance : SetLike (PreAbstractSimplicialComplex ι) (Finset ι) where
 instance : Min (PreAbstractSimplicialComplex ι) where
   min K L :=
     { faces := K.faces ∩ L.faces
-      empty_notMem := fun h => K.empty_notMem (Set.inter_subset_left h)
-      down_closed := fun hs hst ht => ⟨K.down_closed hs.1 hst ht, L.down_closed hs.2 hst ht⟩ }
+      empty_notMem h := K.empty_notMem (Set.inter_subset_left h)
+      down_closed hs hst ht := ⟨K.down_closed hs.1 hst ht, L.down_closed hs.2 hst ht⟩ }
 
 /-- The complex consisting of all faces present in either of its arguments. -/
 instance : Max (PreAbstractSimplicialComplex ι) where
@@ -289,7 +289,7 @@ instance : Bot (AbstractSimplicialComplex ι) where
 
 instance : CompleteSemilatticeSup (AbstractSimplicialComplex ι) where
   le_sSup _ K hK _ ht := Or.inl (Set.mem_biUnion hK ht)
-  sSup_le _ L hL := fun _ ht => by
+  sSup_le _ L hL _ ht := by
     cases ht with
     | inl ht =>
       simp only [Set.mem_iUnion] at ht
