@@ -35,7 +35,7 @@ namespace Geometry
 namespace AbstractSimplicialComplex
 
 /--
-Construct a pre-abstract simplicial complex from a simple graph, where vertices of the graph
+Construct an abstract simplicial complex from a simple graph, where vertices of the graph
 are 0-simplices and edges are 1-simplices.
 -/
 def ofSimpleGraph {ι : Type*} [DecidableEq ι] (G : SimpleGraph ι) :
