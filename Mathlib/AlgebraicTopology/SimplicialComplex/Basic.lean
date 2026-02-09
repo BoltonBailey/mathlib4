@@ -51,6 +51,8 @@ structure PreAbstractSimplicialComplex where
   /-- faces are downward closed: a non-empty subset of its spanning vertices spans another face -/
   down_closed : ∀ {s t}, s ∈ faces → t ⊆ s → t.Nonempty → t ∈ faces
 
+attribute [simp] PreAbstractSimplicialComplex.empty_notMem
+
 namespace PreAbstractSimplicialComplex
 
 instance : SetLike (PreAbstractSimplicialComplex ι) (Finset ι) where

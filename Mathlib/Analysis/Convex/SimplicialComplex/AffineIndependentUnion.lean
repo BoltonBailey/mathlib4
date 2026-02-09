@@ -42,25 +42,16 @@ def ofSimpleGraph {ι : Type*} [DecidableEq ι] (G : SimpleGraph ι) :
     AbstractSimplicialComplex ι where
   faces := ({s : Finset ι | ∃ v, s = {v}}) ∪ Sym2.toFinset '' G.edgeSet
   empty_notMem := by simp
-  down_closed := by
+  down_closed {s t} hs hts ht := by
     simp only [Set.mem_union, Set.mem_setOf_eq, Set.mem_image]
-    intro s t hs hts ht
     rcases hs with ⟨v, rfl⟩ | ⟨e, he, rfl⟩
-    · simp only [Finset.subset_singleton_iff] at hts
-      rcases hts with rfl | rfl
-      · exact ht.ne_empty rfl |>.elim
-      · exact Or.inl ⟨v, rfl⟩
+    · grind
     · by_cases hc : t.card ≤ 1
       · left
         obtain ⟨x, hx⟩ := ht
-        exact ⟨x, Finset.eq_singleton_iff_unique_mem.mpr
-          ⟨hx, fun y hy => Finset.card_le_one.mp hc y hy x hx⟩⟩
+        exact ⟨x, by grind [Finset.eq_singleton_iff_unique_mem, Finset.card_le_one]⟩
       · right
-        push_neg at hc
-        have hle : e.toFinset.card ≤ t.card := by
-          have := Sym2.card_toFinset e
-          split_ifs at this <;> omega
-        exact ⟨e, he, (Finset.eq_of_subset_of_card_le hts hle).symm⟩
+        exact ⟨e, he, by grind [Sym2.card_toFinset e, Finset.eq_of_subset_of_card_le]⟩
   singleton_mem := by
     simp only [Set.mem_union, Set.mem_setOf_eq, Set.mem_image]
     intro v
@@ -103,10 +94,7 @@ noncomputable def onFinsupp {𝕜 ι : Type*} [DecidableEq ι]
     SimplicialComplex 𝕜 (ι →₀ 𝕜) :=
   ofAffineIndependent (𝕜 := 𝕜) (E := ι →₀ 𝕜)
     (abstract.faces.image (fun x => x.image (fun i => Finsupp.single i (1 : 𝕜))))
-    (by
-      simp only [Set.mem_image, Finset.image_eq_empty]
-      rintro ⟨s, hs, rfl⟩
-      exact abstract.empty_notMem hs)
+    (by simp)
     (by
       simp only [Set.mem_image]
       rintro _ t ⟨s', hs', rfl⟩ hts ht
