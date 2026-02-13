@@ -46,10 +46,9 @@ which is downwards closed, i.e., any nonempty subset of a face is also a face.
 structure PreAbstractSimplicialComplex where
   /-- the faces of this simplicial complex: currently, given by their spanning vertices -/
   faces : Set (Finset ι)
-  /-- the empty set is not a face: hence, all faces are non-empty -/
-  empty_notMem : ∅ ∉ faces
-  /-- faces are downward closed: a non-empty subset of its spanning vertices spans another face -/
-  down_closed : ∀ {s t}, s ∈ faces → t ⊆ s → t.Nonempty → t ∈ faces
+  /-- Faces are nonempty and downward closed: a non-empty subset of its spanning vertices spans
+  another face. -/
+  isRelLowerSet_faces : IsRelLowerSet faces Finset.Nonempty
 
 attribute [simp] PreAbstractSimplicialComplex.empty_notMem
 
