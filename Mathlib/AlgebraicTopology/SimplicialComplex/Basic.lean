@@ -145,6 +145,20 @@ instance : CompleteLattice (PreAbstractSimplicialComplex ι) where
   le_top K _ ht := Finset.nonempty_iff_ne_empty.mpr (fun h => K.empty_notMem (h ▸ ht))
   bot_le _ _ ht := ht.elim
 
+/--
+Map each vertex in each face of a PreAbstractSimplicialComplex through a function,
+producing a new PreAbstractSimplicialComplex.
+-/
+def map {α β : Type*} [DecidableEq β] (K : PreAbstractSimplicialComplex α) (f : α → β) :
+    PreAbstractSimplicialComplex β where
+  faces := K.faces.image (fun s => s.image f)
+  empty_notMem := by simp
+  down_closed := by
+    simp only [Set.mem_image]
+    rintro _ t ⟨s', hs', rfl⟩ hts ht
+    rw [Finset.subset_image_iff] at hts
+    obtain ⟨t', ht', rfl⟩ := hts
+    exact ⟨t', K.down_closed hs' ht' (Finset.image_nonempty.mp ht), rfl⟩
 
 end PreAbstractSimplicialComplex
 

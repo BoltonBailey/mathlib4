@@ -62,19 +62,16 @@ end AbstractSimplicialComplex
 namespace SimplicialComplex
 
 /--
-Construct a simplicial complex from a downward-closed set of faces
-with defining points affinely independent.
+Construct a simplicial complex from a `PreAbstractSimplicialComplex` on a set of points in a space,
+under the assumption that the union of the defining points is affinely independent.
 -/
 def ofAffineIndependent {𝕜 E}
     [Field 𝕜] [LinearOrder 𝕜] [IsStrictOrderedRing 𝕜] [DecidableEq E] [AddCommGroup E] [Module 𝕜 E]
-    (faces : Set (Finset E)) (empty_notMem : ∅ ∉ faces)
-    (down_closed : ∀ {s t}, s ∈ faces → t ⊆ s → t.Nonempty → t ∈ faces)
-    (indep : AffineIndependent 𝕜 (Subtype.val : (⋃ s ∈ faces, (s : Set E)) → E)) :
+    (abstract : PreAbstractSimplicialComplex E)
+    (indep : AffineIndependent 𝕜 (Subtype.val : (⋃ s ∈ abstract.faces, (s : Set E)) → E)) :
     SimplicialComplex 𝕜 E where
-  faces := faces
-  empty_notMem := empty_notMem
+  toPreAbstractSimplicialComplex := abstract
   indep {s} hs := indep.mono (Set.subset_biUnion_of_mem hs)
-  down_closed := down_closed
   inter_subset_convexHull {s t} hs ht := by
     apply subset_of_eq
     rw [AffineIndependent.convexHull_inter (R := 𝕜) (s := s ∪ t)]
@@ -93,19 +90,12 @@ noncomputable def onFinsupp {𝕜 ι : Type*} [DecidableEq ι]
     (abstract : PreAbstractSimplicialComplex ι) :
     SimplicialComplex 𝕜 (ι →₀ 𝕜) :=
   ofAffineIndependent (𝕜 := 𝕜) (E := ι →₀ 𝕜)
-    (abstract.faces.image (fun x => x.image (fun i => Finsupp.single i (1 : 𝕜))))
-    (by simp)
-    (by
-      simp only [Set.mem_image]
-      rintro _ t ⟨s', hs', rfl⟩ hts ht
-      rw [Finset.subset_image_iff] at hts
-      obtain ⟨t', ht', rfl⟩ := hts
-      exact ⟨t', abstract.down_closed hs' ht' (Finset.image_nonempty.mp ht), rfl⟩)
+    (abstract.map (fun i => Finsupp.single i (1 : 𝕜)))
     (by
       refine (Finsupp.linearIndependent_single_one 𝕜 ι).affineIndependent.range.mono fun x hx => ?_
-      simp only [Set.mem_iUnion, Set.mem_image, Finset.mem_coe] at hx
+      simp only [Set.mem_iUnion, Finset.mem_coe] at hx
       obtain ⟨_, ⟨_, _, rfl⟩, hx⟩ := hx
-      exact Finset.mem_image.mp hx |>.choose_spec.2 ▸ Set.mem_range_self _)
+      grind )
 
 /--
 The simplicial complex associated to a simple graph, where vertices of the graph
