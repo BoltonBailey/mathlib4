@@ -41,17 +41,16 @@ are 0-simplices and edges are 1-simplices.
 def ofSimpleGraph {ι : Type*} [DecidableEq ι] (G : SimpleGraph ι) :
     AbstractSimplicialComplex ι where
   faces := ({s : Finset ι | ∃ v, s = {v}}) ∪ Sym2.toFinset '' G.edgeSet
-  empty_notMem := by simp
-  down_closed {s t} hs hts ht := by
-    simp only [Set.mem_union, Set.mem_setOf_eq, Set.mem_image]
+  isRelLowerSet_faces := by
+    intro s hs
+    simp only [Set.mem_union, Set.mem_setOf_eq, Set.mem_image] at hs
     rcases hs with ⟨v, rfl⟩ | ⟨e, he, rfl⟩
-    · grind
-    · by_cases hc : t.card ≤ 1
-      · left
-        obtain ⟨x, hx⟩ := ht
-        exact ⟨x, by grind [Finset.eq_singleton_iff_unique_mem, Finset.card_le_one]⟩
-      · right
-        exact ⟨e, he, by grind [Sym2.card_toFinset e, Finset.eq_of_subset_of_card_le]⟩
+    · simp
+    · constructor
+      · exact Finset.nonempty_iff_ne_empty.mpr (Sym2.toFinset_ne_empty e)
+      · intro b hb_sub hb_nonempty
+        by_cases h : b.card = 1 <;>
+          grind [Finset.card_eq_one, Finset.eq_of_subset_of_card_le hb_sub, Sym2.card_toFinset]
   singleton_mem := by
     simp only [Set.mem_union, Set.mem_setOf_eq, Set.mem_image]
     intro v
