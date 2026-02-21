@@ -6,10 +6,10 @@ Authors: Mario Carneiro
 module
 
 public import Mathlib.Computability.Halting
-public import Mathlib.Computability.TuringMachine
+public import Mathlib.Computability.TuringMachine.WangB
 public import Mathlib.Data.Num.Lemmas
 public import Mathlib.Tactic.DeriveFintype  -- shake: keep (deriving handlers not tracked yet)
-public import Mathlib.Computability.TMConfig
+public import Mathlib.Computability.TuringMachine.Config
 
 /-!
 # Modelling partial recursive functions using Turing machines
