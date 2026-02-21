@@ -3450,9 +3450,9 @@ public import Mathlib.Computability.TuringDegree
 public import Mathlib.Computability.TuringMachine.Computable
 public import Mathlib.Computability.TuringMachine.Config
 public import Mathlib.Computability.TuringMachine.PostTuringMachine
+public import Mathlib.Computability.TuringMachine.StackMachine
 public import Mathlib.Computability.TuringMachine.Tape
 public import Mathlib.Computability.TuringMachine.ToPartrec
-public import Mathlib.Computability.TuringMachine.WangB
 public import Mathlib.Condensed.AB
 public import Mathlib.Condensed.Basic
 public import Mathlib.Condensed.CartesianClosed
