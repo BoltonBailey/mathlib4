@@ -556,22 +556,23 @@ variable (B F)
 construction gives a way to construct vector bundles from a structure registering how
 trivialization changes act on fibers. -/
 structure VectorBundleCore (ι : Type*) where
-  /-- The open set of the base over which the trivialization indexed by `i` is defined; its openness
-  is `isOpen_baseSet`. -/
+  /-- The subset of `B` over which the `i`th local trivialization is defined. -/
   baseSet : ι → Set B
+  /-- Each `baseSet i` is open. -/
   isOpen_baseSet : ∀ i, IsOpen (baseSet i)
-  /-- A choice, for each point of the base, of an index whose `baseSet` contains it, witnessing that
-  the `baseSet`s cover `B`. -/
+  /-- An index `i` with `x ∈ baseSet i`, for each `x : B`. -/
   indexAt : B → ι
+  /-- `x` lies in `baseSet (indexAt x)`. -/
   mem_baseSet_at : ∀ x, x ∈ baseSet (indexAt x)
-  /-- The transition function from the trivialization `i` to the trivialization `j`, as a continuous
-  linear automorphism of the model fiber `F` at each point of the base.
-
-  Unlike in `FiberBundleCore` the values are already linear maps, so continuity is required only
-  in the base point; the cocycle condition is `coordChange_comp`. -/
+  /-- `coordChange i j x` is the change of trivialization from chart `i` to chart `j` over the point
+  `x`, as a continuous linear automorphism of `F`. -/
   coordChange : ι → ι → B → F →L[R] F
+  /-- `coordChange i i` is the identity over `baseSet i`. -/
   coordChange_self : ∀ i, ∀ x ∈ baseSet i, ∀ v, coordChange i i x v = v
+  /-- `coordChange i j` is continuous on `baseSet i ∩ baseSet j`, as a map into `F →L[R] F`. -/
   continuousOn_coordChange : ∀ i j, ContinuousOn (coordChange i j) (baseSet i ∩ baseSet j)
+  /-- The cocycle condition: over `baseSet i ∩ baseSet j ∩ baseSet k`, `coordChange j k` after
+  `coordChange i j` is `coordChange i k`. -/
   coordChange_comp : ∀ i j k, ∀ x ∈ baseSet i ∩ baseSet j ∩ baseSet k, ∀ v,
     (coordChange j k x) (coordChange i j x v) = coordChange i k x v
 
@@ -833,10 +834,12 @@ fields), since it depends on propositional information (namely `e e' ∈ pretriv
 This makes it inconvenient to explicitly define a `coordChange` function when constructing a
 `VectorPrebundle`. -/
 structure VectorPrebundle where
-  /-- The designated atlas of pretrivializations. -/
+  /-- The atlas of pretrivializations, which become genuine trivializations once the total space is
+  given its topology. -/
   pretrivializationAtlas : Set (Pretrivialization F (π F E))
+  /-- Every pretrivialization in the atlas is linear. -/
   pretrivialization_linear' : ∀ e, e ∈ pretrivializationAtlas → e.IsLinear R
-  /-- A pretrivialization around each point of the base. -/
+  /-- A pretrivialization from the atlas around each point of the base. -/
   pretrivializationAt : B → Pretrivialization F (π F E)
   mem_base_pretrivializationAt : ∀ x : B, x ∈ (pretrivializationAt x).baseSet
   pretrivialization_mem_atlas : ∀ x : B, pretrivializationAt x ∈ pretrivializationAtlas

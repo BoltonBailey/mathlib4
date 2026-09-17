@@ -48,7 +48,8 @@ structure ImportState where
   /-- The number of transitive imports needed to build the file up to the current command. -/
   importSize   : Nat := 0
 
-/-- The initial `ImportState`, in which no import information has been computed yet. -/
+/-- The default `ImportState` has every field at its default value: no transitive closure yet, no
+imports, and size `0`. -/
 instance : Inhabited ImportState := ⟨{}⟩
 
 /--

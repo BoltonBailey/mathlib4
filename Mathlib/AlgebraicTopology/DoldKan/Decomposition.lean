@@ -90,10 +90,10 @@ construct a morphism `X _⦋n+1⦌ ⟶ Z` (see `φ`) using the decomposition of 
 identity given by `decomposition_Q n (n+1)`. -/
 @[ext]
 structure MorphComponents (n : ℕ) (Z : C) where
-  /-- The component of the morphism on the summand indexed by the identity. -/
+  /-- The part of the morphism `φ` that factors through `PInfty.f (n + 1)`. -/
   a : X _⦋n + 1⦌ ⟶ Z
-  /-- The components of the morphism on the summands of the decomposition `decomposition_Q n (n +
-  1)`. -/
+  /-- The parts of the morphism `φ` that factor through face maps: for each `i`, `φ` has a summand
+  `(P i).f (n + 1) ≫ X.δ i.rev.succ ≫ b (Fin.rev i)`. -/
   b : Fin (n + 1) → (X _⦋n⦌ ⟶ Z)
 
 namespace MorphComponents

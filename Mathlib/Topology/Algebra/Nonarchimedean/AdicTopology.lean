@@ -235,7 +235,7 @@ end IsAdic
 
 /-- The ring `R` is equipped with a preferred ideal. -/
 class WithIdeal (R : Type*) [CommRing R] where
-  /-- The preferred ideal of `R`. -/
+  /-- The preferred ideal of `R`, which defines its adic topology. -/
   i : Ideal R
 
 namespace WithIdeal

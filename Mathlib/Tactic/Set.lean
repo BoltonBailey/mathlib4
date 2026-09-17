@@ -24,7 +24,7 @@ public meta section
 namespace Mathlib.Tactic
 open Lean Elab Elab.Tactic Meta
 
-/-- The arguments of the `set` tactic, after the tactic name. -/
+/-- The arguments of the `set` tactic after the keyword: `a (: ty)? := val (with (←)? h)?`. -/
 syntax setArgsRest := ppSpace binderIdent (" : " term)? " := " term (" with " "← "? binderIdent)?
 
 /--

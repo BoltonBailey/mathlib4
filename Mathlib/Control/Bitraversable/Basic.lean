@@ -46,7 +46,8 @@ universe u
 
 /-- Lawless bitraversable bifunctor. This only holds data for the bimap and bitraverse. -/
 class Bitraversable (t : Type u → Type u → Type u) extends Bifunctor t where
-  /-- Traverse both arguments of `t` at once in the applicative functor `m`. -/
+  /-- Traverse both arguments of `t` at once: apply the effectful maps `f` and `g` to the first and
+  second components respectively, sequencing their effects in the applicative functor `m`. -/
   bitraverse :
     ∀ {m : Type u → Type u} [Applicative m] {α α' β β'},
       (α → m α') → (β → m β') → t α β → m (t α' β')

@@ -51,17 +51,15 @@ elements of `F α` are represented by pairs `⟨a, f⟩`, where `a` is the shape
 `f` indexes the relevant elements of `α`, in a suitably natural manner.
 -/
 class QPF (F : Type u → Type v) extends Functor F where
-  /-- The polynomial functor of which `F` is a quotient. Its elements are pairs `⟨a, f⟩` of a shape
-  `a` and an indexing function `f`. -/
+  /-- The polynomial functor of which `F` is a quotient. -/
   P : PFunctor.{u, u'}
-  /-- The quotient map presenting `F α` as a quotient of `P α`. It is natural in `α` by `abs_map`,
-  and surjective because `repr` is a section of it. -/
+  /-- The quotient map from `P α` onto `F α`. -/
   abs : ∀ {α}, P α → F α
-  /-- A choice of representative in `P α` for each element of `F α`, a section of `abs` by
-  `abs_repr`. It need not be natural in `α`: only `abs` is required to be a morphism of
-  functors. -/
+  /-- A choice of representative in `P α` for each element of `F α`. -/
   repr : ∀ {α}, F α → P α
+  /-- `repr` is a right inverse of `abs`. -/
   abs_repr : ∀ {α} (x : F α), abs (repr x) = x
+  /-- `abs` is natural in `α`. -/
   abs_map : ∀ {α β} (f : α → β) (p : P α), abs (P.map f p) = f <$> abs p
 
 namespace QPF

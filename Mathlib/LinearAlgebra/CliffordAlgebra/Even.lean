@@ -64,9 +64,11 @@ variable (A)
 /-- The type of bilinear maps which are accepted by `CliffordAlgebra.even.lift`. -/
 @[ext]
 structure EvenHom where
-  /-- The underlying bilinear map. -/
+  /-- The underlying bilinear map `M → M → A`. -/
   bilin : M →ₗ[R] M →ₗ[R] A
+  /-- `bilin m m` is the scalar `Q m`. -/
   contract (m : M) : bilin m m = algebraMap R A (Q m)
+  /-- `bilin m₁ m₂ * bilin m₂ m₃ = Q m₂ • bilin m₁ m₃`. -/
   contract_mid (m₁ m₂ m₃ : M) : bilin m₁ m₂ * bilin m₂ m₃ = Q m₂ • bilin m₁ m₃
 
 variable {A Q}

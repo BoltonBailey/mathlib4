@@ -185,9 +185,9 @@ for which the fibers are all homeomorphic to `F`, such that the local situation 
 is a direct product. -/
 class FiberBundle where
   totalSpaceMk_isInducing' : ∀ b : B, IsInducing (@TotalSpace.mk B F E b)
-  /-- The designated atlas of trivializations. Use `FiberBundle.trivializationAtlas` instead. -/
+  /-- The atlas of trivializations; use `FiberBundle.trivializationAtlas` instead. -/
   trivializationAtlas' : Set (Trivialization F (π F E))
-  /-- A trivialization around each point of the base. Use `FiberBundle.trivializationAt` instead. -/
+  /-- A trivialization around each base point; use `FiberBundle.trivializationAt` instead. -/
   trivializationAt' : B → Trivialization F (π F E)
   mem_baseSet_trivializationAt' : ∀ b : B, b ∈ (trivializationAt' b).baseSet
   trivialization_mem_atlas' : ∀ b : B, trivializationAt' b ∈ trivializationAtlas'
@@ -419,24 +419,25 @@ Trivialization changes from `i` to `j` are given by continuous maps `coordChange
 space of continuous maps on `F`. -/
 structure FiberBundleCore (ι : Type*) (B : Type*) [TopologicalSpace B] (F : Type*)
     [TopologicalSpace F] where
-  /-- The open set of the base over which the trivialization indexed by `i` is defined; its openness
-  is `isOpen_baseSet`. -/
+  /-- The subset of `B` over which the `i`th local trivialization is defined. -/
   baseSet : ι → Set B
+  /-- Each `baseSet i` is open. -/
   isOpen_baseSet : ∀ i, IsOpen (baseSet i)
-  /-- A choice, for each point of the base, of an index whose `baseSet` contains it, witnessing that
-  the `baseSet`s cover `B`. -/
+  /-- An index `i` with `x ∈ baseSet i`, for each `x : B`. -/
   indexAt : B → ι
+  /-- `x` lies in `baseSet (indexAt x)`. -/
   mem_baseSet_at : ∀ x, x ∈ baseSet (indexAt x)
-  /-- The transition function from the trivialization `i` to the trivialization `j`, as a map `B → F
-  → F` that is a homeomorphism of `F` over `baseSet i ∩ baseSet j`.
-
-  It is presented as a map `B → F → F` rather than a map into the homeomorphisms of `F` so that
-  no topology on that space is needed; continuity is instead required on `(baseSet i ∩ baseSet
-  j) ×ˢ univ`. The cocycle condition is `coordChange_comp`. -/
+  /-- `coordChange i j x` is the change of trivialization from chart `i` to chart `j` over the point
+  `x`, as a map `F → F`. -/
   coordChange : ι → ι → B → F → F
+  /-- `coordChange i i` is the identity over `baseSet i`. -/
   coordChange_self : ∀ i, ∀ x ∈ baseSet i, ∀ v, coordChange i i x v = v
+  /-- `coordChange i j` is continuous jointly in the base point and the fibre coordinate, over
+  `baseSet i ∩ baseSet j`. -/
   continuousOn_coordChange : ∀ i j,
     ContinuousOn (fun p : B × F => coordChange i j p.1 p.2) ((baseSet i ∩ baseSet j) ×ˢ univ)
+  /-- The cocycle condition: over `baseSet i ∩ baseSet j ∩ baseSet k`, `coordChange j k` after
+  `coordChange i j` is `coordChange i k`. -/
   coordChange_comp : ∀ i j k, ∀ x ∈ baseSet i ∩ baseSet j ∩ baseSet k, ∀ v,
     (coordChange j k x) (coordChange i j x v) = coordChange i k x v
 
@@ -760,9 +761,10 @@ equivalences but there is not yet a topology on the total space. The total space
 topology in such a way that there is a fiber bundle structure for which the partial equivalences
 are also open partial homeomorphisms and hence local trivializations. -/
 structure FiberPrebundle where
-  /-- The designated atlas of pretrivializations. -/
+  /-- The atlas of pretrivializations, which become genuine local trivializations once the total
+  space is given its topology. -/
   pretrivializationAtlas : Set (Pretrivialization F (π F E))
-  /-- A pretrivialization around each point of the base. -/
+  /-- A pretrivialization from the atlas around each point of the base. -/
   pretrivializationAt : B → Pretrivialization F (π F E)
   mem_base_pretrivializationAt : ∀ x : B, x ∈ (pretrivializationAt x).baseSet
   pretrivialization_mem_atlas : ∀ x : B, pretrivializationAt x ∈ pretrivializationAtlas

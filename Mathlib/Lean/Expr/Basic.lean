@@ -93,12 +93,9 @@ def isPrefixOf? (pre nm : Name) : Option Name :=
 open Meta
 
 -- from Lean.Server.Completion
-/-- Is `declName` an implementation detail that should be hidden from the user? This covers
-`sorryAx`, internal names, auxiliary recursors, matchers, recursors, and the `inj` and
-`noConfusionType` helpers.
-
-Tactics that enumerate the environment, such as `#find` and `exact?`, use this to skip
-declarations that would only be noise. -/
+/-- Should `declName` be hidden from users? True for `sorryAx`, internal details, auxiliary
+recursors, `noConfusion` helpers, recursors, matchers, and the generated `inj` and
+`noConfusionType` declarations. Adapted from `Lean.Server.Completion`. -/
 def isBlackListed {m} [Monad m] [MonadEnv m] (declName : Name) : m Bool := do
   if declName == ``sorryAx then return true
   if declName matches .str _ "inj" then return true
@@ -190,8 +187,7 @@ namespace Expr
 
 /-! ### Declarations about `Expr` -/
 
-/-- The de Bruijn index of a loose bound variable, or `none` if the expression is not a `bvar`. Note
-that an index is meaningful only relative to the binders it sits under. -/
+/-- The index `i` of a bound variable `bvar i`, or `none`. -/
 def bvarIdx? : Expr → Option Nat
   | bvar idx => some idx
   | _        => none
@@ -396,16 +392,15 @@ end recognizers
 
 universe u
 
-/-- Run `modifier` on the last argument of an application, or return the expression unchanged if it
-is not an application. The modification happens in an arbitrary functor, so it may fail or
-produce several results. -/
+/-- Apply `modifier` to the last argument of an application `f a`, producing `f a'` inside the
+functor `M`. A non-application is returned unchanged. -/
 def modifyAppArgM {M : Type → Type u} [Functor M] [Pure M]
     (modifier : Expr → M Expr) : Expr → M Expr
   | app f a => mkApp f <$> modifier a
   | e => pure e
 
-/-- Given `f a₀ a₁ ... aₙ₋₁`, run `modifier` on the `i`th argument counting from the right, or
-return the original expression if out of bounds. -/
+/-- `modifyRevArg modifier i e` applies `modifier` to the `i`th argument of the application `e`,
+counting from the last one; `e` is returned unchanged if it has fewer than `i + 1` arguments. -/
 def modifyRevArg (modifier : Expr → Expr) : Nat → Expr → Expr
   | 0,     (.app f x) => .app f (modifier x)
   | (i+1), (.app f x) => .app (modifyRevArg modifier i f) x
@@ -421,8 +416,8 @@ returns the original expression if out of bounds. -/
 def setArg (e : Expr) (i : Nat) (x : Expr) (n := e.getAppNumArgs) : Expr :=
   e.modifyArg (fun _ => x) i n
 
-/-- Given `f a₀ a₁ ... aₙ₋₁`, return the `i`th argument counting from the right, or `none` if out of
-bounds. -/
+/-- `getRevArg? e i` is the `i`th argument of the application `e`, counting from the last one, or
+`none` if `e` has fewer than `i + 1` arguments. -/
 def getRevArg? : Expr → Nat → Option Expr
   | app _ a, 0   => a
   | app f _, i+1 => getRevArg! f i

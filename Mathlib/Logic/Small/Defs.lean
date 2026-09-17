@@ -63,9 +63,11 @@ theorem Shrink.ext {α : Type v} [Small.{w} α] {x y : Shrink α}
 -- It would be nice to mark this as `aesop cases` if
 -- https://github.com/leanprover-community/aesop/issues/59
 -- is resolved.
-/-- To prove a statement about every element of `Shrink α`, it suffices to prove it for every
-element of the form `equivShrink α a`. This is tagged `@[induction_eliminator]`, so `induction
-x` on `x : Shrink α` uses it. -/
+/-- Eliminator for `Shrink α`: to prove `F X` for every `X : Shrink α`, it suffices to prove `F
+(equivShrink α a)` for every `a : α`.
+
+It is registered as the `induction` eliminator for `Shrink`, so `induction X` on `X : Shrink α`
+replaces `X` by `equivShrink α a` with `a : α` a fresh variable. -/
 @[induction_eliminator]
 protected noncomputable def Shrink.rec {α : Type*} [Small.{w} α] {F : Shrink α → Sort v}
     (h : ∀ X, F (equivShrink _ X)) : ∀ X, F X :=

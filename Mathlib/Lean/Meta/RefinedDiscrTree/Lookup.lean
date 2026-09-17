@@ -168,7 +168,7 @@ private structure PartialMatch where
   We use a `List Key`, in the reverse order. -/
   treeStars : Std.HashMap Nat (List Key) := {}
 
-/-- A junk `PartialMatch`, used only to make the type inhabited. -/
+/-- The empty partial match: no keys, score `0`, default trie index. -/
 private instance : Inhabited PartialMatch :=
   ⟨{ keys := default, score := default, trie := default }⟩
 

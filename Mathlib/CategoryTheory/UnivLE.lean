@@ -41,7 +41,8 @@ theorem UnivLE_iff_essSurj :
 
 instance [UnivLE.{max u v, v}] : uliftFunctor.{u, v}.IsEquivalence where
 
-/-- A fully faithful functor `Type u ⥤ Type v` witnessing `UnivLE.{u, v}`. -/
+/-- A fully faithful functor `Type u ⥤ Type v` witnessing `UnivLE.{u, v}`: lift to `Type (max u v)`,
+then apply the inverse of the lift from `Type v`, which is an equivalence under the hypothesis. -/
 def UnivLE.witness [UnivLE.{max u v, v}] : Type u ⥤ Type v :=
   uliftFunctor.{v, u} ⋙ (uliftFunctor.{u, v}).inv
 

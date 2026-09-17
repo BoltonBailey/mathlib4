@@ -111,7 +111,8 @@ def Algebra.cast {R A : Type*} [CommSemiring R] [Semiring A] [Algebra R A] : R �
 
 namespace algebraMap
 
-/-- The coercion `R → A` given by `algebraMap`, as a `CoeHTCT` instance. -/
+/-- Coercion from `R` to `A` through `algebraMap R A`. It is scoped, so it is only active after
+`open scoped algebraMap`. -/
 scoped instance coeHTCT (R A : Type*) [CommSemiring R] [Semiring A] [Algebra R A] :
     CoeHTCT R A :=
   ⟨Algebra.cast⟩

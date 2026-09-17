@@ -67,7 +67,7 @@ inductive StyleError where
   | unicodeVariant (s : String) (selector: Option Char)
 deriving BEq
 
-/-- A junk `StyleError`, used only to make the type inhabited. -/
+/-- The default `StyleError` is `adaptationNote`. -/
 instance : Inhabited StyleError := ⟨.adaptationNote⟩
 
 /-- How to format style errors -/

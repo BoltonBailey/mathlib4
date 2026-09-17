@@ -35,7 +35,7 @@ open Function
 
 /-- Lawless bifunctor. This typeclass only holds the data for the bimap. -/
 class Bifunctor (F : Type u₀ → Type u₁ → Type u₂) where
-  /-- Map over both arguments of `F` at once. -/
+  /-- Map `f` over the first argument of `F` and `g` over the second. -/
   bimap : ∀ {α α' β β'}, (α → α') → (β → β') → F α β → F α' β'
 
 export Bifunctor (bimap)

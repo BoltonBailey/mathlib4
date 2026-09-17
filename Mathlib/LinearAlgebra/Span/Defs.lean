@@ -315,7 +315,7 @@ theorem sup_span : p ⊔ span R s = span R (p ∪ s) := by rw [Submodule.span_un
 
 theorem span_sup : span R s ⊔ p = span R (s ∪ p) := by rw [Submodule.span_union, p.span_eq]
 
-/-- `R ∙ x` is the `R`-submodule spanned by the single element `x`.
+/-- `R ∙ x` is the `R`-submodule spanned by the single vector `x`, that is, `span R {x}`.
 
 Note that the character `∙` U+2219 used here is different from the scalar multiplication
 character `•` U+2022. -/

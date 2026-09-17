@@ -529,7 +529,8 @@ open Elab Tactic
     goal.assignIfDefEq (← mkAppOptM ``Eq.subst #[h, m])
     goal.applyRfl
 
-/-- Close the goal with the hypothesis itself, if it is definitionally equal to the goal. -/
+/-- The `gcongr_forward` extension closing the goal by a hypothesis that is definitionally equal to
+it. -/
 @[gcongr_forward] def exact : ForwardExt where
   eval e m := m.assignIfDefEq e
 

@@ -148,7 +148,7 @@ structure TransvectionStruct where
   /-- The column index of the off-diagonal entry. -/
   j : n
   hij : i ≠ j
-  /-- The value of the off-diagonal entry. -/
+  /-- The coefficient placed at position `(i, j)`. -/
   c : R
 
 instance [Nontrivial n] : Nonempty (TransvectionStruct n R) := by

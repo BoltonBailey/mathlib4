@@ -34,14 +34,18 @@ open scoped MatrixGroups
 /-- A general version of the slash action of the space of modular forms. This is the same data as a
 family of `DistribMulAction Gᵒᵖ α` indexed by `k`. -/
 class SlashAction (β G α : Type*) [Monoid G] [AddMonoid α] where
-  /-- The action of `g : G` on `a : α` in weight `k : β`, written `a ∣[k] g`. -/
+  /-- `map k g a` is the action of `g` on `a` in weight `k`, written `a ∣[k] g`. -/
   map : β → G → α → α
+  /-- The action fixes `0`. -/
   zero_slash : ∀ (k : β) (g : G), map k g 0 = 0
+  /-- The identity of `G` acts trivially. -/
   slash_one : ∀ (k : β) (a : α), map k 1 a = a
+  /-- The action is a right action: acting by `g * h` is acting by `g` and then by `h`. -/
   slash_mul : ∀ (k : β) (g h : G) (a : α), map k (g * h) a = map k h (map k g a)
+  /-- Each `g` acts additively. -/
   add_slash : ∀ (k : β) (g : G) (a b : α), map k g (a + b) = map k g a + map k g b
 
-/-- `f ∣[k] a` is the slash action of `a` on `f` in weight `k`. -/
+/-- `f ∣[k] a` denotes the slash action `SlashAction.map k a f` of `a` on `f` in weight `k`. -/
 scoped[ModularForm] notation:100 f " ∣[" k "] " a:100 => SlashAction.map k a f
 
 open scoped ModularForm

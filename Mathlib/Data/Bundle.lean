@@ -58,7 +58,7 @@ structure TotalSpace (F : Type*) (E : B → Type*) where
   /-- `Bundle.TotalSpace.proj` is the canonical projection `Bundle.TotalSpace F E → B` from the
   total space to the base space. -/
   proj : B
-  /-- The point of the fibre over `proj` that this element of the total space is. -/
+  /-- The point of the fibre `E proj` over the base point `proj`. -/
   snd : E proj
 
 instance [Inhabited B] [Inhabited (E default)] : Inhabited (TotalSpace F E) :=
@@ -69,8 +69,7 @@ variable {E}
 @[inherit_doc]
 scoped notation:max "π " F':max E':max => Bundle.TotalSpace.proj (F := F') (E := E')
 
-/-- Version of `Bundle.TotalSpace.mk` taking the model fibre `F` explicitly, to help elaboration
-when `F` cannot be inferred from the expected type. -/
+/-- `TotalSpace.mk` with the model fibre `F` as an explicit argument. -/
 abbrev TotalSpace.mk' (F : Type*) (x : B) (y : E x) : TotalSpace F E := ⟨x, y⟩
 
 theorem TotalSpace.mk_cast {x x' : B} (h : x = x') (b : E x) :

@@ -85,9 +85,9 @@ def Lean.Elab.Tactic.applyCongr (q : Option Expr) : TacticM Unit := do
     let newGoals ← mainGoal.apply congrTheoremExpr { newGoals := .nonDependentOnly }
     newGoals.mapM fun newGoal => Prod.snd <$> newGoal.intros)
 
-/-- Apply a congruence lemma inside `conv` mode; see `Lean.Elab.Tactic.applyCongr` for the details.
-With no argument it tries every lemma marked `@[congr]`, and `apply_congr e` applies the lemma
-`e`. -/
+/-- `apply_congr` applies a congruence lemma inside `conv` mode. Without an argument it tries every
+lemma tagged `@[congr]`; `apply_congr e` applies the lemma `e`. See
+`Lean.Elab.Tactic.applyCongr` for a full description and an example. -/
 syntax (name := Lean.Parser.Tactic.applyCongr) "apply_congr" (ppSpace colGt term)? : conv
 
 -- TODO: add `apply_congr with h` to specify hypothesis name

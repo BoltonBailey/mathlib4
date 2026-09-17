@@ -196,7 +196,7 @@ inductive Stained
   | wildcard : Stained
   deriving Repr, DecidableEq, Hashable
 
-/-- A junk `Stained`, used only to make the type inhabited. -/
+/-- The default `Stained` is `.name default`. -/
 instance : Inhabited Stained := ⟨.name default⟩
 
 /-- Converting a `Stained` to a `String`:

@@ -32,7 +32,7 @@ and a sheaf of commutative rings (see `Mathlib/AlgebraicGeometry/StructureSheaf.
 It is a fundamental building block in algebraic geometry. -/
 @[ext]
 structure PrimeSpectrum (R : Type*) [CommSemiring R] where
-  /-- The underlying ideal, required to be prime. -/
+  /-- The prime ideal itself. -/
   asIdeal : Ideal R
   isPrime : asIdeal.IsPrime
 

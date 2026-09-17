@@ -111,8 +111,8 @@ scoped[Isocrystal]
 Frobenius-linear automorphism.
 -/
 class Isocrystal (V : Type*) [AddCommGroup V] extends Module K(p, k) V where
-  /-- The Frobenius-linear automorphism of `V`: an additive bijection satisfying `frob (a • v) = φ a
-  • frob v`, where `φ` is the Frobenius of the fraction field of the Witt vectors. -/
+  /-- The Frobenius-linear automorphism of `V`: an additive bijection that is semilinear with
+  respect to the Frobenius of `K(p, k)`. -/
   frob : V ≃ᶠˡ[p, k] V
 
 open WittVector

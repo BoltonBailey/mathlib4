@@ -62,8 +62,8 @@ open Command in elab_rules : command
       elabCommand cmd.raw
       if (← get).messages.hasErrors then break
 
-/-- The optional `(lemma := name)` clause of `irreducible_def`, naming the generated defining
-equation instead of taking the default name `foo_def`. -/
+/-- The optional `(lemma := name)` clause of `irreducible_def`, choosing the name of the generated
+unfolding theorem instead of the default `foo_def`. -/
 syntax irredDefLemma := atomic(" (" &"lemma" " := ") ident ")"
 
 /--

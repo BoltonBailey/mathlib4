@@ -909,12 +909,13 @@ variable (X : ℕ → Type) [∀ n, MetricSpace (X n)] [∀ n, CompactSpace (X n
 /-- Auxiliary structure used to glue metric spaces below, recording an isometric embedding
 of a type `A` in another metric space. -/
 structure AuxGluingStruct (A : Type) [MetricSpace A] : Type 1 where
-  /-- The carrier of the larger space. -/
+  /-- The ambient metric space into which `A` is embedded. -/
   Space : Type
-  /-- Its metric space structure. -/
+  /-- The metric space structure on `Space`. -/
   metric : MetricSpace Space
-  /-- The embedding of `A`, required by `isom` to be an isometry. -/
+  /-- The isometric embedding of `A` into `Space`. -/
   embed : A → Space
+  /-- `embed` is an isometry. -/
   isom : Isometry embed
 
 attribute [local instance] AuxGluingStruct.metric

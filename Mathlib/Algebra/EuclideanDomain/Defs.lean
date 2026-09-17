@@ -112,9 +112,7 @@ variable {R : Type u} [EuclideanDomain R]
 /-- Abbreviated notation for the well-founded relation `r` in a Euclidean domain. -/
 local infixl:50 " ≺ " => EuclideanDomain.r
 
-/-- The well-founded relation used to justify recursion on the remainder in a Euclidean domain. It
-is local, so that it does not compete with the default `WellFoundedRelation` instances
-elsewhere. -/
+/-- `EuclideanDomain.r` packaged as a local `WellFoundedRelation` instance. -/
 local instance wellFoundedRelation : WellFoundedRelation R where
   rel := EuclideanDomain.r
   wf := r_wellFounded

@@ -31,8 +31,9 @@ def cyclicPermute! [Inhabited α] : Array α → List Nat → Array α
   | a, [] => a
   | a, i :: is => cyclicPermuteAux a is a[i]! i
 where
-  /-- Carry the displaced value `x` along the remaining indices, writing it back at `i0` at the
-  end of the cycle. -/
+  /-- `cyclicPermuteAux a is x i0` continues the cycle: it places `x` at the first index in `is`,
+  carries away the element that was there, and so on, finally writing the last carried element
+  at `i0`. -/
   cyclicPermuteAux : Array α → List Nat → α → Nat → Array α
   | a, [], x, i0 => a.set! i0 x
   | a, i :: is, x, i0 =>

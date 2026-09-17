@@ -213,7 +213,7 @@ namespace EsakiaHom
 variable [TopologicalSpace α] [Preorder α] [TopologicalSpace β] [Preorder β] [TopologicalSpace γ]
   [Preorder γ] [TopologicalSpace δ] [Preorder δ]
 
-/-- Reinterpret an Esakia homomorphism as a pseudo-epimorphism. -/
+/-- Reinterpret an Esakia homomorphism as a pseudo-epimorphism, forgetting continuity. -/
 def toPseudoEpimorphism (f : EsakiaHom α β) : PseudoEpimorphism α β :=
   { f with }
 

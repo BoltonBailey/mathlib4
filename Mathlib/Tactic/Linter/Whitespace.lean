@@ -97,7 +97,7 @@ structure FormatError where
   /-- The starting position of the mismatch, as a `String.pos`. -/
   srcStartPos : String.Pos.Raw
 
-/-- A junk `FormatError`, with every field set to its own default value. -/
+/-- The default `FormatError` has every field at its default value. -/
 instance : Inhabited FormatError := ⟨default, default, default, default, default, default⟩
 
 instance : ToString FormatError where

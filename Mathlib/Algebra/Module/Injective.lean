@@ -217,8 +217,8 @@ theorem extensionOfMax_is_max :
   fun _ ↦ (@zorn_le_nonempty (ExtensionOf i f) _ ⟨Inhabited.default⟩ fun _ hchain hnonempty =>
     ⟨ExtensionOf.max hchain hnonempty, ExtensionOf.le_max hchain hnonempty⟩).choose_spec.eq_of_ge
 
-/-- The submodule `(extensionOfMax i f).domain ⊔ span R {y}`, named so that Lean does not read the
-`⊔` as a `Max (Type u)`. -/
+/-- The submodule `(extensionOfMax i f).domain ⊔ span R {y}`. Writing `x : ↥(… ⊔ …)` inline makes
+Lean look for a `Max (Type u)` instance, hence this abbreviation. -/
 abbrev supExtensionOfMaxSingleton (y : N) : Submodule R N :=
   (extensionOfMax i f).domain ⊔ (Submodule.span R {y})
 

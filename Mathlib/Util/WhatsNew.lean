@@ -88,9 +88,8 @@ private def printIdCore (id : Name) : ConstantInfo → CoreM MessageData
       { levelParams := us, numParams, numIndices, type := t, ctors, isUnsafe := u, .. } =>
     printInduct id us numParams numIndices t ctors u
 
-/-- Report how many entries a single environment extension gained between two environments, or
-`none` if its state is unchanged. Asynchronous extensions are read synchronously so that the two
-states can be compared at all. -/
+/-- How many entries the extension `ext` gained between the environments `old` and `new`, as a
+message, or `none` if its state did not change. -/
 def diffExtension (old new : Environment)
     (ext : PersistentEnvExtension EnvExtensionEntry EnvExtensionEntry EnvExtensionState) :
     CoreM (Option MessageData) := unsafe do
@@ -105,9 +104,12 @@ def diffExtension (old new : Environment)
   let newEntries := (ext.exportEntriesFn (← getEnv) newSt.state).private
   pure m!"-- {ext.name} extension: {(newEntries.size - oldEntries.size : Int)} new entries"
 
-/-- Describe everything added between two environments: the new declarations, printed in full, and
-the number of new entries in each environment extension. This is what the `whatsnew in` command
-reports for the command it wraps. -/
+/-- A report of everything in `new` that is not in `old`: each new declaration is printed in full,
+in the style of `#print`, followed by one line per environment extension that changed, giving
+the number of entries it gained.
+
+This backs the `whatsnew in` command, which runs it on the environments before and after the
+wrapped command. -/
 def whatsNew (old new : Environment) : CoreM MessageData := do
   let mut diffs := #[]
 

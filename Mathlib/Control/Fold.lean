@@ -110,18 +110,16 @@ how the monoid of endofunctions define `Foldl`.
 abbrev Foldl (α : Type u) : Type u :=
   (End α)ᵐᵒᵖ
 
-/-- Wrap an endofunction of `α` as an element of the monoid `Monoid.Foldl α`, whose product is
-composition in reverse order. -/
+/-- View an endofunction `f : α → α` as an element of `Monoid.Foldl α`. -/
 def Foldl.mk (f : α → α) : Foldl α :=
   op (↾f)
 
-/-- Recover the underlying endofunction of `α` from an element of `Monoid.Foldl α`, undoing
-`Monoid.Foldl.mk`. -/
+/-- The endofunction underlying an element of `Monoid.Foldl α`. -/
 def Foldl.get (x : Foldl α) : α → α :=
   ConcreteCategory.hom (unop x)
 
-/-- The monoid hom sending a list `xs` to the left fold `fun b ↦ xs.foldl f b`, an element of
-`Monoid.Foldl β`. -/
+/-- The monoid hom `FreeMonoid α →* Monoid.Foldl β` sending a word `xs` to the endofunction `fun b ↦
+xs.toList.foldl f b`. -/
 @[simps]
 def Foldl.ofFreeMonoid (f : β → α → β) : FreeMonoid α →* Monoid.Foldl β where
   toFun xs := op <| ↾(flip (List.foldl f) (FreeMonoid.toList xs))
@@ -131,27 +129,22 @@ def Foldl.ofFreeMonoid (f : β → α → β) : FreeMonoid α →* Monoid.Foldl 
     simp only [FreeMonoid.toList_mul, List.foldl_append, Function.flip_def]
     rfl
 
-/-- `Monoid.Foldr α` is the monoid of endofunctions of `α` under composition. Unlike `Monoid.Foldl`
-it is not the opposite monoid: composing in the given order folds from the right.
-
-As with `Monoid.Foldl`, the point is that `foldMap` into this monoid accumulates a composite of
-the functions `f a` for each element `a` of the collection, and applying that composite to the
-initial value performs the fold. -/
+/-- `Monoid.Foldr α` is the monoid `End α` of endofunctions of `α` under composition, which `foldr`
+folds into. It is the opposite of `Monoid.Foldl`: folding from the right composes the step
+functions in the order the elements are visited, rather than in reverse. -/
 abbrev Foldr (α : Type u) : Type u :=
   End α
 
-/-- Wrap an endofunction of `α` as an element of the monoid `Monoid.Foldr α`, whose product is
-composition in the given order. -/
+/-- View an endofunction `f : α → α` as an element of `Monoid.Foldr α`. -/
 def Foldr.mk (f : α → α) : Foldr α :=
   ↾f
 
-/-- Recover the underlying endofunction of `α` from an element of `Monoid.Foldr α`, undoing
-`Monoid.Foldr.mk`. -/
+/-- The endofunction underlying an element of `Monoid.Foldr α`. -/
 def Foldr.get (x : Foldr α) : α → α :=
   ConcreteCategory.hom x
 
-/-- The monoid hom sending a list `xs` to the right fold `fun b ↦ xs.foldr f b`, an element of
-`Monoid.Foldr β`. -/
+/-- The monoid hom `FreeMonoid α →* Monoid.Foldr β` sending a word `xs` to the endofunction `fun b ↦
+xs.toList.foldr f b`. -/
 @[simps]
 def Foldr.ofFreeMonoid (f : α → β → β) : FreeMonoid α →* Monoid.Foldr β where
   toFun xs := ↾(flip (List.foldr f) (FreeMonoid.toList xs))
@@ -161,24 +154,21 @@ def Foldr.ofFreeMonoid (f : α → β → β) : FreeMonoid α →* Monoid.Foldr 
     ext
     apply List.foldr_append
 
-/-- `Monoid.foldlM m α` is the monoid of Kleisli endofunctions `α → m α` under reverse composition,
-the monadic analogue of `Monoid.Foldl`.
-
-The underlying type is the opposite of the endomorphism monoid of `α` in the Kleisli category of
-`m`, so that composing in the given order folds from the left. -/
+/-- `Monoid.foldlM m α` is the opposite of the monoid of endomorphisms `α → m α` of `α` in the
+Kleisli category of `m`. It is the monoid used by the monadic fold `foldlm`. -/
 abbrev foldlM (m : Type u → Type u) [Monad m] (α : Type u) : Type u :=
   MulOpposite <| End <| KleisliCat.mk m α
 
-/-- Wrap a Kleisli endofunction `α → m α` as an element of the monoid `Monoid.foldlM m α`. -/
+/-- View a Kleisli endomorphism `f : α → m α` as an element of `Monoid.foldlM m α`. -/
 def foldlM.mk (f : α → m α) : foldlM m α :=
   op f
 
-/-- Recover the underlying Kleisli endofunction from an element of `Monoid.foldlM m α`, undoing
-`Monoid.foldlM.mk`. -/
+/-- The Kleisli endomorphism underlying an element of `Monoid.foldlM m α`. -/
 def foldlM.get (x : foldlM m α) : α → m α :=
   unop x
 
-/-- The monoid hom sending a list `xs` to the monadic left fold `fun b ↦ xs.foldlM f b`. -/
+/-- The monoid hom `FreeMonoid α →* Monoid.foldlM m β` sending a word `xs` to `fun b ↦
+xs.toList.foldlM f b`. -/
 @[simps]
 def foldlM.ofFreeMonoid [LawfulMonad m] (f : β → α → m β) : FreeMonoid α →* Monoid.foldlM m β where
   toFun xs := op <| flip (List.foldlM f) (FreeMonoid.toList xs)
@@ -189,24 +179,21 @@ def foldlM.ofFreeMonoid [LawfulMonad m] (f : β → α → m β) : FreeMonoid α
     funext
     apply List.foldlM_append
 
-/-- `Monoid.foldrM m α` is the monoid of Kleisli endofunctions `α → m α` under composition, the
-monadic analogue of `Monoid.Foldr`.
-
-The underlying type is the endomorphism monoid of `α` in the Kleisli category of `m`, so that
-composing in the given order folds from the right. -/
+/-- `Monoid.foldrM m α` is the monoid of endomorphisms `α → m α` of `α` in the Kleisli category of
+`m`, under Kleisli composition. It is the monoid used by the monadic fold `foldrm`. -/
 abbrev foldrM (m : Type u → Type u) [Monad m] (α : Type u) : Type u :=
   End <| KleisliCat.mk m α
 
-/-- Wrap a Kleisli endofunction `α → m α` as an element of the monoid `Monoid.foldrM m α`. -/
+/-- View a Kleisli endomorphism `f : α → m α` as an element of `Monoid.foldrM m α`. -/
 def foldrM.mk (f : α → m α) : foldrM m α :=
   f
 
-/-- Recover the underlying Kleisli endofunction from an element of `Monoid.foldrM m α`, undoing
-`Monoid.foldrM.mk`. -/
+/-- The Kleisli endomorphism underlying an element of `Monoid.foldrM m α`. -/
 def foldrM.get (x : foldrM m α) : α → m α :=
   x
 
-/-- The monoid hom sending a list `xs` to the monadic right fold `fun b ↦ xs.foldrM f b`. -/
+/-- The monoid hom `FreeMonoid α →* Monoid.foldrM m β` sending a word `xs` to `fun b ↦
+xs.toList.foldrM f b`. -/
 @[simps]
 def foldrM.ofFreeMonoid [LawfulMonad m] (f : α → β → m β) : FreeMonoid α →* Monoid.foldrM m β where
   toFun xs := flip (List.foldrM f) (FreeMonoid.toList xs)
@@ -223,27 +210,22 @@ section Defs
 
 variable {α β : Type u} {t : Type u → Type u} [Traversable t]
 
-/-- Accumulate the elements of `x : t α` in the monoid `ω`, sending each element through `f`. Every
-other fold in this file is defined in terms of `foldMap`.
+/-- Send every element of a collection into the monoid `ω` with `f` and multiply the results
+together in traversal order.
 
-It is implemented by traversing `x` in the applicative functor `Const ω`, which discards the
-reconstructed structure and multiplies the visited elements together in the order they are
-traversed.
-
-Its defining property is `foldMap_hom`: a monoid hom `g : ω →* ω'` may be pushed through, as
-`g (foldMap f x) = foldMap (g ∘ f) x`. Choosing the monoid fixes the fold: the free monoid gives
-`toList`, the endomorphisms of `α` under composition give `foldr`, and their opposite gives
-`foldl`. -/
+`foldl`, `foldr` and `toList` are all obtained from it by choosing a suitable monoid, and its
+defining property is `foldMap_hom`: a monoid hom can be moved inside `foldMap`. It is implemented as
+a traversal in the applicative functor `Const ω`. -/
 def foldMap {α ω} [One ω] [Mul ω] (f : α → ω) : t α → ω :=
   traverse (Const.mk' ∘ f)
 
-/-- Fold a traversable collection from the left, visiting its elements in traversal order, as
-`List.foldl` does for lists. -/
+/-- `foldl f x xs` folds `f` over the elements of `xs` from the left, starting from `x`. It agrees
+with `List.foldl` applied to `toList xs`, see `foldl_toList`. -/
 def foldl (f : α → β → α) (x : α) (xs : t β) : α :=
   (foldMap (Foldl.mk ∘ flip f) xs).get x
 
-/-- Fold a traversable collection from the right, visiting its elements in traversal order, as
-`List.foldr` does for lists. -/
+/-- `foldr f x xs` folds `f` over the elements of `xs` from the right, starting from `x`. It agrees
+with `List.foldr` applied to `toList xs`, see `foldr_toList`. -/
 def foldr (f : α → β → β) (x : β) (xs : t α) : β :=
   (foldMap (Foldr.mk ∘ f) xs).get x
 
@@ -266,18 +248,20 @@ prevents each element of the traversable to be appended at the end
 def toList : t α → List α :=
   List.reverse ∘ foldl (flip List.cons) []
 
-/-- The number of elements of a traversable collection, computed by folding with a counter rather
-than by building the list of elements. -/
+/-- The number of elements of `xs`, computed by a left fold with a counter. It is the length of
+`toList xs`, see `length_toList`. -/
 def length (xs : t α) : ℕ :=
   down <| foldl (fun l _ => up <| l.down + 1) (up 0) xs
 
 variable {m : Type u → Type u} [Monad m]
 
-/-- Fold a traversable collection from the left in a monad, as `List.foldlM` does for lists. -/
+/-- Monadic left fold: like `foldl`, but the step function `f` may have effects in `m`, which are
+sequenced in traversal order. The analogue of `List.foldlM`. -/
 def foldlm (f : α → β → m α) (x : α) (xs : t β) : m α :=
   (foldMap (foldlM.mk ∘ flip f) xs).get x
 
-/-- Fold a traversable collection from the right in a monad, as `List.foldrM` does for lists. -/
+/-- Monadic right fold: like `foldr`, but the step function `f` may have effects in `m`, which are
+sequenced in traversal order. The analogue of `List.foldrM`. -/
 def foldrm (f : α → β → m β) (x : β) (xs : t α) : m β :=
   (foldMap (foldrM.mk ∘ f) xs).get x
 
@@ -290,8 +274,7 @@ variable {α β γ : Type u}
 open Function hiding const
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Turn a monoid hom `f : α →* β` into an applicative transformation `Const α ⟹ Const β`, so that
-`foldMap` may be transported along `f`. This is what makes `foldMap_hom` hold. -/
+/-- The applicative transformation `Const α ⟹ Const β` induced by a monoid hom `f : α →* β`. -/
 def mapFold [Monoid α] [Monoid β] (f : α →* β) : ApplicativeTransformation (Const α) (Const β) where
   app _ := f
   preserves_seq' := by intros; simp only [Seq.seq, map_mul]

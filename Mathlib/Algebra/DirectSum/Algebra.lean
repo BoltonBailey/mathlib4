@@ -46,12 +46,16 @@ section
 /-- A graded version of `Algebra`. An instance of `DirectSum.GAlgebra R A` endows `(⨁ i, A i)`
 with an `R`-algebra structure. -/
 class GAlgebra where
-  /-- The structure map `R →+ A 0`, landing in the degree-zero part. -/
+  /-- The map from `R` into the degree-zero piece `A 0`. -/
   toFun : R →+ A 0
+  /-- `toFun` sends `1` to `1`. -/
   map_one : toFun 1 = GradedMonoid.GOne.one
+  /-- `toFun` is multiplicative. -/
   map_mul :
     ∀ r s, GradedMonoid.mk _ (toFun (r * s)) = .mk _ (GradedMonoid.GMul.mul (toFun r) (toFun s))
+  /-- The image of `R` is central in the graded monoid. -/
   commutes : ∀ (r) (x : GradedMonoid A), .mk _ (toFun r) * x = x * .mk _ (toFun r)
+  /-- The `R`-action on the graded monoid is multiplication by the image of `R`. -/
   smul_def : ∀ (r) (x : GradedMonoid A), r • x = .mk _ (toFun r) * x
 
 end

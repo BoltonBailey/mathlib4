@@ -71,9 +71,8 @@ Examples include `Subgroup G` if `G` is a group, and `Submodule R M` if `M` is a
 In the example of subgroups, `IsMaximal H K` means that `H` is a maximal normal subgroup of `K`.
 In the example of submodules, `IsMaximal M N` means that `M` is a maximal submodule of `N`. -/
 class JordanHolderLattice (X : Type u) [Lattice X] where
-  /-- `IsMaximal x y` means that `x` is a maximal element strictly below `y`. The remaining fields
-  record the properties of this relation that the Jordan-Hölder argument needs, rather than
-  deriving them from an order-theoretic definition of maximality. -/
+  /-- `IsMaximal x y` expresses that `x` is a maximal element strictly below `y`, in the sense
+  relevant to the application (a maximal normal subgroup, a maximal submodule, and so on). -/
   IsMaximal : X → X → Prop
   lt_of_isMaximal : ∀ {x y}, IsMaximal x y → x < y
   sup_eq_of_isMaximal : ∀ {x y z}, IsMaximal x z → IsMaximal y z → x ≠ y → x ⊔ y = z

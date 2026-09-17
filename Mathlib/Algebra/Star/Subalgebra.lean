@@ -901,7 +901,8 @@ variable (R : Type*) {S A B : Type*} [CommSemiring R]
   [CommSemiring S] [Semiring A] [Semiring B] [Algebra R S] [Algebra S A] [Algebra S B]
   [Algebra R A] [Algebra R B] [IsScalarTower R S A] [IsScalarTower R S B] [Star A] [Star B]
 
-/-- Restrict the scalars of a star algebra hom `A →⋆ₐ[S] B` along `R → S`. -/
+/-- Restrict the scalar ring of a star algebra hom: when `R → S → A, B` form scalar towers, an
+`S`-algebra hom `A →⋆ₐ[S] B` is in particular an `R`-algebra hom. -/
 @[simps!]
 def StarAlgHom.restrictScalars (f : A →⋆ₐ[S] B) : A →⋆ₐ[R] B where
   toAlgHom := f.toAlgHom.restrictScalars R

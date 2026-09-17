@@ -70,9 +70,10 @@ instance [Inhabited C] : Inhabited (PresheafedSpace C) :=
 `f` between the underlying topological spaces, and a (note: contravariant!) map
 from the presheaf on `Y` to the pushforward of the presheaf on `X` via `f`. -/
 structure Hom (X Y : PresheafedSpace C) where
-  /-- The continuous map between the underlying topological spaces. -/
+  /-- The continuous map between the underlying spaces. -/
   base : (X : TopCat) ⟶ (Y : TopCat)
-  /-- The map from the presheaf on `Y` to the pushforward along `base` of the presheaf on `X`. -/
+  /-- The map of presheaves on `Y`, going from the presheaf of `Y` to the pushforward along `base`
+  of the presheaf of `X`. -/
   c : Y.presheaf ⟶ base _* X.presheaf
 
 @[ext (iff := false)]

@@ -14,8 +14,8 @@ public meta section
 
 namespace Mathlib.Tactic.Monotonicity
 
-/-- The optional side argument of `@[mono]`, recording which argument the lemma is monotone in:
-`left`, `right`, or `both` when it is monotone separately in each. -/
+/-- The optional `left`, `right` or `both` argument of the `@[mono]` attribute. It is currently
+parsed but ignored: `@[mono left]` behaves exactly like `@[mono]`. -/
 syntax mono.side := &"left" <|> &"right" <|> &"both"
 
 namespace Attr

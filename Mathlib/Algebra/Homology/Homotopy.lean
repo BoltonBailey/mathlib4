@@ -124,10 +124,9 @@ which are zero unless `c.Rel j i`, satisfying the homotopy condition.
 -/
 @[ext]
 structure Homotopy (f g : C ⟶ D) where
-  /-- The components of the homotopy, required by `zero` to vanish unless `c.Rel j i`. As with the
-  differentials of a complex, components are given for every pair of degrees and cut down by a
-  separate vanishing field. -/
+  /-- The components `hom i j : C.X i ⟶ D.X j` of the homotopy. -/
   hom : ∀ i j, C.X i ⟶ D.X j
+  /-- The component `hom i j` vanishes unless `c.Rel j i`. -/
   zero : ∀ i j, ¬c.Rel j i → hom i j = 0 := by cat_disch
   comm : ∀ i, f.f i = dNext i hom + prevD i hom + g.f i := by cat_disch
 

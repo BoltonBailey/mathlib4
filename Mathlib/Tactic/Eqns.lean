@@ -35,13 +35,24 @@ theorem transpose_const {m n} (c : ℕ) :
 public meta section
 open Lean Elab
 
-/-- `@[eqns h₁ h₂]` overrides the equation lemmas of a declaration with the given list, so that
-`simp` and `rw` unfold it through those lemmas instead. -/
+/-- `@[eqns h₁ h₂ …]` replaces the equation lemmas of a definition `f` by the theorems `h₁ h₂ …`, so
+that `rw [f]` and `simp [f]` unfold `f` through them instead of through the automatically
+generated equations.
+
+For example, after
+```lean
+def transpose {m n} (A : m → n → ℕ) : n → m → ℕ
+  | i, j => A j i
+
+theorem transpose_apply {m n} (A : m → n → ℕ) (i j) : transpose A i j = A j i := rfl
+
+attribute [eqns transpose_apply] transpose
+```
+`rw [transpose]` rewrites with `transpose_apply` rather than with the pattern-matching equation. -/
 syntax (name := eqns) "eqns" (ppSpace ident)* : attr
 
-/-- The environment extension backing the `@[eqns]` attribute, mapping a declaration to the equation
-lemmas that override its own. It is consulted through a `GetEqnsFn`, which is registered so as
-to run before Lean generates the default equations. -/
+/-- The extension recording, for each definition tagged `@[eqns]`, the theorems that replace its
+equation lemmas. -/
 initialize eqnsAttribute : NameMapExtension (Array Name) ←
   registerNameMapAttribute {
     name  := `eqns

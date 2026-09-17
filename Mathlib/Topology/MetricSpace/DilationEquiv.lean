@@ -46,7 +46,7 @@ end Class
 structure DilationEquiv (X Y : Type*) [PseudoEMetricSpace X] [PseudoEMetricSpace Y]
     extends X ≃ Y, Dilation X Y
 
-/-- The underlying dilation of a dilation equivalence. -/
+/-- The dilation underlying a dilation equivalence. -/
 add_decl_doc DilationEquiv.toDilation
 
 @[inherit_doc] infixl:25 " ≃ᵈ " => DilationEquiv

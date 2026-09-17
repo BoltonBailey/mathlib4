@@ -558,14 +558,15 @@ where
     unless b config do return none
     f config mvar
 
-/-- The state threaded through the congruence passes of `congr!`. -/
+/-- State carried by `congr!` as it works: the goals it has given up on, and the `intro` patterns
+not yet used. -/
 structure CongrState where
   /-- Accumulated goals that `congr!` could not handle. -/
   goals : Array MVarId
   /-- Patterns to use when doing intro. -/
   patterns : List (TSyntax `rintroPat)
 
-/-- The monad in which the congruence passes of `congr!` run. -/
+/-- The monad in which `congr!` runs: `MetaM` with a mutable `CongrState`. -/
 abbrev CongrMetaM := StateRefT CongrState MetaM
 
 /-- Pop the next pattern from the current state. -/
@@ -665,12 +666,9 @@ def Lean.MVarId.preCongr! (mvarId : MVarId) (tryClose : Bool) : MetaM (Option MV
     if ← mvarId.proofIrrelHeq then return none
   return some mvarId
 
-/-- Apply a single round of congruence to the goal, trying each pass of `congrPasses!` in turn.
-Returns the resulting subgoals, or `none` if no pass applied.
-
-The goal is first normalised from a reflexive relation to an equality by `liftReflToEq`; this is
-done here rather than in `preCongr!` so that the normalisation is rolled back when no congruence
-lemma turns out to apply. -/
+/-- A single step of `congr!`: lift a reflexive relation in the goal to an equality, then try the
+passes in `congrPasses!` in order, returning the goals produced by the first that succeeds, or
+`none` if none does. The state is restored between attempts. -/
 def Lean.MVarId.congrCore! (config : Congr!.Config) (mvarId : MVarId) :
     MetaM (Option (List MVarId)) := do
   mvarId.checkNotAssigned `congr!
@@ -748,7 +746,7 @@ where
 
 namespace Congr!
 
-/-- Elaborator for the configuration argument of `congr!`. -/
+/-- Elaborator for the `(config := …)` argument of `congr!`. -/
 declare_config_elab elabConfig Config
 
 /--

@@ -27,8 +27,8 @@ namespace Prod
 
 lemma swap_eq_iff_eq_swap {x : α × β} {y : β × α} : x.swap = y ↔ x = y.swap := by grind
 
-/-- Continuation-passing form of injectivity of `Prod.mk`: from `(x₁, y₁) = (x₂, y₂)` one may assume
-`x₁ = x₂` and `y₁ = y₂`. -/
+/-- Injectivity of `Prod.mk` in continuation-passing form: to prove any `P` from `(x₁, y₁) = (x₂,
+y₂)`, it suffices to prove it assuming `x₁ = x₂` and `y₁ = y₂`. -/
 def mk.injArrow {x₁ : α} {y₁ : β} {x₂ : α} {y₂ : β} :
     (x₁, y₁) = (x₂, y₂) → ∀ ⦃P : Sort*⦄, (x₁ = x₂ → y₁ = y₂ → P) → P := by
   intros h P w

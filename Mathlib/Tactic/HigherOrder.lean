@@ -28,9 +28,11 @@ open Lean Name Meta Elab Expr Term
 
 namespace Lean.Parser.Attr
 
-/-- `@[higher_order]` produces a lemma stating the pointwise statement of the tagged lemma in
-composed form; an optional identifier names the generated lemma. See
-`Mathlib.Tactic.higherOrderAttr`. -/
+/-- `@[higher_order]` on a lemma of the form `∀ x, f (g x) = h x` generates a companion lemma `f ∘ g
+= h`.
+
+`@[higher_order name]` names the companion `name`; without it, a name is derived from the
+original. -/
 syntax (name := higherOrder) "higher_order" (ppSpace ident)? : attr
 
 end Lean.Parser.Attr

@@ -25,7 +25,7 @@ public section
 maximal ideals of `R`. -/
 @[ext]
 structure MaximalSpectrum (R : Type*) [CommSemiring R] where
-  /-- The underlying ideal, required to be maximal. -/
+  /-- The maximal ideal itself. -/
   asIdeal : Ideal R
   isMaximal : asIdeal.IsMaximal
 

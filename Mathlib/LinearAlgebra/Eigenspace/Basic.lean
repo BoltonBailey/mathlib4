@@ -451,7 +451,7 @@ lemma hasEigenvalue_iff {f : End R M} {μ : R} :
 abbrev Eigenvalues (f : End R M) : Type _ :=
   UnifEigenvalues f 1
 
-/-- The coercion of an eigenvalue of `f` to the underlying scalar. -/
+/-- The scalar underlying a bundled eigenvalue of `f`. -/
 @[coe]
 abbrev Eigenvalues.val (f : Module.End R M) : Eigenvalues f → R := UnifEigenvalues.val f 1
 

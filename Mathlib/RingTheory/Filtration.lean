@@ -50,9 +50,11 @@ open scoped Polynomial
 `I • (N i) ≤ N (i + 1)`. Note that we do not require the filtration to start from `⊤`. -/
 @[ext]
 structure Ideal.Filtration (M : Type*) [AddCommGroup M] [Module R M] where
-  /-- The submodule in position `i` of the filtration. -/
+  /-- The `i`th submodule of the filtration. -/
   N : ℕ → Submodule R M
+  /-- The filtration is decreasing. -/
   mono : ∀ i, N (i + 1) ≤ N i
+  /-- Multiplying by `I` moves one step down the filtration: `I • N i ≤ N (i + 1)`. -/
   smul_le : ∀ i, I • N i ≤ N (i + 1)
 
 variable (F F' : I.Filtration M) {I}

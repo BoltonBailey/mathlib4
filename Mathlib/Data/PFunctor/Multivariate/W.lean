@@ -127,8 +127,9 @@ def wpMk {α : TypeVec n} (a : P.A) (f : P.last.B a → P.last.W) (f' : P.WPath 
     P.W α :=
   ⟨⟨a, f⟩, f'⟩
 
-/-- Recursor for `wp`: define a value of `C` from a `W`-tree together with a labelling of its paths,
-by recursion on the tree. -/
+/-- Recursor for a `W`-tree together with a labelling of its paths by `α`: `wpRec g ⟨a, f⟩ f'`
+applies `g` to the root shape `a`, the subtrees `f`, the labelling `f'`, and the results of
+recursing into each subtree with the restricted labelling. -/
 def wpRec {α : TypeVec n} {C : Sort*}
     (g : ∀ (a : P.A) (f : P.last.B a → P.last.W), P.WPath ⟨a, f⟩ ⟹ α → (P.last.B a → C) → C) :
     ∀ (x : P.last.W) (_ : P.WPath x ⟹ α), C

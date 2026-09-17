@@ -46,7 +46,7 @@ variable [AffineSpace V P] [AffineSpace V₂ P₂] [AffineSpace V₃ P₃]
 /-- A `Simplex k P n` is a collection of `n + 1` affinely
 independent points. -/
 structure Simplex (n : ℕ) where
-  /-- The vertices of the simplex. -/
+  /-- The vertices of the simplex, indexed by `Fin (n + 1)`. -/
   points : Fin (n + 1) → P
   independent : AffineIndependent k points
 

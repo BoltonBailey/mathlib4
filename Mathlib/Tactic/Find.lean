@@ -56,9 +56,8 @@ private def isBlackListed (declName : Name) : MetaM Bool := do
   <||> isRec declName
   <||> isMatcher declName
 
-/-- A cache mapping the head symbol of a declaration's type to the declarations with that head, used
-by `#find` to narrow the search. Declarations that `isBlackListed` rejects, such as internal and
-auxiliary ones, are left out. -/
+/-- Cache for `#find`, mapping the head symbol of a declaration's (reducible-transparency)
+conclusion to the declarations with that head. Blacklisted declarations are left out. -/
 initialize findDeclsPerHead : DeclCache (Std.HashMap HeadIndex (Array Name)) ←
   DeclCache.mk "#find: init cache" failure {} fun _ c headMap ↦ do
     if (← isBlackListed c.name) then
@@ -69,11 +68,9 @@ initialize findDeclsPerHead : DeclCache (Std.HashMap HeadIndex (Array Name)) ←
     let head := ty.toHeadIndex
     pure <| headMap.insert head (headMap.getD head #[] |>.push c.name)
 
-/-- Log every declaration whose type matches the pattern `t`, where the metavariables of `t` may be
-instantiated arbitrarily.
-
-Only declarations whose conclusion has the same head symbol as `t` are considered, which is what
-makes the search tractable; they are looked up in the `findDeclsPerHead` cache. -/
+/-- Print every declaration whose conclusion unifies with the pattern `t`, the metavariables of `t`
+acting as wildcards. Only declarations sharing the head symbol of `t` are examined, via
+`findDeclsPerHead`. This implements `#find` and the `find` tactic. -/
 def findType (t : Expr) : TermElabM Unit := withReducible do
   let t ← instantiateMVars t
   let head := (← forallMetaTelescopeReducing t).2.2.toHeadIndex

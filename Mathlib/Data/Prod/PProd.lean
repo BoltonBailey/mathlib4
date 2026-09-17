@@ -21,8 +21,8 @@ variable {α β γ δ : Sort*}
 
 namespace PProd
 
-/-- Continuation-passing form of injectivity of `PProd.mk`: from `(x₁, y₁) = (x₂, y₂)` one may
-assume `x₁ = x₂` and `y₁ = y₂`. -/
+/-- Injectivity of `PProd.mk` in continuation-passing form: to prove any `P` from `(x₁, y₁) = (x₂,
+y₂)`, it suffices to prove it assuming `x₁ = x₂` and `y₁ = y₂`. -/
 def mk.injArrow {α : Type*} {β : Type*} {x₁ : α} {y₁ : β} {x₂ : α} {y₂ : β} :
     (x₁, y₁) = (x₂, y₂) → ∀ ⦃P : Sort*⦄, (x₁ = x₂ → y₁ = y₂ → P) → P := by
   intros h P w

@@ -35,8 +35,7 @@ register_option variable?.maxSteps : Nat :=
     descr :=
       "The maximum number of instance arguments `variable?` will try to insert before giving up" }
 
-/-- Whether `variable?` should warn when an instance argument can be inferred from the preceding
-ones. -/
+/-- Whether `variable?` warns when an instance argument can be inferred from the preceding ones. -/
 register_option variable?.checkRedundant : Bool :=
   { defValue := true
     descr := "Warn if instance arguments can be inferred from preceding ones" }
@@ -233,13 +232,10 @@ where
           return true
       return false
 
-/-- Add the missing instance arguments to `binders`, returning the completed binders together with a
-flag for each one recording whether it was already present.
-
-Instances are added one at a time, up to `maxSteps` of them, until the binders elaborate with no
-outstanding instance problems; the step limit is what stops the search when a class has no
-instance that could ever apply. When `checkRedundant` is set, an instance argument that is
-already implied by the preceding binders is reported rather than silently kept. -/
+/-- Complete `binders` by inserting the instance arguments they need in order to elaborate, making
+at most `maxSteps` insertions. With `checkRedundant`, instance binders already implied by
+earlier ones are flagged. Returns the completed binders together with, for each one, whether it
+should be omitted from the final `variable` command. -/
 def completeBinders (maxSteps : Nat) (checkRedundant : Bool)
     (binders : TSyntaxArray ``bracketedBinder) :
     TermElabM (TSyntaxArray ``bracketedBinder × Array Bool) :=

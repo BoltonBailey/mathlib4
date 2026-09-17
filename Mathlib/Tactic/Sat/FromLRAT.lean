@@ -447,7 +447,8 @@ partial def buildReify (ctx ctx' proof : Expr) (nvars : Nat) : Expr × Expr := I
   let cons := mkApp (mkConst ``List.cons [.zero]) (mkSort .zero)
   let nil := mkApp (mkConst ``List.nil [.zero]) (mkSort .zero)
   let rec
-    /-- Prepend the `n` de Bruijn variables `#(depth + n - 1), ..., #depth` to the list `e`. -/
+    /-- `mkPS depth e n` prepends the bound variables `#(depth + n - 1), …, #depth` to the list
+    expression `e`. -/
     mkPS depth e
     | 0 => e
     | n + 1 => mkPS (depth+1) (mkApp2 cons (mkBVar depth) e) n
