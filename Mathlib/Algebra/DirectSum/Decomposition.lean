@@ -54,6 +54,9 @@ canonical "recomposition" rather than just a proof that the "recomposition" is b
 Often it is easier to construct a term of this type via `Decomposition.ofAddHom` or
 `Decomposition.ofLinearMap`. -/
 class Decomposition where
+  /-- The decomposition of an element of `M` into its homogeneous components, inverse to the
+  canonical recomposition map by `left_inv` and `right_inv`. Use `DirectSum.decompose` instead,
+  which is stated in terms of an equivalence. -/
   decompose' : M → ⨁ i, ℳ i
   left_inv : Function.LeftInverse (DirectSum.coeAddMonoidHom ℳ) decompose'
   right_inv : Function.RightInverse (DirectSum.coeAddMonoidHom ℳ) decompose'

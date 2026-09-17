@@ -40,7 +40,9 @@ namespace AlgebraicGeometry
 
 /-- A `PresheafedSpace C` is a topological space equipped with a presheaf of `C`s. -/
 structure PresheafedSpace.{u} where
+  /-- The underlying topological space. -/
   carrier : TopCat.{u}
+  /-- The presheaf of objects of `C` on the underlying space. -/
   protected presheaf : carrier.Presheaf C
 
 variable {C}
@@ -68,7 +70,9 @@ instance [Inhabited C] : Inhabited (PresheafedSpace C) :=
 `f` between the underlying topological spaces, and a (note: contravariant!) map
 from the presheaf on `Y` to the pushforward of the presheaf on `X` via `f`. -/
 structure Hom (X Y : PresheafedSpace C) where
+  /-- The continuous map between the underlying topological spaces. -/
   base : (X : TopCat) ⟶ (Y : TopCat)
+  /-- The map from the presheaf on `Y` to the pushforward along `base` of the presheaf on `X`. -/
   c : Y.presheaf ⟶ base _* X.presheaf
 
 @[ext (iff := false)]

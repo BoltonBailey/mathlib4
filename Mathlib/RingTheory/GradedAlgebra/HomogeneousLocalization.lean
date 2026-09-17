@@ -94,8 +94,12 @@ section
 denominator with same grading such that the denominator is contained in `x`.
 -/
 structure NumDenSameDeg (𝒜 : ι → σ) (x : Submonoid A) where
+  /-- The common degree of the numerator and the denominator. -/
   deg : ι
-  (num den : 𝒜 deg)
+  /-- The numerator, homogeneous of degree `deg`. -/
+  num : 𝒜 deg
+  /-- The denominator, homogeneous of degree `deg` and required to lie in `x`. -/
+  den : 𝒜 deg
   den_mem : (den : A) ∈ x
 
 end

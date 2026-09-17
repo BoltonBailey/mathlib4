@@ -46,6 +46,7 @@ variable [MonoidalCategory C]
 /-- A typeclass carrying a choice of lift of an object from `C` to `FreeMonoidalCategory C`.
 It must be the case that `projectObj id (LiftObj.lift x) = x` by defeq. -/
 class LiftObj (X : C) where
+  /-- The chosen lift of `X` to the free monoidal category. -/
   protected lift : FreeMonoidalCategory C
 
 namespace LiftObj
@@ -62,6 +63,7 @@ end LiftObj
 /-- A typeclass carrying a choice of lift of a morphism from `C` to `FreeMonoidalCategory C`.
 It must be the case that `projectMap id _ _ (LiftHom.lift f) = f` by defeq. -/
 class LiftHom {X Y : C} [LiftObj X] [LiftObj Y] (f : X ⟶ Y) where
+  /-- The chosen lift of `f` to the free monoidal category. -/
   protected lift : LiftObj.lift X ⟶ LiftObj.lift Y
 
 namespace LiftHom

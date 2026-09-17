@@ -19,6 +19,7 @@ public import Lean.Meta.DiscrTree
 
 open Lean Elab.Tactic
 
+/-- The elements of a `PHashSet`, in an unspecified order. -/
 def Lean.PHashSet.toList.{u} {α : Type u} [BEq α] [Hashable α] (s : Lean.PHashSet α) : List α :=
   s.1.toList.map (·.1)
 

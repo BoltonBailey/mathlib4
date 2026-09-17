@@ -46,6 +46,7 @@ section
 /-- A graded version of `Algebra`. An instance of `DirectSum.GAlgebra R A` endows `(⨁ i, A i)`
 with an `R`-algebra structure. -/
 class GAlgebra where
+  /-- The structure map `R →+ A 0`, landing in the degree-zero part. -/
   toFun : R →+ A 0
   map_one : toFun 1 = GradedMonoid.GOne.one
   map_mul :

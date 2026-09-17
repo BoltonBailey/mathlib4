@@ -77,6 +77,8 @@ namespace quotientPi_aux
 
 variable (p : ∀ i, Submodule R (Ms i))
 
+/-- The forward map of `Submodule.quotientPi`, quotienting each factor separately by lifting the
+family of quotient maps. -/
 @[simp]
 def toFun : ((∀ i, Ms i) ⧸ pi Set.univ p) → ∀ i, Ms i ⧸ p i :=
   quotientPiLift p (fun i => (p i).mkQ) fun i => (ker_mkQ (p i)).ge
@@ -91,6 +93,9 @@ theorem map_smul (r : R) (x : ((i : ι) → Ms i) ⧸ pi Set.univ p) :
 
 variable [Fintype ι] [DecidableEq ι]
 
+/-- The inverse map of `Submodule.quotientPi`, assembling a family of quotients into a quotient of
+the product. It is defined by lifting the maps that place each factor into the product, which
+requires `ι` to be a `Fintype` with decidable equality. -/
 @[simp]
 def invFun : (∀ i, Ms i ⧸ p i) → (∀ i, Ms i) ⧸ pi Set.univ p :=
   piQuotientLift p (pi Set.univ p) _ fun _ => le_comap_single_pi p

@@ -62,6 +62,8 @@ where
           return acc
       return (acc.push g)
 
+/-- Case split on every hypothesis whose type has one of the given head constants, recursively when
+`recursive` is set. -/
 def casesType (heads : Array Name) (recursive := false) (allowSplit := true) :
     MVarId → MetaM (List MVarId) :=
   let matcher ty := pure <|

@@ -43,6 +43,7 @@ namespace Order
   - downward directed
   - upward closed. -/
 structure PFilter (P : Type*) [Preorder P] where
+  /-- The corresponding ideal of the order dual `Pᵒᵈ`. -/
   dual : Ideal Pᵒᵈ
 
 variable {P : Type*}

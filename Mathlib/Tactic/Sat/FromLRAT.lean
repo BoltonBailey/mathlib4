@@ -446,9 +446,11 @@ partial def buildReify (ctx ctx' proof : Expr) (nvars : Nat) : Expr × Expr := I
   let mut e := e.lowerLooseBVars (nvars+1) (nvars+1)
   let cons := mkApp (mkConst ``List.cons [.zero]) (mkSort .zero)
   let nil := mkApp (mkConst ``List.nil [.zero]) (mkSort .zero)
-  let rec mkPS depth e
-  | 0 => e
-  | n + 1 => mkPS (depth+1) (mkApp2 cons (mkBVar depth) e) n
+  let rec
+    /-- Prepend the `n` de Bruijn variables `#(depth + n - 1), ..., #depth` to the list `e`. -/
+    mkPS depth e
+    | 0 => e
+    | n + 1 => mkPS (depth+1) (mkApp2 cons (mkBVar depth) e) n
   pr := mkApp5 (mkConst ``Sat.Fmla.refute) e (mkPS 0 nil nvars) ctx proof pr
   for _ in [0:nvars] do
     e := mkForall `a default (mkSort .zero) e

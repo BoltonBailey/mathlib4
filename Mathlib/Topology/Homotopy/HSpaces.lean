@@ -64,11 +64,17 @@ open Path ContinuousMap Set.Icc TopologicalSpace
 topological group, but where the axioms for a group only hold up to homotopy.
 -/
 class HSpace (X : Type u) [TopologicalSpace X] where
+  /-- The continuous multiplication of the H-space. -/
   hmul : C(X × X, X)
+  /-- The distinguished point acting as a unit up to homotopy. -/
   e : X
   hmul_e_e : hmul (e, e) = e
+  /-- Multiplying by `e` on the left is homotopic to the identity, by a homotopy fixing `e`.
+  Fixing `e` throughout is what makes an H-space more than a space with a homotopy unit. -/
   eHmul :
     (hmul.comp <| (const X e).prodMk <| ContinuousMap.id X).HomotopyRel (ContinuousMap.id X) {e}
+  /-- Multiplying by `e` on the right is homotopic to the identity, by a homotopy fixing `e`.
+  It is a separate field because `hmul` is not assumed commutative, even up to homotopy. -/
   hmulE :
     (hmul.comp <| (ContinuousMap.id X).prodMk <| const X e).HomotopyRel (ContinuousMap.id X) {e}
 

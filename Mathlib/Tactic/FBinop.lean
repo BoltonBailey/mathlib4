@@ -86,7 +86,9 @@ where
 /-- Records a "functor", which is some function `Type u → Type v`. We only
 allow `c a1 ... an` for `c` a constant. This is so we can abstract out the universe variables. -/
 structure SRec where
+  /-- The name of the head constant. -/
   name : Name
+  /-- The arguments the head constant is applied to, with the last one dropped. -/
   args : Array Expr
   deriving Inhabited, ToExpr
 
@@ -242,6 +244,11 @@ private def toExpr (tree : Tree) (expectedType? : Option Expr) : TermElabM Expr 
     trace[Elab.fbinop] "result: {result}"
     ensureHasType expectedType? result
 
+/-- The elaborator for `binop%`-style notations whose operands are functors, such as `×ˢ`.
+
+It collects the operands into a tree, works out the largest functor that all of them can be
+coerced into, inserts those coercions, and only then elaborates the result against the expected
+type. -/
 @[term_elab prodSyntax]
 def elabBinOp : TermElab := fun stx expectedType? => do
   toExpr (← toTree stx) expectedType?

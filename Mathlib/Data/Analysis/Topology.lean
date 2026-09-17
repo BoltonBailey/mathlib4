@@ -35,9 +35,17 @@ open scoped Topology
   represented by a type `σ` together with operations for the top element and
   the intersection operation. -/
 structure Ctop (α σ : Type*) where
+  /-- The subset of `α` that an index denotes. -/
   f : σ → Set α
+  /-- An index whose set contains the given point, witnessing that the basis covers `α`. The index
+  is allowed to depend on the point, so no single largest basic set is required. -/
   top : α → σ
   top_mem : ∀ x : α, x ∈ f (top x)
+  /-- An index for a basic set containing a given point of `f a ∩ f b`, witnessing that the basis is
+  closed under intersection.
+
+  The index may depend on the point, since a basis need not be closed under intersection on the
+  nose: `inter_sub` only requires `f (inter a b x h) ⊆ f a ∩ f b`. -/
   inter : ∀ (a b) (x : α), x ∈ f a ∩ f b → σ
   inter_mem : ∀ a b x h, x ∈ f (inter a b x h)
   inter_sub : ∀ a b x h, f (inter a b x h) ⊆ f a ∩ f b
@@ -102,7 +110,9 @@ end Ctop
 /-- A `Ctop` realizer for the topological space `T` is a `Ctop`
   which generates `T`. -/
 structure Ctop.Realizer (α) [T : TopologicalSpace α] where
+  /-- The index type of the realizing basis. -/
   σ : Type*
+  /-- The basis on the index type, whose generated topology is `T`. -/
   F : Ctop α σ
   eq : F.toTopsp = T
 
@@ -214,7 +224,10 @@ end Ctop.Realizer
 choice of open sets from the basis of `F` such that they intersect only finitely many of the values
 of `f`. -/
 structure LocallyFinite.Realizer [TopologicalSpace α] (F : Ctop.Realizer α) (f : β → Set α) where
+  /-- For each point of `α`, a basic neighbourhood of it drawn from the basis `F`, chosen so that
+  `sets` holds. -/
   bas : ∀ a, { s // a ∈ F.F s }
+  /-- The chosen neighbourhood of `x` meets only finitely many of the sets `f i`. -/
   sets : ∀ x : α, Fintype { i | (f i ∩ F.F (bas x)).Nonempty }
 
 theorem LocallyFinite.Realizer.to_locallyFinite [TopologicalSpace α] {F : Ctop.Realizer α}

@@ -33,8 +33,11 @@ Use `WriterT.run` to obtain the final value of this output. -/
 def WriterT (ω : Type u) (M : Type u → Type v) (α : Type u) : Type v :=
   M (α × ω)
 
+/-- `Writer ω α` is the writer monad: a value of `α` paired with an accumulated output of type
+`ω`. -/
 abbrev Writer ω := WriterT ω Id
 
+/-- A monad that can accumulate an output of type `ω` alongside its result. -/
 class MonadWriter (ω : outParam (Type u)) (M : Type u → Type v) where
   /-- Emit an output `w`. -/
   tell (w : ω) : M PUnit
@@ -59,11 +62,17 @@ instance [Monad M] [MonadWriter ω M] : MonadWriter ω (StateT σ M) where
 
 namespace WriterT
 
+/-- Read a computation returning a value paired with an output as a `WriterT` computation; the two
+are definitionally equal. -/
 @[inline]
 protected def mk {ω : Type u} (cmd : M (α × ω)) : WriterT ω M α := cmd
+/-- Run a `WriterT` computation, returning its value together with the output accumulated along the
+way. -/
 @[inline]
 protected def run {ω : Type u} (cmd : WriterT ω M α) : M (α × ω) := cmd
 
+/-- Version of `WriterT.run` taking the output type `ω` explicitly, to help elaboration when the
+monad stack contains more than one writer and `ω` cannot be inferred. -/
 abbrev runThe (ω : Type u) (cmd : WriterT ω M α) : M (α × ω) := cmd.run
 
 @[simp] theorem run_mk {ω : Type u} (cmd : M (α × ω)) : (WriterT.mk cmd).run = cmd := rfl
@@ -173,6 +182,7 @@ instance [MonadLiftT M (WriterT ω M)] : MonadControl M (WriterT ω M) where
 instance : MonadFunctor M (WriterT ω M) where
   monadMap := fun k (w : M _) ↦ WriterT.mk <| k w
 
+/-- Transform the accumulated output of a computation along `f : ω → ω'`. -/
 @[inline] protected def adapt {ω' : Type u} {α : Type u} (f : ω → ω') :
     WriterT ω M α → WriterT ω' M α :=
   fun cmd ↦ WriterT.mk <| Prod.map id f <$> cmd
@@ -186,6 +196,7 @@ but does not use lenses (why would it), and is derived automatically for any tra
 implementing `MonadFunctor`.
 -/
 class MonadWriterAdapter (ω : outParam (Type u)) (m : Type u → Type v) where
+  /-- Run `x` with its accumulated output transformed by `f`. -/
   adaptWriter {α : Type u} : (ω → ω) → m α → m α
 
 export MonadWriterAdapter (adaptWriter)

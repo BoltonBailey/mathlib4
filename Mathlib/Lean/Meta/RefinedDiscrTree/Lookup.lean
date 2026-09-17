@@ -167,8 +167,10 @@ private structure PartialMatch where
   /-- Metavariable assignments for `.labelledStar` patterns in the discrimination tree.
   We use a `List Key`, in the reverse order. -/
   treeStars : Std.HashMap Nat (List Key) := {}
-  deriving Inhabited
 
+/-- A junk `PartialMatch`, used only to make the type inhabited. -/
+private instance : Inhabited PartialMatch :=
+  ⟨{ keys := default, score := default, trie := default }⟩
 
 /--
 Add to the `todo` stack all matches that result from a `.star` in the query expression.

@@ -57,7 +57,11 @@ This avoids a lot of dependent type theory hell!
 The composite of any two differentials `d i j ≫ d j k` must be zero.
 -/
 structure HomologicalComplex (c : ComplexShape ι) where
+  /-- The chain group in degree `i`. -/
   X : ι → V
+  /-- The differential from degree `i` to degree `j`, required by `shape` to vanish unless `c.Rel i
+  j`. Asking for a map for every pair `i j` rather than only for the related ones avoids
+  dependent-type trouble at the cost of these extra vanishing hypotheses. -/
   d : ∀ i j, X i ⟶ X j
   shape : ∀ i j, ¬c.Rel i j → d i j = 0 := by cat_disch
   d_comp_d' : ∀ i j k, c.Rel i j → c.Rel j k → d i j ≫ d j k = 0 := by cat_disch
@@ -215,6 +219,7 @@ commuting with the differentials.
 -/
 @[ext]
 structure Hom (A B : HomologicalComplex V c) where
+  /-- The map between the chain groups in degree `i`. -/
   f : ∀ i, A.X i ⟶ B.X i
   comm' : ∀ i j, c.Rel i j → f i ≫ B.d i j = A.d i j ≫ f j := by cat_disch
 

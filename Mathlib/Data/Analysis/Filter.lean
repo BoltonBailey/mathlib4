@@ -24,13 +24,17 @@ This file provides infrastructure to compute with filters.
 
 open Set Filter
 
--- TODO write doc strings
 /-- A `CFilter α σ` is a realization of a filter (base) on `α`,
   represented by a type `σ` together with operations for the top element and
   the binary `inf` operation. -/
 structure CFilter (α σ : Type*) [PartialOrder α] where
+  /-- The element of `α` that an index denotes. -/
   f : σ → α
+  /-- An index for the largest element of the base, witnessing that the base is nonempty. No
+  maximality is required of it: it is only used to see that the generated filter is proper. -/
   pt : σ
+  /-- An index for an element of the base below both of the given two, witnessing that the base is
+  downward directed. -/
   inf : σ → σ → σ
   inf_le_left : ∀ a b : σ, f (inf a b) ≤ f a
   inf_le_right : ∀ a b : σ, f (inf a b) ≤ f b
@@ -90,10 +94,11 @@ theorem mem_toFilter_sets (F : CFilter (Set α) σ) {a : Set α} : a ∈ F.toFil
 
 end CFilter
 
--- TODO write doc strings
 /-- A realizer for filter `f` is a `CFilter` which generates `f`. -/
 structure Filter.Realizer (f : Filter α) where
+  /-- The index type of the realizing filter base. -/
   σ : Type*
+  /-- The filter base on the index type, whose generated filter is `f`. -/
   F : CFilter (Set α) σ
   eq : F.toFilter = f
 

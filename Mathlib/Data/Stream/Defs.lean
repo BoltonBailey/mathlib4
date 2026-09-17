@@ -101,7 +101,8 @@ def corec' (f : α → β × α) : α → Stream' β :=
 def corecState {σ α} (cmd : StateM σ α) (s : σ) : Stream' α :=
   corec Prod.fst (cmd.run ∘ Prod.snd) (cmd.run s)
 
--- corec is also known as unfolds
+/-- Generate a stream by unfolding: `unfolds g f a` is `g a, g (f a), g (f (f a)), ...`. This is
+another name for `Stream'.corec`, matching the terminology used for the dual of a fold. -/
 abbrev unfolds (g : α → β) (f : α → α) (a : α) : Stream' β :=
   corec g f a
 

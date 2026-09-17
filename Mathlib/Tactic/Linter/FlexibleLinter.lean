@@ -194,7 +194,10 @@ inductive Stained
   | name     : Name → Stained
   | goal     : Stained
   | wildcard : Stained
-  deriving Repr, Inhabited, DecidableEq, Hashable
+  deriving Repr, DecidableEq, Hashable
+
+/-- A junk `Stained`, used only to make the type inhabited. -/
+instance : Inhabited Stained := ⟨.name default⟩
 
 /-- Converting a `Stained` to a `String`:
 * a `Name` is represented by the corresponding string;

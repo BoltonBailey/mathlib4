@@ -44,6 +44,12 @@ theorem isFibAux_two_mul_add_one {n a b n' a' b' : ℕ} (H : IsFibAux n a b)
   ⟨by rw [← hn, fib_two_mul_add_one, H.1, H.2, pow_two, pow_two, add_comm, h1],
    by rw [← hn, fib_two_mul_add_two, H.1, H.2, h2]⟩
 
+/-- Prove `IsFibAux n' a' b'` for a numeral `n'`, that is, compute `Nat.fib n'` and `Nat.fib (n' +
+1)` together with a proof.
+
+The proof is built by fast doubling rather than by iterating the recurrence: from `fib n` and
+`fib (n + 1)` one obtains the pair at `2 * n` and at `2 * n + 1` in a constant number of
+multiplications, so the recursion depth is logarithmic in `n'`. -/
 partial def proveNatFibAux (en' : Q(ℕ)) : (ea' eb' : Q(ℕ)) × Q(IsFibAux $en' $ea' $eb') :=
   match en'.natLit! with
   | 0 =>

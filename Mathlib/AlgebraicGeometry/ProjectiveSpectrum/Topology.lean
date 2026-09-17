@@ -52,6 +52,8 @@ variable (𝒜 : ℕ → σ) [GradedRing 𝒜]
 that are prime and do not contain the irrelevant ideal. -/
 @[ext]
 structure ProjectiveSpectrum where
+  /-- The underlying homogeneous ideal, required to be prime and not to contain the irrelevant
+  ideal. -/
   asHomogeneousIdeal : HomogeneousIdeal 𝒜
   isPrime : asHomogeneousIdeal.toIdeal.IsPrime
   not_irrelevant_le : ¬HomogeneousIdeal.irrelevant 𝒜 ≤ asHomogeneousIdeal

@@ -48,6 +48,12 @@ private def getAltNumFields (elimInfo : ElimInfo) (altName : Name) : TermElabM N
       return altInfo.numFields
   throwError "unknown alternative name '{altName}'"
 
+/-- Name the hypotheses introduced in each alternative of an eliminator application from the `with`
+clause `withArg`, returning the resulting goals.
+
+Names are consumed alternative by alternative, each taking as many as that alternative has
+fields; `numEqs` further equations are introduced first, `generalized` variables are reverted
+back into the goal, and the hypotheses in `toClear` are removed. -/
 def ElimApp.evalNames (elimInfo : ElimInfo) (alts : Array ElimApp.Alt) (withArg : Syntax)
     (numEqs := 0) (generalized : Array FVarId := #[]) (toClear : Array FVarId := #[])
     (toTag : Array (Ident × FVarId) := #[]) :

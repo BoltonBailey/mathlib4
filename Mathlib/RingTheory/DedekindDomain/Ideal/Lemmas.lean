@@ -491,6 +491,7 @@ variable [IsDedekindDomain R]
 `R`. Note that this equals the maximal spectrum if `R` has Krull dimension 1. -/
 @[ext, nolint unusedArguments]
 structure HeightOneSpectrum where
+  /-- The underlying ideal, required to be prime and nonzero. -/
   asIdeal : Ideal R
   isPrime : asIdeal.IsPrime
   ne_bot : asIdeal ≠ ⊥

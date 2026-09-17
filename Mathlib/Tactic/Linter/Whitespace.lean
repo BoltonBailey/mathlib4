@@ -96,7 +96,9 @@ structure FormatError where
   length : Nat
   /-- The starting position of the mismatch, as a `String.pos`. -/
   srcStartPos : String.Pos.Raw
-  deriving Inhabited
+
+/-- A junk `FormatError`, with every field set to its own default value. -/
+instance : Inhabited FormatError := ⟨default, default, default, default, default, default⟩
 
 instance : ToString FormatError where
   toString f :=

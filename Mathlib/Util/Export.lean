@@ -32,6 +32,9 @@ private opaque MethodsRefPointed : NonemptyType.{0}
 
 private def MethodsRef : Type := MethodsRefPointed.type
 
+/-- The kinds of object the exporter assigns an index to and emits: names, universe levels,
+expressions and definitions. Indices are shared across a single export, so an entry emitted once
+may be referred to from anywhere later in the file. -/
 inductive Entry
   | name (n : Name)
   | level (n : Level)
@@ -43,21 +46,37 @@ instance : Coe Name Entry := ⟨Entry.name⟩
 instance : Coe Level Entry := ⟨Entry.level⟩
 instance : Coe Expr Entry := ⟨Entry.expr⟩
 
+/-- An index allocator for objects of type `α`, recording the index already given to each object
+together with the next index to hand out. -/
 structure Alloc (α) [BEq α] [Hashable α] where
+  /-- The index assigned to each object exported so far. -/
   map : Std.HashMap α Nat
+  /-- The next unused index. -/
   next : Nat
 deriving Inhabited
 
+/-- The exporter's state: one index allocator per kind of object, the set of declarations already
+emitted, and a stack of pending entries. -/
 structure State where
+  /-- Indices assigned to names. -/
   names : Alloc Name := ⟨(∅ : Std.HashMap Name Nat).insert Name.anonymous 0, 1⟩
+  /-- Indices assigned to universe levels. -/
   levels : Alloc Level := ⟨(∅ : Std.HashMap Level Nat).insert .zero 0, 1⟩
+  /-- Indices assigned to expressions. -/
   exprs : Alloc Expr
+  /-- The declarations that have already been emitted. -/
   defs : Std.HashSet Name
+  /-- A stack of entries paired with a visited flag, for a non-recursive traversal. Unused by the
+  current exporter, which recurses directly. -/
   stk : Array (Bool × Entry)
 deriving Inhabited
 
+/-- Uniform access to the `Alloc α` field of the state, so that `alloc` can be written once and used
+for names, levels and expressions alike. -/
 class OfState (α : Type) [BEq α] [Hashable α] where
+  /-- Project the allocator for `α` out of the state. -/
   get : State → Alloc α
+  /-- Update the allocator for `α` inside the state. -/
   modify : (Alloc α → Alloc α) → State → State
 
 instance : OfState Name where
@@ -74,15 +93,22 @@ instance : OfState Expr where
 
 end Export
 
+/-- The exporter monad: `CoreM` carrying the exporter's `State`. -/
 abbrev ExportM := StateT Export.State CoreM
 
 namespace Export
 
+/-- Assign the next free index to `a`, recording it in the state, and return that index. The caller
+is responsible for actually emitting the line that defines the object at that index. -/
 def alloc {α} [BEq α] [Hashable α] [OfState α] (a : α) : ExportM Nat := do
   let n := (OfState.get (α := α) (← get)).next
   modify <| OfState.modify (α := α) fun s ↦ {map := s.map.insert a n, next := n + 1}
   pure n
 
+/-- Emit `n` and all of its prefixes, returning the index assigned to `n`. Names already exported
+are served from the state instead of being emitted twice. The anonymous name is always index
+`0`; other names are emitted as `#NS` (string component) or `#NI` (numeric component) applied to
+the index of their prefix. -/
 def exportName (n : Name) : ExportM Nat := do
   match (← get).names.map[n]? with
   | some i => pure i
@@ -91,6 +117,10 @@ def exportName (n : Name) : ExportM Nat := do
     | .num p a => let i ← alloc n; IO.println s!"{i} #NI {← exportName p} {a}"; pure i
     | .str p s => let i ← alloc n; IO.println s!"{i} #NS {← exportName p} {s}"; pure i
 
+/-- Emit the universe level `L` and its subterms, returning the index assigned to `L`. Level `0` is
+always index `0`; the other constructors are emitted as `#US` (successor), `#UM` (max), `#UIM`
+(impredicative max) and `#UP` (parameter). Universe metavariables cannot appear in an exported
+level. -/
 def exportLevel (L : Level) : ExportM Nat := do
   match (← get).levels.map[L]? with
   | some i => pure i
@@ -106,6 +136,7 @@ def exportLevel (L : Level) : ExportM Nat := do
       let i ← alloc L; IO.println s!"{i} #UP {← exportName n}"; pure i
     | .mvar _ => unreachable!
 
+/-- The export format's code for a binder annotation. -/
 def biStr : BinderInfo → String
   | BinderInfo.default        => "#BD"
   | BinderInfo.implicit       => "#BI"
@@ -115,6 +146,17 @@ def biStr : BinderInfo → String
 open ConstantInfo in
 mutual
 
+/-- Emit the expression `E`, its subterms and the declarations of any constants it mentions,
+returning the index assigned to `E`.
+
+Each constructor gets its own line, referring to its subterms by index: `#EV` for a bound
+variable, `#ES` for a sort, `#EC` for a constant together with its universe arguments, `#EA` for
+an application, `#EL` for a lambda, `#EP` for a pi, `#EN` and `#ET` for natural number and
+string literals, and `#EJ` for a projection. Binders also record their binder annotation via
+`biStr`.
+
+Free variables, metavariables and `mdata` cannot appear in an exported term, and meeting one is
+a bug rather than a user error. -/
 partial def exportExpr (E : Expr) : ExportM Nat := do
   match (← get).exprs.map[E]? with
   | some i => pure i
@@ -146,6 +188,19 @@ partial def exportExpr (E : Expr) : ExportM Nat := do
     | .proj n k e =>
       let i ← alloc E; IO.println s!"{i} #EJ {← exportName n} {k} {← exportExpr e}"; pure i
 
+/-- Emit the declaration `n`, first emitting every constant that its type or value depends on, and
+record it in `State.defs` so that it is never emitted twice.
+
+The line emitted depends on the kind of declaration: `#AX` for an axiom, `#DEF` for a
+definition, `#THM` for a theorem, `#CN` for an opaque constant, `#QUOT` for the quotient
+primitives, and `#IND` for an inductive type, or `#MUT` for a mutually inductive family. Each of
+these is followed by the indices of the name, the type and, where there is one, the value, then
+by the indices of the universe parameters.
+
+An inductive line additionally carries the number of parameters, and, for each type in the
+family, its name, its type and its constructors with their types; the type itself and its
+recursors are marked as emitted at the same time, since the importer reconstructs them from the
+inductive declaration rather than reading them separately. -/
 partial def exportDef (n : Name) : ExportM Unit := do
   if (← get).defs.contains n then return
   let ci ← getConstInfo n
@@ -203,6 +258,7 @@ where
 
 end
 
+/-- Run an exporter action in `CoreM`, starting from the empty state. -/
 def runExportM {α : Type} (m : ExportM α) : CoreM α := m.run' default
 
 -- #eval runExportM (exportDef `Lean.Expr)

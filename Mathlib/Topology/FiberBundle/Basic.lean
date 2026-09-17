@@ -185,7 +185,9 @@ for which the fibers are all homeomorphic to `F`, such that the local situation 
 is a direct product. -/
 class FiberBundle where
   totalSpaceMk_isInducing' : ∀ b : B, IsInducing (@TotalSpace.mk B F E b)
+  /-- The designated atlas of trivializations. Use `FiberBundle.trivializationAtlas` instead. -/
   trivializationAtlas' : Set (Trivialization F (π F E))
+  /-- A trivialization around each point of the base. Use `FiberBundle.trivializationAt` instead. -/
   trivializationAt' : B → Trivialization F (π F E)
   mem_baseSet_trivializationAt' : ∀ b : B, b ∈ (trivializationAt' b).baseSet
   trivialization_mem_atlas' : ∀ b : B, trivializationAt' b ∈ trivializationAtlas'
@@ -417,10 +419,20 @@ Trivialization changes from `i` to `j` are given by continuous maps `coordChange
 space of continuous maps on `F`. -/
 structure FiberBundleCore (ι : Type*) (B : Type*) [TopologicalSpace B] (F : Type*)
     [TopologicalSpace F] where
+  /-- The open set of the base over which the trivialization indexed by `i` is defined; its openness
+  is `isOpen_baseSet`. -/
   baseSet : ι → Set B
   isOpen_baseSet : ∀ i, IsOpen (baseSet i)
+  /-- A choice, for each point of the base, of an index whose `baseSet` contains it, witnessing that
+  the `baseSet`s cover `B`. -/
   indexAt : B → ι
   mem_baseSet_at : ∀ x, x ∈ baseSet (indexAt x)
+  /-- The transition function from the trivialization `i` to the trivialization `j`, as a map `B → F
+  → F` that is a homeomorphism of `F` over `baseSet i ∩ baseSet j`.
+
+  It is presented as a map `B → F → F` rather than a map into the homeomorphisms of `F` so that
+  no topology on that space is needed; continuity is instead required on `(baseSet i ∩ baseSet
+  j) ×ˢ univ`. The cocycle condition is `coordChange_comp`. -/
   coordChange : ι → ι → B → F → F
   coordChange_self : ∀ i, ∀ x ∈ baseSet i, ∀ v, coordChange i i x v = v
   continuousOn_coordChange : ∀ i j,
@@ -748,7 +760,9 @@ equivalences but there is not yet a topology on the total space. The total space
 topology in such a way that there is a fiber bundle structure for which the partial equivalences
 are also open partial homeomorphisms and hence local trivializations. -/
 structure FiberPrebundle where
+  /-- The designated atlas of pretrivializations. -/
   pretrivializationAtlas : Set (Pretrivialization F (π F E))
+  /-- A pretrivialization around each point of the base. -/
   pretrivializationAt : B → Pretrivialization F (π F E)
   mem_base_pretrivializationAt : ∀ x : B, x ∈ (pretrivializationAt x).baseSet
   pretrivialization_mem_atlas : ∀ x : B, pretrivializationAt x ∈ pretrivializationAtlas

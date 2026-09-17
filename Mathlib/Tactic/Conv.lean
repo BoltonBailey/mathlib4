@@ -50,6 +50,7 @@ macro_rules
   | `(tactic| conv_rhs $[at $id]? $[in $[$occs]? $pat]? => $seq) =>
     `(tactic| conv $[at $id]? $[in $[$occs]? $pat]? => rhs; ($seq:convSeq))
 
+/-- `run_conv e` runs the `do` sequence `e` as a `conv` tactic. -/
 macro "run_conv" e:doSeq : conv => `(conv| tactic' => run_tac $e)
 
 /--

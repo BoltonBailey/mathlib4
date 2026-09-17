@@ -47,7 +47,9 @@ structure ImportState where
   minImports   : NameSet := {}
   /-- The number of transitive imports needed to build the file up to the current command. -/
   importSize   : Nat := 0
-  deriving Inhabited
+
+/-- The initial `ImportState`, in which no import information has been computed yet. -/
+instance : Inhabited ImportState := ⟨{}⟩
 
 /--
 `minImportsRef` keeps track of cumulative imports across multiple commands, using `ImportState`.

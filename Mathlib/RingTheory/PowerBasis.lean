@@ -58,8 +58,14 @@ For the common case where `S` is defined by adjoining an integral element to `R`
 the canonical power basis is given by `{Algebra,IntermediateField}.adjoin.powerBasis`.
 -/
 structure PowerBasis (R S : Type*) [CommRing R] [Ring S] [Algebra R S] where
+  /-- The generator of the power basis. -/
   gen : S
+  /-- The number of basis elements, so that `gen` is integral of degree `dim` over `R` and `S` is
+  free of rank `dim` as an `R`-module. -/
   dim : ℕ
+  /-- The basis itself, whose `i`th element is `gen ^ i` by `basis_eq_pow`. It is carried as data
+  rather than constructed from `gen` so that a `PowerBasis` may be built with a basis that is
+  already known. -/
   basis : Basis (Fin dim) R S
   basis_eq_pow : ∀ (i), basis i = gen ^ (i : ℕ)
 

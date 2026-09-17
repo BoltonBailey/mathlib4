@@ -115,7 +115,9 @@ namespace Mathlib.Tactic
 
 -- FIXME: we cannot write this line when `Lean.Parser.Tactic` is open,
 -- or it will get an extra `group`
+/-- A `with x y z` clause naming hypotheses introduced by a tactic. -/
 syntax withArgs := " with" (ppSpace colGt ident)+
+/-- A `using e` clause supplying an extra term to a tactic. -/
 syntax usingArg := " using " term
 
 open Lean Parser.Tactic

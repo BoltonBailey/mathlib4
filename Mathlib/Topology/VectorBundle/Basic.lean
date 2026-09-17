@@ -556,10 +556,19 @@ variable (B F)
 construction gives a way to construct vector bundles from a structure registering how
 trivialization changes act on fibers. -/
 structure VectorBundleCore (ι : Type*) where
+  /-- The open set of the base over which the trivialization indexed by `i` is defined; its openness
+  is `isOpen_baseSet`. -/
   baseSet : ι → Set B
   isOpen_baseSet : ∀ i, IsOpen (baseSet i)
+  /-- A choice, for each point of the base, of an index whose `baseSet` contains it, witnessing that
+  the `baseSet`s cover `B`. -/
   indexAt : B → ι
   mem_baseSet_at : ∀ x, x ∈ baseSet (indexAt x)
+  /-- The transition function from the trivialization `i` to the trivialization `j`, as a continuous
+  linear automorphism of the model fiber `F` at each point of the base.
+
+  Unlike in `FiberBundleCore` the values are already linear maps, so continuity is required only
+  in the base point; the cocycle condition is `coordChange_comp`. -/
   coordChange : ι → ι → B → F →L[R] F
   coordChange_self : ∀ i, ∀ x ∈ baseSet i, ∀ v, coordChange i i x v = v
   continuousOn_coordChange : ∀ i j, ContinuousOn (coordChange i j) (baseSet i ∩ baseSet j)
@@ -824,8 +833,10 @@ fields), since it depends on propositional information (namely `e e' ∈ pretriv
 This makes it inconvenient to explicitly define a `coordChange` function when constructing a
 `VectorPrebundle`. -/
 structure VectorPrebundle where
+  /-- The designated atlas of pretrivializations. -/
   pretrivializationAtlas : Set (Pretrivialization F (π F E))
   pretrivialization_linear' : ∀ e, e ∈ pretrivializationAtlas → e.IsLinear R
+  /-- A pretrivialization around each point of the base. -/
   pretrivializationAt : B → Pretrivialization F (π F E)
   mem_base_pretrivializationAt : ∀ x : B, x ∈ (pretrivializationAt x).baseSet
   pretrivialization_mem_atlas : ∀ x : B, pretrivializationAt x ∈ pretrivializationAtlas

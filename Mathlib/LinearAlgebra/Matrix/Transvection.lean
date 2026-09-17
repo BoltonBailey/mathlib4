@@ -143,8 +143,12 @@ variable (R n)
 This structure is easier to manipulate than transvections as one has a direct access to all the
 relevant fields. -/
 structure TransvectionStruct where
-  (i j : n)
+  /-- The row index of the off-diagonal entry. -/
+  i : n
+  /-- The column index of the off-diagonal entry. -/
+  j : n
   hij : i ≠ j
+  /-- The value of the off-diagonal entry. -/
   c : R
 
 instance [Nontrivial n] : Nonempty (TransvectionStruct n R) := by

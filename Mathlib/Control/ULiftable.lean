@@ -51,6 +51,9 @@ u₂`, this class convert between instantiations, from
 At any rate, the lift should be unique, as the intent is to only lift the same constants with
 different universe parameters. -/
 class ULiftable (f : outParam (Type u₀ → Type u₁)) (g : Type v₀ → Type v₁) where
+  /-- Transport an equivalence `α ≃ β` to an equivalence `f α ≃ g β` between the two instantiations.
+  Taking `β` to be `ULift α` gives the lifting and lowering maps; the equivalence is asked for
+  in this form so that it can be transported in either direction. -/
   congr {α β} : α ≃ β → f α ≃ g β
 
 namespace ULiftable

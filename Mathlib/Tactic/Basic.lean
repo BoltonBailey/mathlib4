@@ -89,6 +89,7 @@ example : ∀ a b : Nat, a = b → ∀ c, b = c → a = c := by
 ```
 -/
 syntax (name := introv) "introv" (ppSpace colGt binderIdent)* : tactic
+/-- Elaborator for the `introv` tactic. -/
 @[tactic introv] partial def evalIntrov : Tactic := fun stx ↦ do
   match stx with
   | `(tactic| introv)                     => introsDep

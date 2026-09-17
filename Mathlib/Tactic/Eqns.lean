@@ -35,8 +35,13 @@ theorem transpose_const {m n} (c : ℕ) :
 public meta section
 open Lean Elab
 
+/-- `@[eqns h₁ h₂]` overrides the equation lemmas of a declaration with the given list, so that
+`simp` and `rw` unfold it through those lemmas instead. -/
 syntax (name := eqns) "eqns" (ppSpace ident)* : attr
 
+/-- The environment extension backing the `@[eqns]` attribute, mapping a declaration to the equation
+lemmas that override its own. It is consulted through a `GetEqnsFn`, which is registered so as
+to run before Lean generates the default equations. -/
 initialize eqnsAttribute : NameMapExtension (Array Name) ←
   registerNameMapAttribute {
     name  := `eqns

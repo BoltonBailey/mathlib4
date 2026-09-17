@@ -77,6 +77,9 @@ This is not a typeclass because the choice of root given `S` and `f` is not uniq
 -/
 structure IsAdjoinRoot {R : Type u} (S : Type v) [CommSemiring R] [Semiring S] [Algebra R S]
     (f : R[X]) : Type max u v where
+  /-- The algebra map `R[X] →ₐ[R] S` sending `X` to the adjoined root, required to be surjective
+  with kernel `span {f}`. Together these say that `map` presents `S` as `R[X] / (f)`, and the
+  image of `X` is the root of `f` that has been adjoined. -/
   map : R[X] →ₐ[R] S
   map_surjective : Function.Surjective map
   ker_map : RingHom.ker map = Ideal.span {f}

@@ -90,7 +90,10 @@ construct a morphism `X _⦋n+1⦌ ⟶ Z` (see `φ`) using the decomposition of 
 identity given by `decomposition_Q n (n+1)`. -/
 @[ext]
 structure MorphComponents (n : ℕ) (Z : C) where
+  /-- The component of the morphism on the summand indexed by the identity. -/
   a : X _⦋n + 1⦌ ⟶ Z
+  /-- The components of the morphism on the summands of the decomposition `decomposition_Q n (n +
+  1)`. -/
   b : Fin (n + 1) → (X _⦋n⦌ ⟶ Z)
 
 namespace MorphComponents

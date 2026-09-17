@@ -73,7 +73,9 @@ variable (K : Type*)
 `⟨b, fr⟩`.
 -/
 structure IntFractPair where
+  /-- The integer part `⌊v⌋`. -/
   b : ℤ
+  /-- The fractional part `v - ⌊v⌋`. -/
   fr : K
 
 variable {K}

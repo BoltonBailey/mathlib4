@@ -123,6 +123,9 @@ the same universe as the ring.
 See Note [forgetful inheritance] for why we extend `UniformSpace`, `IsUniformAddGroup`. -/
 class Valued (R : Type u) [Ring R] (Γ₀ : outParam (Type v))
   [LinearOrderedCommGroupWithZero Γ₀] extends UniformSpace R, IsUniformAddGroup R where
+  /-- The canonical valuation on `R`, whose topology is the one carried by the `UniformSpace`
+  structure. The compatibility is `is_topological_valuation`, which says that the neighbourhoods
+  of `0` are exactly the sets containing a ball `{x | v x < γ}`. -/
   v : Valuation R Γ₀
   is_topological_valuation : ∀ s, s ∈ 𝓝 (0 : R) ↔
     ∃ γ : (MonoidWithZeroHom.ValueGroup₀ (.ofClass v))ˣ, { x : R | v.restrict x < γ.1 } ⊆ s

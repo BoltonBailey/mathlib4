@@ -65,7 +65,10 @@ inductive StyleError where
   * `selector` is the desired selector or `none`
   -/
   | unicodeVariant (s : String) (selector: Option Char)
-deriving BEq, Inhabited
+deriving BEq
+
+/-- A junk `StyleError`, used only to make the type inhabited. -/
+instance : Inhabited StyleError := ⟨.adaptationNote⟩
 
 /-- How to format style errors -/
 public inductive ErrorFormat

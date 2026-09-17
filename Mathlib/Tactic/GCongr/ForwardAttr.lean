@@ -19,6 +19,8 @@ namespace Mathlib.Tactic.GCongr
 
 /-- An extension for `gcongr_forward`. -/
 structure ForwardExt where
+  /-- Attempt to close `goal` using the hypothesis `h`, throwing an exception on failure so that the
+  next extension is tried. -/
   eval (h : Expr) (goal : MVarId) : MetaM Unit
 
 /-- Read a `gcongr_forward` extension from a declaration of the right type. -/

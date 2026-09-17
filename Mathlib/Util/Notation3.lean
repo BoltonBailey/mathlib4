@@ -68,11 +68,23 @@ macro_rules
       `(fun $y:ident ↦ expand_binders% ($x => $term) (h : satisfies_binder_pred% $y $pred)
         $[$binders]*, $res)
 
+/-- Expand `expand_foldl% (x y => t) init [a₁, ..., aₙ]` by folding the arguments from the left,
+starting at `init` and substituting the accumulated term for `x` and the next argument for `y`
+in `t` at each step.
+
+This is what `notation3` uses to elaborate a `foldl` clause, so that a variadic notation expands
+to a left-nested application. -/
 macro (name := expandFoldl) "expand_foldl% "
   "(" x:ident ppSpace y:ident " => " term:term ") " init:term:max " [" args:term,* "]" : term =>
   args.getElems.foldlM (init := init) fun res arg ↦ do
     term.replaceM fun e ↦
       return if e == x then some res else if e == y then some arg else none
+/-- Expand `expand_foldr% (x y => t) init [a₁, ..., aₙ]` by folding the arguments from the right,
+starting at `init` and substituting the next argument for `x` and the accumulated term for `y`
+in `t` at each step.
+
+This is what `notation3` uses to elaborate a `foldr` clause, so that a variadic notation expands
+to a right-nested application. -/
 macro (name := expandFoldr) "expand_foldr% "
   "(" x:ident ppSpace y:ident " => " term:term ") " init:term:max " [" args:term,* "]" : term =>
   args.getElems.foldrM (init := init) fun arg res ↦ do
@@ -476,6 +488,8 @@ inductive BoundValueType
   /-- A fold variable, use the fold state (do not reverse the array). -/
   | foldr
 
+/-- Optional `(prettyPrint := true/false)` clause of `notation3`, controlling whether a delaborator
+is generated so that the notation is used when printing as well as when parsing. -/
 syntax prettyPrintOpt := "(" &"prettyPrint" " := " (&"true" <|> &"false") ")"
 
 /-- Interpret a `prettyPrintOpt`. The default value is `true`. -/

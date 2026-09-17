@@ -89,10 +89,8 @@ the namespace associated to the inductive type `α`.
 -/
 macro "derive_fintype% " t:term : term => `(term| Fintype.ofEquiv _ (proxy_equiv% $t))
 
-/-
-Creates a `Fintype` instance by adding additional `Fintype` and `Decidable` instance arguments
-for every type and prop parameter of the type, then use the `derive_fintype%` elaborator.
--/
+/-- Creates a `Fintype` instance by adding additional `Fintype` and `Decidable` instance arguments
+for every type and prop parameter of the type, then using the `derive_fintype%` elaborator. -/
 def mkFintype (declName : Name) : CommandElabM Bool := do
   let indVal ← getConstInfoInduct declName
   let cmd ← liftTermElabM do
@@ -182,6 +180,9 @@ def mkFintypeEnum (declName : Name) : CommandElabM Unit := do
   trace[Elab.Deriving.fintype] "instance command:\n{cmd}"
   elabCommand cmd
 
+/-- The `deriving Fintype` handler: derives the instance by enumerating the constructors for an enum
+type, and via `derive_fintype%` otherwise. Mutually inductive types are not supported, and the
+handler declines them by returning `false`. -/
 def mkFintypeInstanceHandler (declNames : Array Name) : CommandElabM Bool := do
   if h : declNames.size ≠ 1 then
     return false -- mutually inductive types are not supported
