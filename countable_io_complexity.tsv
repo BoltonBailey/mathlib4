@@ -1,0 +1,712 @@
+name	module	verdict	reason	verdict_if_bundled_maps_are_functions
+Mathlib.Tactic.Translate.Permutation.beq	Mathlib.Tactic.Translate.Reorder	P	list manipulation	P
+Mathlib.Tactic.Translate.Permutation.range	Mathlib.Tactic.Translate.Reorder	P	list manipulation	P
+Mathlib.Tactic.Translate.Permutation.reverse	Mathlib.Tactic.Translate.Reorder	P	list manipulation	P
+Nat.bit	Mathlib.Data.Nat.BinaryRec	P	append a bit	P
+Xor	Mathlib.Basic.Logic.Basic	P	Boolean function of two truth values (Prop read as Bool)	P
+Classical.dec	Mathlib.Basic.Logic.Basic	P	output is the truth value of the input (Prop read as Bool)	P
+uniqueProp	Mathlib.Basic.Unique	P	output type has a unique element: O(1)	P
+finOneEquiv	Mathlib.Logic.Equiv.Defs	P	constant (no input): O(1)	P
+finTwoEquiv	Mathlib.Logic.Equiv.Defs	P	constant (no input): O(1)	P
+finZeroEquiv	Mathlib.Logic.Equiv.Defs	P	constant (no input): O(1)	P
+finZeroEquiv'	Mathlib.Logic.Equiv.Defs	P	constant (no input): O(1)	P
+Equiv.ofIff	Mathlib.Logic.Equiv.Defs	P	output type has a unique element: O(1)	P
+Equiv.propEquivBool	Mathlib.Logic.Equiv.Defs	P	constant (no input): O(1)	P
+Equiv.propEquivPEmpty	Mathlib.Logic.Equiv.Defs	P	output type has a unique element: O(1)	P
+Equiv.propEquivPUnit	Mathlib.Logic.Equiv.Defs	P	output type has a unique element: O(1)	P
+Equiv.punitEquivPUnit	Mathlib.Logic.Equiv.Defs	P	constant (no input): O(1)	P
+Ordering.dthen	Mathlib.Data.Ordering.Basic	P	case split on a 3-element type	P
+Bool.carry	Mathlib.Data.Bool.Basic	P	Boolean function	P
+Bool.ofNat	Mathlib.Data.Bool.Basic	P	zero test	P
+Bool.xor3	Mathlib.Data.Bool.Basic	P	Boolean function	P
+Equiv.boolEquivPUnitSumPUnit	Mathlib.Logic.Equiv.Sum	P	constant (no input): O(1)	P
+Int.natMod	Mathlib.Data.Int.Init	P	integer division	P
+Int.pred	Mathlib.Data.Int.Init	P	arithmetic	P
+Int.succ	Mathlib.Data.Int.Init	P	arithmetic	P
+Mathlib.CountHeartbeats.variation	Mathlib.Util.CountHeartbeats	P	min/max/integer square root of a list	P
+Int.sqrt	Mathlib.Data.Int.Sqrt	P	integer square root (Newton)	P
+List.TFAE	Mathlib.Data.List.TFAE	P	list of truth values all equal	P
+Int.ofNatHom	Mathlib.Data.Int.Cast.Lemmas	P	constant (no input): O(1)	P
+NNRat.den	Mathlib.Data.Rat.Init	P	projection	P
+NNRat.num	Mathlib.Data.Rat.Init	P	projection	P
+NNRat.coeHom	Mathlib.Data.NNRat.Defs	P	constant (no input): O(1)	P
+NNRat.divNat	Mathlib.Data.NNRat.Defs	P	gcd reduction	P
+Rat.nnabs	Mathlib.Data.NNRat.Defs	P	arithmetic	P
+Rat.toNNRat	Mathlib.Data.NNRat.Defs	P	arithmetic	P
+PNat.val	Mathlib.Data.PNat.Notation	P	projection	P
+Nat.succPNat	Mathlib.Data.PNat.Defs	P	arithmetic	P
+Nat.toPNat	Mathlib.Data.PNat.Defs	P	identity on data	P
+Nat.toPNat'	Mathlib.Data.PNat.Defs	P	arithmetic	P
+PNat.div	Mathlib.Data.PNat.Defs	P	division	P
+PNat.divExact	Mathlib.Data.PNat.Defs	P	division	P
+PNat.mod	Mathlib.Data.PNat.Defs	P	division	P
+PNat.modDiv	Mathlib.Data.PNat.Defs	P	division	P
+PNat.modDivAux	Mathlib.Data.PNat.Defs	P	division	P
+PNat.natPred	Mathlib.Data.PNat.Defs	P	arithmetic	P
+Rat.pnatDen	Mathlib.Data.Rat.Lemmas	P	projection	P
+Nat.ascFactorial	Mathlib.Data.Nat.Factorial.Basic	not P	n(n+1)...(n+k-1) has about k log n bits; k is given in binary	not P
+Nat.ascFactorialBinary	Mathlib.Data.Nat.Factorial.Basic	not P	same value as ascFactorial	not P
+Nat.descFactorial	Mathlib.Data.Nat.Factorial.Basic	not P	n!/(n-k)! has about k log n bits; k is given in binary	not P
+Nat.descFactorialBinary	Mathlib.Data.Nat.Factorial.Basic	not P	same value as descFactorial	not P
+Nat.factorial	Mathlib.Data.Nat.Factorial.Basic	not P	n! has about n log n bits; input has log n bits	not P
+Nat.factorialBinarySplitting	Mathlib.Data.Nat.Factorial.Basic	not P	same value as factorial	not P
+Int.gcdA	Mathlib.Data.Int.GCD	P	extended Euclid	P
+Int.gcdB	Mathlib.Data.Int.GCD	P	extended Euclid	P
+Nat.gcdA	Mathlib.Data.Int.GCD	P	extended Euclid	P
+Nat.gcdB	Mathlib.Data.Int.GCD	P	extended Euclid	P
+Nat.xgcd	Mathlib.Data.Int.GCD	P	extended Euclid	P
+Nat.xgcdAux	Mathlib.Data.Int.GCD	P	extended Euclid	P
+Mathlib.Tactic.Linarith.Linexp.add	Mathlib.Tactic.Linarith.Datatypes	P	sorted-list merge	P
+Mathlib.Tactic.Linarith.Linexp.cmp	Mathlib.Tactic.Linarith.Datatypes	P	lexicographic comparison	P
+Mathlib.Tactic.Linarith.Linexp.contains	Mathlib.Tactic.Linarith.Datatypes	P	list search	P
+Mathlib.Tactic.Linarith.Linexp.get	Mathlib.Tactic.Linarith.Datatypes	P	list search	P
+Mathlib.Tactic.Linarith.Linexp.scale	Mathlib.Tactic.Linarith.Datatypes	P	list map	P
+Mathlib.Tactic.Linarith.Linexp.vars	Mathlib.Tactic.Linarith.Datatypes	P	list map	P
+Mathlib.Tactic.Linarith.Linexp.zfind	Mathlib.Tactic.Linarith.Datatypes	P	list search	P
+OrderIso.pnatIsoNat	Mathlib.Data.PNat.Basic	P	constant (no input): O(1)	P
+Multiset.range	Mathlib.Data.Multiset.Range	not P	output has n elements; input has log n bits	not P
+Finset.range	Mathlib.Data.Finset.Range	not P	output has n elements; input has log n bits	not P
+List.ranges	Mathlib.Data.List.Range	not P	output has (sum of input) elements	not P
+Fin.equivSubtype	Mathlib.Data.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+finCongr	Mathlib.Data.Fin.SuccPred	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.castPred	Mathlib.Data.Fin.SuccPred	P	arithmetic on Fin	P
+Fin.predAbove	Mathlib.Data.Fin.SuccPred	P	arithmetic on Fin	P
+Fin.succAbove	Mathlib.Data.Fin.SuccPred	P	arithmetic on Fin	P
+Fin.addNatEmb	Mathlib.Data.Fin.Embedding	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.castAddEmb	Mathlib.Data.Fin.Embedding	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.castLEEmb	Mathlib.Data.Fin.Embedding	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.castSuccEmb	Mathlib.Data.Fin.Embedding	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.natAddEmb	Mathlib.Data.Fin.Embedding	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.natAdd_castLEEmb	Mathlib.Data.Fin.Embedding	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.succAboveEmb	Mathlib.Data.Fin.Embedding	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.succEmb	Mathlib.Data.Fin.Embedding	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.revPerm	Mathlib.Data.Fin.Rev	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.addNatOrderEmb	Mathlib.Order.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.castAddOrderEmb	Mathlib.Order.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.castLEOrderEmb	Mathlib.Order.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.castOrderIso	Mathlib.Order.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.castSuccOrderEmb	Mathlib.Order.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.natAddOrderEmb	Mathlib.Order.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.orderIsoSubtype	Mathlib.Order.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.revOrderIso	Mathlib.Order.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.succAboveOrderEmb	Mathlib.Order.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.succOrderEmb	Mathlib.Order.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.find	Mathlib.Data.Fin.Tuple.Basic	P	linear scan of the predicate table (the table has n entries, so the input has size n)	P
+Set.Nat.fintypeIio	Mathlib.Data.Set.Finite.Basic	not P	Fintype structure lists all n elements; input has log n bits	not P
+Nat.choose	Mathlib.Data.Nat.Choose.Basic	not P	C(2m, m) has about 2m bits; input has log m bits	not P
+Nat.fast_choose	Mathlib.Data.Nat.Choose.Basic	not P	same value as choose	not P
+Nat.multichoose	Mathlib.Data.Nat.Choose.Basic	not P	C(n+k-1, k) is exponentially long in the input	not P
+Nat.bits	Mathlib.Data.Nat.Bits	P	binary expansion	P
+Nat.bodd	Mathlib.Data.Nat.Bits	P	parity	P
+Nat.div2	Mathlib.Data.Nat.Bits	P	shift	P
+Nat.ldiff	Mathlib.Data.Nat.Bits	P	bitwise	P
+Nat.shiftLeft'	Mathlib.Data.Nat.Bits	not P	shifting by n (in binary) produces n extra bits	not P
+Nat.size	Mathlib.Data.Nat.Bits	P	bit length	P
+Nat.pair	Mathlib.Data.Nat.Pairing	P	arithmetic	P
+Nat.unpair	Mathlib.Data.Nat.Pairing	P	integer square root	P
+Finset.attachFin	Mathlib.Data.Finset.Fin	P	relabel elements	P
+finAddFlip	Mathlib.Logic.Equiv.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+finProdFinEquiv	Mathlib.Logic.Equiv.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+finSuccAboveEquiv	Mathlib.Logic.Equiv.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+finSuccEquiv	Mathlib.Logic.Equiv.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+finSuccEquiv'	Mathlib.Logic.Equiv.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+finSuccEquivLast	Mathlib.Logic.Equiv.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+finSumFinEquiv	Mathlib.Logic.Equiv.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.castLEquiv	Mathlib.Logic.Equiv.Fin.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+finFunctionFinEquiv	Mathlib.Algebra.BigOperators.Fin	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+finPiFinEquiv	Mathlib.Algebra.BigOperators.Fin	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+finSigmaFinEquiv	Mathlib.Algebra.BigOperators.Fin	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+finCycle	Mathlib.Logic.Equiv.Fin.Rotate	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+finRotate	Mathlib.Logic.Equiv.Fin.Rotate	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+ENat.lift	Mathlib.Data.ENat.Basic	P	projection	P
+ENat.toNat	Mathlib.Data.ENat.Basic	P	projection	P
+Nat.ModEq	Mathlib.Data.Nat.ModEq	P	compare remainders	P
+Nat.chineseRemainder	Mathlib.Data.Nat.ModEq	P	CRT via extended Euclid	P
+Nat.chineseRemainder'	Mathlib.Data.Nat.ModEq	P	CRT via extended Euclid	P
+PrincipalSeg.pemptyToPUnit	Mathlib.Order.InitialSeg	P	constant (no input): O(1)	P
+Cardinal.liftInitialSeg	Mathlib.SetTheory.Cardinal.Order	P	constant (no input): O(1)	P
+List.Nat.antidiagonal	Mathlib.Data.List.NatAntidiagonal	not P	output has n+1 pairs	not P
+Multiset.Nat.antidiagonal	Mathlib.Data.Multiset.NatAntidiagonal	not P	output has n+1 pairs	not P
+Finset.Nat.antidiagonalEquivFin	Mathlib.Data.Finset.NatAntidiagonal	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Ordinal.liftInitialSeg	Mathlib.SetTheory.Ordinal.Basic	P	constant (no input): O(1)	P
+Cardinal.orderBotAleph0OrdToType	Mathlib.SetTheory.Ordinal.Arithmetic	P	constant (no input): O(1)	P
+Ordinal.liftPrincipalSeg	Mathlib.SetTheory.Ordinal.Univ	P	constant (no input): O(1)	P
+Nat.clog	Mathlib.Data.Nat.Log	P	O(log n) multiplications	P
+Nat.log	Mathlib.Data.Nat.Log	P	O(log n) multiplications	P
+Nat.clog.go	Mathlib.Data.Nat.Log	P	repeated squaring, stops once b exceeds n	P
+Nat.log.go	Mathlib.Data.Nat.Log	P	repeated squaring, stops once b exceeds n	P
+Cardinal.preAleph	Mathlib.SetTheory.Cardinal.Aleph	P	constant (no input): O(1)	P
+Ordinal.isInitialIso	Mathlib.SetTheory.Cardinal.Aleph	P	constant (no input): O(1)	P
+Nat.Prime	Mathlib.Data.Nat.Prime.Defs	P	AKS primality test	P
+Nat.decidablePrime'	Mathlib.Data.Nat.Prime.Defs	P	AKS primality test (output is the decision)	P
+Nat.minFac	Mathlib.Data.Nat.Prime.Defs	open	smallest prime factor; at least as hard as splitting semiprimes (factoring); no poly-time algorithm or lower bound known	open
+Nat.minFacAux	Mathlib.Data.Nat.Prime.Defs	open	smallest factor >= k; factoring-type problem	open
+Polynomial.revAtFun	Mathlib.Algebra.Polynomial.Reverse	P	arithmetic	P
+Int.ModEq	Mathlib.Data.Int.ModEq	P	compare remainders	P
+Nat.primeFactorsList	Mathlib.Data.Nat.Factors	open	integer factorization	open
+Nat.primeFactors	Mathlib.Data.Nat.PrimeFin	open	integer factorization (output has O(log n) elements)	open
+Int.divisors	Mathlib.NumberTheory.Divisors	not P	number of divisors can be 2^(c log n / log log n), superpolynomial in log n	not P
+Int.divisorsAntidiag	Mathlib.NumberTheory.Divisors	not P	number of divisors is superpolynomial in log n	not P
+Nat.Perfect	Mathlib.NumberTheory.Divisors	open	even perfect numbers are recognisable in poly time (Euclid-Euler); whether odd perfect numbers exist, and how they are distributed, is open	open
+Nat.divisors	Mathlib.NumberTheory.Divisors	not P	number of divisors is superpolynomial in log n	not P
+Nat.divisorsAntidiagonal	Mathlib.NumberTheory.Divisors	not P	number of divisors is superpolynomial in log n	not P
+Nat.divisorsAntidiagonalList	Mathlib.NumberTheory.Divisors	not P	number of divisors is superpolynomial in log n	not P
+Nat.properDivisors	Mathlib.NumberTheory.Divisors	not P	number of divisors is superpolynomial in log n	not P
+ZMod.chineseRemainder	Mathlib.Data.ZMod.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+ZMod.ringEquivCongr	Mathlib.Data.ZMod.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+ZMod.unitOfCoprime	Mathlib.Data.ZMod.Basic	P	modular inverse via extended Euclid	P
+ZMod.unitsEquivCoprime	Mathlib.Data.ZMod.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Nat.centralBinom	Mathlib.Data.Nat.Choose.Central	not P	C(2n, n) has about 2n bits	not P
+Nat.digits	Mathlib.Data.Nat.Digits.Defs	not P	base 1 gives a list of n ones (P for base >= 2)	not P
+Nat.digitsAux	Mathlib.Data.Nat.Digits.Defs	P	base >= 2 digit expansion	P
+Nat.digitsAux0	Mathlib.Data.Nat.Digits.Defs	P	singleton list	P
+Nat.digitsAux1	Mathlib.Data.Nat.Digits.Defs	not P	list of n ones	not P
+List.consFixedLengthDigits	Mathlib.Data.Nat.Digits.Lemmas	not P	finset of b^l lists	not P
+List.fixedLengthDigits	Mathlib.Data.Nat.Digits.Lemmas	not P	finset of b^l lists	not P
+Nat.digitsAppend	Mathlib.Data.Nat.Digits.Lemmas	not P	pads to length l, where l is given in binary	not P
+Nat.divMaxPow	Mathlib.Data.Nat.MaxPowDiv	P	repeated division (O(log n) steps)	P
+Nat.maxPowDvdDiv	Mathlib.Data.Nat.MaxPowDiv	P	repeated squaring of p	P
+Nat.maxPowDvdDiv.go	Mathlib.Data.Nat.MaxPowDiv	P	repeated squaring of p	P
+padicValNat	Mathlib.Data.Nat.PadicValNat	P	repeated division (O(log n) steps)	P
+Nat.factorization	Mathlib.Data.Nat.Factorization.Defs	open	integer factorization	open
+Nat.factorizationLCMLeft	Mathlib.Data.Nat.Factorization.Defs	P	computable from a coprime base of {a, b} (Bach-Driscoll-Shallit), no factoring needed	P
+Nat.factorizationLCMRight	Mathlib.Data.Nat.Factorization.Defs	P	computable from a coprime base of {a, b}, no factoring needed	P
+CategoryTheory.fullyFaithfulULiftFunctor	Mathlib.CategoryTheory.Types.Basic	P	constant (no input): O(1)	P
+AddCommMonCat.fullyFaithfulForgetToAddMonCat	Mathlib.Algebra.Category.MonCat.Basic	P	constant (no input): O(1)	P
+CommMonCat.fullyFaithfulForgetToMonCat	Mathlib.Algebra.Category.MonCat.Basic	P	constant (no input): O(1)	P
+AddCommGrpCat.fullyFaihtfulForget₂ToAddGrp	Mathlib.Algebra.Category.Grp.Basic	P	constant (no input): O(1)	P
+AddCommGrpCat.fullyFaithfulForget₂ToAddGrp	Mathlib.Algebra.Category.Grp.Basic	P	constant (no input): O(1)	P
+AddGrpCat.fullyFaihtfulForget₂ToAddMonCat	Mathlib.Algebra.Category.Grp.Basic	P	constant (no input): O(1)	P
+AddGrpCat.fullyFaithfulForget₂ToAddMonCat	Mathlib.Algebra.Category.Grp.Basic	P	constant (no input): O(1)	P
+CommGrpCat.fullyFaithfulForget₂ToGrp	Mathlib.Algebra.Category.Grp.Basic	P	constant (no input): O(1)	P
+GrpCat.fullyFaithfulForget₂ToMonCat	Mathlib.Algebra.Category.Grp.Basic	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingPair.ctorIdx	Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.WalkingPair	P	finite type	P
+CategoryTheory.Limits.WalkingPair.equivBool	Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.WalkingPair	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingPair.left	Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.WalkingPair	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingPair.ofNat	Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.WalkingPair	P	finite type	P
+CategoryTheory.Limits.WalkingPair.right	Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.WalkingPair	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingPair.swap	Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.WalkingPair	P	constant (no input): O(1)	P
+CategoryTheory.Limits.instInhabitedWalkingPair.default	Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.WalkingPair	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingCospan.left	Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingCospan.one	Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingCospan.right	Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingSpan.left	Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingSpan.right	Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingSpan.zero	Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingCospan.Hom.id	Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan	P	finite type	P
+CategoryTheory.Limits.WalkingCospan.Hom.inl	Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingCospan.Hom.inr	Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingSpan.Hom.fst	Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingSpan.Hom.id	Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan	P	finite type	P
+CategoryTheory.Limits.WalkingSpan.Hom.snd	Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingParallelPair.ctorIdx	Mathlib.CategoryTheory.Limits.Shapes.Equalizers	P	finite type	P
+CategoryTheory.Limits.WalkingParallelPair.ofNat	Mathlib.CategoryTheory.Limits.Shapes.Equalizers	P	finite type	P
+CategoryTheory.Limits.WalkingParallelPair.one	Mathlib.CategoryTheory.Limits.Shapes.Equalizers	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingParallelPair.zero	Mathlib.CategoryTheory.Limits.Shapes.Equalizers	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingParallelPairHom.comp	Mathlib.CategoryTheory.Limits.Shapes.Equalizers	P	finite type	P
+CategoryTheory.Limits.WalkingParallelPairHom.ctorIdx	Mathlib.CategoryTheory.Limits.Shapes.Equalizers	P	finite type	P
+CategoryTheory.Limits.WalkingParallelPairHom.id	Mathlib.CategoryTheory.Limits.Shapes.Equalizers	P	finite type	P
+CategoryTheory.Limits.WalkingParallelPairHom.left	Mathlib.CategoryTheory.Limits.Shapes.Equalizers	P	constant (no input): O(1)	P
+CategoryTheory.Limits.WalkingParallelPairHom.right	Mathlib.CategoryTheory.Limits.Shapes.Equalizers	P	constant (no input): O(1)	P
+CategoryTheory.Limits.instDecidableEqWalkingParallelPairHom.decEq	Mathlib.CategoryTheory.Limits.Shapes.Equalizers	P	finite type	P
+CategoryTheory.Limits.instInhabitedWalkingParallelPair.default	Mathlib.CategoryTheory.Limits.Shapes.Equalizers	P	constant (no input): O(1)	P
+CategoryTheory.Limits.Types.isTerminalPUnit	Mathlib.CategoryTheory.Limits.Types.Products	P	constant (no input): O(1)	P
+CommRingCat.fullyFaithfulForget₂ToRingCat	Mathlib.Algebra.Category.Ring.Basic	P	constant (no input): O(1)	P
+CommSemiRingCat.fullyFaithfulForget₂ToSemiRingCat	Mathlib.Algebra.Category.Ring.Basic	P	constant (no input): O(1)	P
+RingCat.fullyFaithfulForget₂ToSemiRingCat	Mathlib.Algebra.Category.Ring.Basic	P	constant (no input): O(1)	P
+finSuccAboveOrderIso	Mathlib.Order.Fin.Tuple	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.castLEOrderIso	Mathlib.Order.Fin.Tuple	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Finset.Nat.antidiagonalTuple	Mathlib.Data.Fin.Tuple.NatAntidiagonal	not P	C(n+k-1, k-1) tuples	not P
+List.Nat.antidiagonalTuple	Mathlib.Data.Fin.Tuple.NatAntidiagonal	not P	C(n+k-1, k-1) tuples	not P
+Multiset.Nat.antidiagonalTuple	Mathlib.Data.Fin.Tuple.NatAntidiagonal	not P	C(n+k-1, k-1) tuples	not P
+compositionAsSetEquiv	Mathlib.Combinatorics.Enumerative.Composition	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+compositionEquiv	Mathlib.Combinatorics.Enumerative.Composition	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Composition.append	Mathlib.Combinatorics.Enumerative.Composition	P	list append	P
+Composition.blocks	Mathlib.Combinatorics.Enumerative.Composition	P	projection	P
+Composition.blocksFinEquiv	Mathlib.Combinatorics.Enumerative.Composition	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Composition.blocksFun	Mathlib.Combinatorics.Enumerative.Composition	P	table of size length (input already has that many blocks)	P
+Composition.boundaries	Mathlib.Combinatorics.Enumerative.Composition	P	prefix sums	P
+Composition.boundary	Mathlib.Combinatorics.Enumerative.Composition	P	table of size length+1 (input already has that many blocks)	P
+Composition.cast	Mathlib.Combinatorics.Enumerative.Composition	P	identity on data	P
+Composition.ctorIdx	Mathlib.Combinatorics.Enumerative.Composition	P	constant	P
+Composition.embedding	Mathlib.Combinatorics.Enumerative.Composition	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Composition.index	Mathlib.Combinatorics.Enumerative.Composition	P	prefix-sum search	P
+Composition.invEmbedding	Mathlib.Combinatorics.Enumerative.Composition	P	prefix-sum search	P
+Composition.length	Mathlib.Combinatorics.Enumerative.Composition	P	list length	P
+Composition.mk	Mathlib.Combinatorics.Enumerative.Composition	P	identity on data	P
+Composition.ones	Mathlib.Combinatorics.Enumerative.Composition	not P	n blocks; input has log n bits	not P
+Composition.reverse	Mathlib.Combinatorics.Enumerative.Composition	P	list reverse	P
+Composition.single	Mathlib.Combinatorics.Enumerative.Composition	P	one block	P
+Composition.sizeUpTo	Mathlib.Combinatorics.Enumerative.Composition	P	prefix sum	P
+Composition.toCompositionAsSet	Mathlib.Combinatorics.Enumerative.Composition	P	prefix sums	P
+CompositionAsSet.blocks	Mathlib.Combinatorics.Enumerative.Composition	P	differences of boundary points	P
+CompositionAsSet.blocksFun	Mathlib.Combinatorics.Enumerative.Composition	P	differences of boundary points	P
+CompositionAsSet.boundaries	Mathlib.Combinatorics.Enumerative.Composition	P	projection	P
+CompositionAsSet.boundary	Mathlib.Combinatorics.Enumerative.Composition	P	sorted enumeration of the given finset	P
+CompositionAsSet.ctorIdx	Mathlib.Combinatorics.Enumerative.Composition	P	constant	P
+CompositionAsSet.length	Mathlib.Combinatorics.Enumerative.Composition	P	finset size	P
+CompositionAsSet.mk	Mathlib.Combinatorics.Enumerative.Composition	P	identity on data	P
+CompositionAsSet.toComposition	Mathlib.Combinatorics.Enumerative.Composition	P	differences of boundary points	P
+instDecidableEqComposition.decEq	Mathlib.Combinatorics.Enumerative.Composition	P	list equality	P
+instDecidableEqCompositionAsSet.decEq	Mathlib.Combinatorics.Enumerative.Composition	P	finset equality	P
+Nat.Partition.countRestricted	Mathlib.Combinatorics.Enumerative.Partition.Basic	not P	finset of exponentially many partitions	not P
+Nat.Partition.ctorIdx	Mathlib.Combinatorics.Enumerative.Partition.Basic	P	constant	P
+Nat.Partition.distincts	Mathlib.Combinatorics.Enumerative.Partition.Basic	not P	finset of exponentially many partitions	not P
+Nat.Partition.indiscrete	Mathlib.Combinatorics.Enumerative.Partition.Basic	P	one part	P
+Nat.Partition.mk	Mathlib.Combinatorics.Enumerative.Partition.Basic	P	identity on data	P
+Nat.Partition.oddDistincts	Mathlib.Combinatorics.Enumerative.Partition.Basic	not P	finset of exponentially many partitions	not P
+Nat.Partition.odds	Mathlib.Combinatorics.Enumerative.Partition.Basic	not P	finset of exponentially many partitions	not P
+Nat.Partition.ofComposition	Mathlib.Combinatorics.Enumerative.Partition.Basic	P	list to multiset	P
+Nat.Partition.ofMultiset	Mathlib.Combinatorics.Enumerative.Partition.Basic	P	drop zeros	P
+Nat.Partition.ofSums	Mathlib.Combinatorics.Enumerative.Partition.Basic	P	drop zeros	P
+Nat.Partition.partitionWithPartEquiv	Mathlib.Combinatorics.Enumerative.Partition.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Nat.Partition.parts	Mathlib.Combinatorics.Enumerative.Partition.Basic	P	projection	P
+Nat.Partition.toFinsuppAntidiag	Mathlib.Combinatorics.Enumerative.Partition.Basic	P	count multiplicities	P
+Nat.instDecidableEqPartition.decEq	Mathlib.Combinatorics.Enumerative.Partition.Basic	P	multiset equality	P
+Equiv.Perm.finPairsLT	Mathlib.GroupTheory.Perm.Sign	not P	n(n-1)/2 pairs; input has log n bits	not P
+Equiv.Perm.signAux	Mathlib.GroupTheory.Perm.Sign	P	count inversions in the input table	P
+Equiv.Perm.signBijAux	Mathlib.GroupTheory.Perm.Sign	P	table of size n^2 from an input table of size n	P
+Fin.cycleIcc	Mathlib.GroupTheory.Perm.Fin	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin.cycleRange	Mathlib.GroupTheory.Perm.Fin	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Equiv.Perm.decomposeFin	Mathlib.GroupTheory.Perm.Fin	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Equiv.Perm.decomposeFin'	Mathlib.GroupTheory.Perm.Fin	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Equiv.Perm.decomposeFin'Symm	Mathlib.GroupTheory.Perm.Fin	P	table of size n+2 from an input table of size n+1	P
+CommRingCat.isInitial	Mathlib.Algebra.Category.Ring.Constructions	P	constant (no input): O(1)	P
+CommRingCat.punitIsTerminal	Mathlib.Algebra.Category.Ring.Constructions	P	constant (no input): O(1)	P
+CommRingCat.zIsInitial	Mathlib.Algebra.Category.Ring.Constructions	P	constant (no input): O(1)	P
+Denumerable.lower	Mathlib.Logic.Equiv.Multiset	P	list differences	P
+Denumerable.raise	Mathlib.Logic.Equiv.Multiset	P	prefix sums	P
+Denumerable.lower'	Mathlib.Logic.Equiv.Finset	P	list differences	P
+Denumerable.raise'	Mathlib.Logic.Equiv.Finset	P	prefix sums	P
+Denumerable.raise'Finset	Mathlib.Logic.Equiv.Finset	P	prefix sums	P
+CategoryTheory.Limits.Types.isInitialPEmpty	Mathlib.CategoryTheory.Limits.Types.Coproducts	P	constant (no input): O(1)	P
+Int.negOnePow	Mathlib.Algebra.Ring.NegOnePow	P	parity	P
+Nat.totient	Mathlib.Data.Nat.Totient	open	computing Euler phi is randomized-equivalent to factoring; no poly-time algorithm or lower bound known	open
+AddCommGrpCat.uliftFunctorFullyFaithful	Mathlib.Algebra.Category.Grp.Ulift	P	constant (no input): O(1)	P
+AddGrpCat.uliftFunctorFullyFaithful	Mathlib.Algebra.Category.Grp.Ulift	P	constant (no input): O(1)	P
+CommGrpCat.uliftFunctorFullyFaithful	Mathlib.Algebra.Category.Grp.Ulift	P	constant (no input): O(1)	P
+GrpCat.uliftFunctorFullyFaithful	Mathlib.Algebra.Category.Grp.Ulift	P	constant (no input): O(1)	P
+ZMod.AddAutEquivUnits	Mathlib.Data.ZMod.Aut	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+TopCat.isInitialPEmpty	Mathlib.Topology.Category.TopCat.Limits.Basic	P	constant (no input): O(1)	P
+TopCat.isTerminalPUnit	Mathlib.Topology.Category.TopCat.Limits.Basic	P	constant (no input): O(1)	P
+Nat.fastFib	Mathlib.Data.Nat.Fib.Basic	not P	fib n has about 0.69 n bits	not P
+Nat.fastFibAux	Mathlib.Data.Nat.Fib.Basic	not P	fib n has about 0.69 n bits	not P
+Nat.fib	Mathlib.Data.Nat.Fib.Basic	not P	fib n has about 0.69 n bits	not P
+SimplexCategory.Truncated.inclusion.fullyFaithful	Mathlib.AlgebraicTopology.SimplexCategory.Defs	P	output type has a unique element: O(1)	P
+Fin.homSucc	Mathlib.Order.Category.NonemptyFinLinOrd	P	output type has a unique element: O(1)	P
+Fin.hom_succ	Mathlib.Order.Category.NonemptyFinLinOrd	P	output type has a unique element: O(1)	P
+SimplexCategory.diag	Mathlib.AlgebraicTopology.SimplexCategory.Basic	P	monotone map table with 2 entries	P
+SimplexCategory.factor_δ	Mathlib.AlgebraicTopology.SimplexCategory.Basic	P	table of the same size as the input map	P
+SimplexCategory.intervalEdge	Mathlib.AlgebraicTopology.SimplexCategory.Basic	P	monotone map table with 2 entries	P
+SimplexCategory.isTerminalZero	Mathlib.AlgebraicTopology.SimplexCategory.Basic	P	constant (no input): O(1)	P
+SimplexCategory.mkOfLe	Mathlib.AlgebraicTopology.SimplexCategory.Basic	P	monotone map table with 2 entries	P
+SimplexCategory.mkOfLeComp	Mathlib.AlgebraicTopology.SimplexCategory.Basic	P	monotone map table with 3 entries	P
+SimplexCategory.mkOfSucc	Mathlib.AlgebraicTopology.SimplexCategory.Basic	P	monotone map table with 2 entries	P
+SimplexCategory.subinterval	Mathlib.AlgebraicTopology.SimplexCategory.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimplexCategory.δ	Mathlib.AlgebraicTopology.SimplexCategory.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimplexCategory.σ	Mathlib.AlgebraicTopology.SimplexCategory.Basic	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimplexCategory.δ₀Iter	Mathlib.AlgebraicTopology.SimplexCategory.DeltaZeroIter	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimplexCategory.σ₀Iter	Mathlib.AlgebraicTopology.SimplexCategory.DeltaZeroIter	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SSet.Truncated.cosk.fullyFaithful	Mathlib.AlgebraicTopology.SimplicialSet.Basic	P	output type has a unique element: O(1)	P
+SSet.Truncated.sk.fullyFaithful	Mathlib.AlgebraicTopology.SimplicialSet.Basic	P	output type has a unique element: O(1)	P
+Fin.succAboveOrderIso	Mathlib.Order.Fin.SuccAboveOrderIso	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SSet.stdSimplex.edge	Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex	P	simplex given by 2 vertices	P
+SSet.stdSimplex.finOrderIsoPairCompl	Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SSet.stdSimplex.finSuccAboveOrderIsoFinset	Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SSet.stdSimplex.fullyFaithful	Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex	P	constant (no input): O(1)	P
+SSet.stdSimplex.nonDegenerateEquiv	Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SSet.stdSimplex.nonDegenerateEquiv'	Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SSet.stdSimplex.obj₀Equiv	Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SSet.stdSimplex.orderIsoOfNonDegenerate	Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex	P	table of size d+1 from an input simplex with d+1 vertices	P
+SSet.stdSimplex.triangle	Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex	P	simplex given by 3 vertices	P
+Nat.superFactorial	Mathlib.Data.Nat.Factorial.SuperFactorial	not P	output has about n^2 log n bits	not P
+Mathlib.Tactic.Echelon.pivotOfList	Mathlib.Tactic.Echelon.Reflection	P	list lookup	P
+Mathlib.Tactic.Matrix.IsIndecomposable.SpansFrom	Mathlib.Tactic.Simproc.IsIndecomposable	P	graph search on the given n x n table	P
+Mathlib.Tactic.Matrix.IsIndecomposable.isClosed	Mathlib.Tactic.Simproc.IsIndecomposable	P	check on the given n x n table	P
+Mathlib.Tactic.Matrix.IsIndecomposable.isClosedPacked	Mathlib.Tactic.Simproc.IsIndecomposable	P	only rows i < bitlength(s) matter, so O(log s) bit operations	P
+Mathlib.Tactic.Matrix.IsIndecomposable.packedAdj	Mathlib.Tactic.Simproc.IsIndecomposable	P	bit extraction	P
+Mathlib.Tactic.Matrix.IsIndecomposable.reached	Mathlib.Tactic.Simproc.IsIndecomposable	P	single pass over the edge list	P
+SignType.ctorIdx	Mathlib.Basic.Sign.Defs	P	finite type	P
+SignType.enumList	Mathlib.Basic.Sign.Defs	P	constant (no input): O(1)	P
+SignType.fin3Equiv	Mathlib.Basic.Sign.Defs	P	constant (no input): O(1)	P
+SignType.neg	Mathlib.Basic.Sign.Defs	P	constant (no input): O(1)	P
+SignType.ofNat	Mathlib.Basic.Sign.Defs	P	finite type	P
+SignType.pos	Mathlib.Basic.Sign.Defs	P	constant (no input): O(1)	P
+SignType.zero	Mathlib.Basic.Sign.Defs	P	constant (no input): O(1)	P
+instInhabitedSignType.default	Mathlib.Basic.Sign.Defs	P	constant (no input): O(1)	P
+Nat.nthRoot	Mathlib.Data.Nat.NthRoot.Defs	P	integer root by Newton's method; answer is 1 once n exceeds log a	P
+Nat.nthRoot.go	Mathlib.Data.Nat.NthRoot.Defs	P	Newton iteration	P
+Complex.conjAe	Mathlib.LinearAlgebra.Complex.Module	P	constant (no input): O(1)	P
+Complex.ofRealAm	Mathlib.LinearAlgebra.Complex.Module	P	constant (no input): O(1)	P
+Nat.stirlingFirst	Mathlib.Combinatorics.Enumerative.Stirling	not P	s(n, 1) = (n-1)! is exponentially long	not P
+Nat.stirlingSecond	Mathlib.Combinatorics.Enumerative.Stirling	not P	S(n, 2) = 2^(n-1) - 1 is exponentially long	not P
+BoxIntegral.IntegrationParams.equivProd	Mathlib.Analysis.BoxIntegral.Partition.Filter	P	constant (no input): O(1)	P
+ZMod.equivPi	Mathlib.Data.ZMod.QuotientRing	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Nat.doubleFactorial	Mathlib.Data.Nat.Factorial.DoubleFactorial	not P	n!! has about (n/2) log n bits	not P
+List.multinomial	Mathlib.Data.Nat.Choose.Multinomial	not P	multinomial coefficients are exponentially long in the bit size of the entries	not P
+Multiset.multinomial	Mathlib.Data.Nat.Choose.Multinomial	not P	multinomial coefficients are exponentially long in the bit size of the entries	not P
+Sym.e1	Mathlib.Data.Sym.Card	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Sym.e2	Mathlib.Data.Sym.Card	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Nat.MinSqFacProp	Mathlib.Data.Nat.Squarefree	open	deciding it includes testing squarefreeness, which has no known poly-time algorithm	open
+Nat.minSqFac	Mathlib.Data.Nat.Squarefree	open	smallest prime whose square divides n; squarefreeness testing is open	open
+Nat.minSqFacAux	Mathlib.Data.Nat.Squarefree	open	squarefreeness-type problem	open
+Nat.finMulAntidiag	Mathlib.Algebra.Order.Antidiag.Nat	not P	the d = 2 case already lists all divisors (superpolynomially many)	not P
+Polynomial.IsUnitTrinomial	Mathlib.Algebra.Polynomial.UnitTrinomial	P	inspect the coefficients	P
+Int.IsFundamentalDiscr	Mathlib.NumberTheory.FundamentalDiscriminant	open	requires testing squarefreeness of the odd part	open
+AlgebraicGeometry.LocallyRingedSpace.emptyIsInitial	Mathlib.Geometry.RingedSpace.LocallyRingedSpace	P	constant (no input): O(1)	P
+AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace	Mathlib.AlgebraicGeometry.Scheme	P	constant (no input): O(1)	P
+AlgebraicGeometry.Spec.fullyFaithful	Mathlib.AlgebraicGeometry.GammaSpecAdjunction	P	constant (no input): O(1)	P
+AlgebraicGeometry.Spec.fullyFaithfulToLocallyRingedSpace	Mathlib.AlgebraicGeometry.GammaSpecAdjunction	P	constant (no input): O(1)	P
+AlgebraicGeometry.emptyIsInitial	Mathlib.AlgebraicGeometry.Limits	P	constant (no input): O(1)	P
+AlgebraicGeometry.specPUnitIsInitial	Mathlib.AlgebraicGeometry.Limits	P	constant (no input): O(1)	P
+AlgebraicGeometry.specULiftZIsTerminal	Mathlib.AlgebraicGeometry.Limits	P	constant (no input): O(1)	P
+AlgebraicGeometry.specZIsTerminal	Mathlib.AlgebraicGeometry.Limits	P	constant (no input): O(1)	P
+ChevalleyThm.degBound	Mathlib.RingTheory.Spectrum.Prime.ChevalleyComplexity	not P	tower-type recursion (num^num iterated)	not P
+ChevalleyThm.numBound	Mathlib.RingTheory.Spectrum.Prime.ChevalleyComplexity	not P	tower-type recursion	not P
+Composition.gather	Mathlib.Analysis.Analytic.Composition	P	list manipulation	P
+Composition.sigmaCompositionAux	Mathlib.Analysis.Analytic.Composition	P	list manipulation	P
+Composition.sigmaEquivSigmaPi	Mathlib.Analysis.Analytic.Composition	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+FormalMultilinearSeries.compChangeOfVariables	Mathlib.Analysis.Analytic.Composition	P	list manipulation of the given tuple	P
+FormalMultilinearSeries.compPartialSumSource	Mathlib.Analysis.Analytic.Composition	not P	finset of exponentially many tuples	not P
+FormalMultilinearSeries.compPartialSumTarget	Mathlib.Analysis.Analytic.Composition	not P	finset of exponentially many compositions	not P
+OrderedFinpartition.atomic	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	not P	n singleton parts; input has log n bits	not P
+OrderedFinpartition.ctorIdx	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	constant	P
+OrderedFinpartition.emb	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	projection (the input already contains the tables)	P
+OrderedFinpartition.embSigma	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	repackage the input tables	P
+OrderedFinpartition.equivSigma	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	table of size n; the input already has size >= n	P
+OrderedFinpartition.eraseLeft	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	table manipulation	P
+OrderedFinpartition.eraseMiddle	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	table manipulation	P
+OrderedFinpartition.extend	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	table manipulation	P
+OrderedFinpartition.extendEquiv	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+OrderedFinpartition.extendLeft	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	table manipulation	P
+OrderedFinpartition.extendMiddle	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	table manipulation	P
+OrderedFinpartition.index	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	table lookup	P
+OrderedFinpartition.invEmbedding	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	table lookup	P
+OrderedFinpartition.length	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	projection	P
+OrderedFinpartition.mk	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	identity on data	P
+OrderedFinpartition.partSize	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	projection	P
+instDecidableEqOrderedFinpartition.decEq	Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno	P	table equality	P
+TopCat.uliftFunctorFullyFaithful	Mathlib.Topology.Category.TopCat.ULift	P	constant (no input): O(1)	P
+Fin.isInitialZero	Mathlib.CategoryTheory.Limits.Shapes.Preorder.Fin	P	output type has a unique element: O(1)	P
+Fin.isTerminalLast	Mathlib.CategoryTheory.Limits.Shapes.Preorder.Fin	P	output type has a unique element: O(1)	P
+padicValInt	Mathlib.NumberTheory.Padics.PadicVal.Basic	P	repeated division	P
+padicValRat	Mathlib.NumberTheory.Padics.PadicVal.Basic	P	repeated division	P
+padicNorm	Mathlib.NumberTheory.Padics.PadicNorm	P	p^(-v) with |v| <= log of the input, so polynomial size	P
+SSet.horn.edge	Mathlib.AlgebraicTopology.SimplicialSet.Horn	P	simplex given by 2 vertices	P
+SSet.horn.edge₃	Mathlib.AlgebraicTopology.SimplicialSet.Horn	P	simplex given by 2 vertices	P
+SSet.horn.face	Mathlib.AlgebraicTopology.SimplicialSet.Horn	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SSet.horn.primitiveEdge	Mathlib.AlgebraicTopology.SimplicialSet.Horn	P	simplex given by 2 vertices	P
+SSet.horn.primitiveTriangle	Mathlib.AlgebraicTopology.SimplicialSet.Horn	P	simplex given by 3 vertices	P
+SSet.horn.isColimit	Mathlib.AlgebraicTopology.SimplicialSet.HornColimits	P	output type has a unique element: O(1)	P
+SSet.stdSimplex.isTerminalObj₀	Mathlib.AlgebraicTopology.SimplicialSet.Monoidal	P	constant (no input): O(1)	P
+CategoryTheory.Cat.isTerminalDiscretePUnit	Mathlib.CategoryTheory.Category.Cat.Terminal	P	constant (no input): O(1)	P
+SSet.isTerminalHoFunctorDeltaZero	Mathlib.AlgebraicTopology.SimplicialSet.HomotopyCat	P	constant (no input): O(1)	P
+CategoryTheory.Cat.chosenTerminalIsTerminal	Mathlib.CategoryTheory.Monoidal.Cartesian.Cat	P	constant (no input): O(1)	P
+SimplexCategoryGenRel.simplicialEvalσ	Mathlib.AlgebraicTopology.SimplexCategory.GeneratorsRelations.NormalForms	P	list recursion	P
+SimplexCategoryGenRel.simplicialInsert	Mathlib.AlgebraicTopology.SimplexCategory.GeneratorsRelations.NormalForms	P	list insertion	P
+SimplexCategoryGenRel.IsAdmissible.getElemAsFin	Mathlib.AlgebraicTopology.SimplexCategory.GeneratorsRelations.NormalForms	P	list lookup	P
+SimplexCategoryGenRel.IsAdmissible.head	Mathlib.AlgebraicTopology.SimplexCategory.GeneratorsRelations.NormalForms	P	list head	P
+SimplexCategory.toMk₁	Mathlib.AlgebraicTopology.SimplexCategory.ToMkOne	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimplexCategory.toMk₁Equiv	Mathlib.AlgebraicTopology.SimplexCategory.ToMkOne	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+CategoryTheory.WalkingIso.equivBool	Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso	P	constant (no input): O(1)	P
+CategoryTheory.WalkingIso.iso	Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso	P	constant (no input): O(1)	P
+SSet.stdSimplex.objMk₁	Mathlib.AlgebraicTopology.SimplicialSet.StdSimplexOne	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SSet.prodStdSimplex.nonDegenerateEquiv₁	Mathlib.AlgebraicTopology.SimplicialSet.ProdStdSimplexOne	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SSet.prodStdSimplex₁.codimOneSimplex	Mathlib.AlgebraicTopology.SimplicialSet.ProdStdSimplexOne	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SSet.prodStdSimplex₁.nonDegenerateEquiv	Mathlib.AlgebraicTopology.SimplicialSet.ProdStdSimplexOne	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SSet.isColimitCoforkπ₀Functor	Mathlib.AlgebraicTopology.SimplicialSet.PiZero	P	constant (no input): O(1)	P
+CategoryTheory.nerve.fullyFaithfulNerveFunctor₂	Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction	P	constant (no input): O(1)	P
+CategoryTheory.nerveFunctor.fullyfaithful	Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction	P	constant (no input): O(1)	P
+Int.multichoose	Mathlib.RingTheory.Binomial	not P	exponentially long binomial-type output	not P
+AddChar.zmodAddEquiv	Mathlib.Analysis.Fourier.FiniteAbelian.PontryaginDuality	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+ZMod.unitOfIsCoprime	Mathlib.Data.ZMod.Units	P	modular inverse via extended Euclid	P
+GaloisField.equivZmodP	Mathlib.FieldTheory.Finite.GaloisField	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+PNat.Coprime	Mathlib.Data.PNat.Prime	P	gcd	P
+PNat.Prime	Mathlib.Data.PNat.Prime	P	AKS primality test	P
+PNat.gcd	Mathlib.Data.PNat.Prime	P	Euclid	P
+PNat.lcm	Mathlib.Data.PNat.Prime	P	Euclid	P
+Nat.Primes.toPNat	Mathlib.Data.PNat.Prime	P	projection	P
+rootsOfUnityCircleEquiv	Mathlib.Analysis.SpecialFunctions.Complex.CircleAddChar	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+ZMod.stdAddChar	Mathlib.Analysis.SpecialFunctions.Complex.CircleAddChar	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Int.range	Mathlib.Data.Int.Range	not P	output has n - m elements	not P
+ZMod.χ₄	Mathlib.NumberTheory.LegendreSymbol.ZModChar	P	constant (no input): O(1)	P
+ZMod.χ₈	Mathlib.NumberTheory.LegendreSymbol.ZModChar	P	constant (no input): O(1)	P
+ZMod.χ₈'	Mathlib.NumberTheory.LegendreSymbol.ZModChar	P	constant (no input): O(1)	P
+Nat.ratSqrt	Mathlib.Data.Rat.NatSqrt.Defs	P	integer square root at precision prec (log prec output bits)	P
+chudnovskyDenom	Mathlib.Analysis.Real.Pi.Chudnovsky	not P	contains (3n)! (n!)^3, exponentially long	not P
+chudnovskyNum	Mathlib.Analysis.Real.Pi.Chudnovsky	not P	contains (6n)!, exponentially long	not P
+chudnovskyTerm	Mathlib.Analysis.Real.Pi.Chudnovsky	not P	exponentially long numerator and denominator	not P
+Rat.sqrt	Mathlib.Data.Rat.Sqrt	P	integer square roots	P
+harmonic	Mathlib.NumberTheory.Harmonic.Defs	not P	the denominator of H_n is about lcm(1..n) = e^(n(1+o(1)))	not P
+Int.fib	Mathlib.Data.Int.Fib.Basic	not P	fib n has about 0.69 n bits	not P
+Mathlib.Meta.NormNum.IsFibAux	Mathlib.Tactic.NormNum.NatFib	P	if a, b are shorter than fib n the answer is false; otherwise the input has size Omega(n) and fib n is computable in poly(n)	P
+Mathlib.Meta.NormNum.MinFacHelper	Mathlib.Tactic.NormNum.Prime	open	includes deciding whether n has a factor < k (factoring decision problem)	open
+Behrend.box	Mathlib.Combinatorics.Additive.AP.Three.Behrend	not P	d^n tuples	not P
+Behrend.dValue	Mathlib.Combinatorics.Additive.AP.Three.Behrend	P	floor(N^(1/n) / 2) by integer root extraction	P
+Behrend.nValue	Mathlib.Combinatorics.Additive.AP.Three.Behrend	P	compare N with e^(k^2); a transcendence measure for e bounds the precision needed by poly(log N) bits	P
+Behrend.sphere	Mathlib.Combinatorics.Additive.AP.Three.Behrend	not P	can contain exponentially many points	not P
+SzemerediRegularity.stepBound	Mathlib.Combinatorics.SimpleGraph.Regularity.Bound	not P	n * 4^n	not P
+Nat.bitIndices	Mathlib.Data.Nat.BitIndices	P	binary expansion	P
+Finset.orderIsoColex	Mathlib.Combinatorics.Colex	P	constant (no input): O(1)	P
+numDerangements	Mathlib.Combinatorics.Derangements.Finite	not P	D_n is about n!/e	not P
+Multiset.bell	Mathlib.Combinatorics.Enumerative.Bell	not P	exponentially long output	not P
+Nat.bell	Mathlib.Combinatorics.Enumerative.Bell	not P	exponentially long output	not P
+Nat.uniformBell	Mathlib.Combinatorics.Enumerative.Bell	not P	exponentially long output	not P
+catalan	Mathlib.Combinatorics.Enumerative.Catalan.Basic	not P	C_n is about 4^n	not P
+DyckWord.equivTreesOfNumNodesEq	Mathlib.Combinatorics.Enumerative.DyckWord	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+YoungDiagram.cellsOfRowLens	Mathlib.Combinatorics.Young.YoungDiagram	not P	number of cells = sum of row lengths, exponential in their bit size	not P
+YoungDiagram.equivPartition	Mathlib.Combinatorics.Enumerative.Partition.YoungDiagram	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Nat.Partition.conjugate	Mathlib.Combinatorics.Enumerative.Partition.YoungDiagram	not P	conjugate of the one-part partition (n) has n parts	not P
+pentagonal	Mathlib.Combinatorics.Enumerative.Pentagonal.Basic	P	arithmetic	P
+Nat.largeSchroder	Mathlib.Combinatorics.Enumerative.Schroder	not P	exponentially long output	not P
+Nat.smallSchroder	Mathlib.Combinatorics.Enumerative.Schroder	not P	exponentially long output	not P
+ruzsaSzemerediNumberNat	Mathlib.Combinatorics.Extremal.RuzsaSzemeredi	open	extremal number on n vertices (n in binary); no closed form or poly(log n) algorithm known, and no lower bound	open
+SimpleGraph.cycleGraph	Mathlib.Combinatorics.SimpleGraph.CycleGraph	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimpleGraph.pathGraph	Mathlib.Combinatorics.SimpleGraph.Hasse	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimpleGraph.turanGraph	Mathlib.Combinatorics.SimpleGraph.Extremal.Turan	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimpleGraph.turanNumber	Mathlib.Combinatorics.SimpleGraph.Extremal.Turan	P	closed formula for the edge count of the Turán graph	P
+SimpleGraph.completeEquipartiteGraph	Mathlib.Combinatorics.SimpleGraph.CompleteMultipartite	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimpleGraph.pathGraph_two_embedding	Mathlib.Combinatorics.SimpleGraph.Coloring.Constructions	P	embedding table with 2 entries	P
+SimpleGraph.Coloring.completeEquipartiteGraph	Mathlib.Combinatorics.SimpleGraph.Coloring.Constructions	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimpleGraph.Coloring.turanGraph	Mathlib.Combinatorics.SimpleGraph.Coloring.Constructions	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimpleGraph.cycleGraph.bicoloring_of_even	Mathlib.Combinatorics.SimpleGraph.Coloring.Constructions	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimpleGraph.cycleGraph.tricoloring	Mathlib.Combinatorics.SimpleGraph.Coloring.Constructions	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimpleGraph.pathGraph.bicoloring	Mathlib.Combinatorics.SimpleGraph.Coloring.Constructions	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+SimpleGraph.zarankiewicz	Mathlib.Combinatorics.SimpleGraph.Extremal.Zarankiewicz	open	Zarankiewicz number z(m,n;s,t) with m,n,s,t in binary; no poly-time algorithm or lower bound known (even z(n,n;2,2) has no closed form)	open
+Nat.ppred	Mathlib.Data.Nat.PSub	P	arithmetic	P
+Nat.psub	Mathlib.Data.Nat.PSub	P	arithmetic	P
+Nat.psub'	Mathlib.Data.Nat.PSub	P	arithmetic	P
+Nat.Partrec.Code.comp	Mathlib.Computability.PartrecCode	P	constructor	P
+Nat.Partrec.Code.const	Mathlib.Computability.PartrecCode	not P	code for n is n nested compositions	not P
+Nat.Partrec.Code.ctorIdx	Mathlib.Computability.PartrecCode	P	constant-time inspection	P
+Nat.Partrec.Code.curry	Mathlib.Computability.PartrecCode	not P	contains const n	not P
+Nat.Partrec.Code.encodeCode	Mathlib.Computability.PartrecCode	not P	nested pairing doubles the bit length per level, so a code of depth d encodes to about 2^d bits	not P
+Nat.Partrec.Code.evaln	Mathlib.Computability.PartrecCode	not P	with fuel k in binary it simulates computations of length about k, so it is EXP-hard; not in P by the time hierarchy theorem	not P
+Nat.Partrec.Code.id	Mathlib.Computability.PartrecCode	P	constant (no input): O(1)	P
+Nat.Partrec.Code.left	Mathlib.Computability.PartrecCode	P	constant (no input): O(1)	P
+Nat.Partrec.Code.ofNatCode	Mathlib.Computability.PartrecCode	P	decoding; output size O(bit length of input)	P
+Nat.Partrec.Code.pair	Mathlib.Computability.PartrecCode	P	constructor	P
+Nat.Partrec.Code.prec	Mathlib.Computability.PartrecCode	P	constructor	P
+Nat.Partrec.Code.rfind'	Mathlib.Computability.PartrecCode	P	constructor	P
+Nat.Partrec.Code.right	Mathlib.Computability.PartrecCode	P	constant (no input): O(1)	P
+Nat.Partrec.Code.succ	Mathlib.Computability.PartrecCode	P	constant (no input): O(1)	P
+Nat.Partrec.Code.zero	Mathlib.Computability.PartrecCode	P	constant (no input): O(1)	P
+ack	Mathlib.Computability.Ackermann	not P	Ackermann function; output not even primitive recursively bounded	not P
+Nat.Partrec.Code.pappAck	Mathlib.Computability.Ackermann	not P	code of size linear in n	not P
+Nat.Partrec.Code.pappAck.step	Mathlib.Computability.Ackermann	P	constructor	P
+Computability.decodeBool	Mathlib.Computability.Encoding	P	encoding	P
+Computability.decodeNat	Mathlib.Computability.Encoding	P	binary decoding	P
+Computability.encodeBool	Mathlib.Computability.Encoding	P	encoding	P
+Computability.encodeNat	Mathlib.Computability.Encoding	P	binary encoding	P
+Computability.inclusionBoolΓ'	Mathlib.Computability.Encoding	P	finite type	P
+Computability.sectionΓ'Bool	Mathlib.Computability.Encoding	P	finite type	P
+Computability.unaryDecodeNat	Mathlib.Computability.Encoding	P	list length	P
+Computability.unaryEncodeNat	Mathlib.Computability.Encoding	not P	unary encoding has n symbols	not P
+Computability.instDecidableEqΓ'.decEq	Mathlib.Computability.Encoding	P	finite type	P
+Computability.Γ'.bit	Mathlib.Computability.Encoding	P	finite type	P
+Computability.Γ'.blank	Mathlib.Computability.Encoding	P	constant (no input): O(1)	P
+Computability.Γ'.bra	Mathlib.Computability.Encoding	P	constant (no input): O(1)	P
+Computability.Γ'.comma	Mathlib.Computability.Encoding	P	constant (no input): O(1)	P
+Computability.Γ'.ctorIdx	Mathlib.Computability.Encoding	P	finite type	P
+Computability.Γ'.ket	Mathlib.Computability.Encoding	P	constant (no input): O(1)	P
+Computability.Γ'.proxyTypeEquiv	Mathlib.Computability.Encoding	P	constant (no input): O(1)	P
+Turing.PartrecToTM2.natEnd	Mathlib.Computability.TuringMachine.ToPartrec	P	finite type	P
+Turing.PartrecToTM2.trLList	Mathlib.Computability.TuringMachine.ToPartrec	P	binary encoding of a list	P
+Turing.PartrecToTM2.trList	Mathlib.Computability.TuringMachine.ToPartrec	P	binary encoding of a list	P
+Turing.PartrecToTM2.trNat	Mathlib.Computability.TuringMachine.ToPartrec	P	binary encoding	P
+Turing.PartrecToTM2.instInhabitedΓ'.default	Mathlib.Computability.TuringMachine.ToPartrec	P	constant (no input): O(1)	P
+Turing.PartrecToTM2.Γ'.bit0	Mathlib.Computability.TuringMachine.ToPartrec	P	constant (no input): O(1)	P
+Turing.PartrecToTM2.Γ'.bit1	Mathlib.Computability.TuringMachine.ToPartrec	P	constant (no input): O(1)	P
+Turing.PartrecToTM2.Γ'.cons	Mathlib.Computability.TuringMachine.ToPartrec	P	constant (no input): O(1)	P
+Turing.PartrecToTM2.Γ'.consₗ	Mathlib.Computability.TuringMachine.ToPartrec	P	constant (no input): O(1)	P
+Turing.PartrecToTM2.Γ'.ctorIdx	Mathlib.Computability.TuringMachine.ToPartrec	P	finite type	P
+Turing.PartrecToTM2.Γ'.enumList	Mathlib.Computability.TuringMachine.ToPartrec	P	constant (no input): O(1)	P
+Turing.PartrecToTM2.Γ'.ofNat	Mathlib.Computability.TuringMachine.ToPartrec	P	finite type	P
+CompHaus.isTerminalPUnit	Mathlib.Topology.Category.CompHaus.Limits	P	constant (no input): O(1)	P
+FintypeCat.toProfiniteFullyFaithful	Mathlib.Topology.Category.Profinite.Basic	P	constant (no input): O(1)	P
+Profinite.isTerminalPUnit	Mathlib.Topology.Category.Profinite.Limits	P	constant (no input): O(1)	P
+Stonean.fullyFaithfulToCompHaus	Mathlib.Topology.Category.Stonean.Basic	P	constant (no input): O(1)	P
+lightToProfiniteFullyFaithful	Mathlib.Topology.Category.LightProfinite.Basic	P	constant (no input): O(1)	P
+FintypeCat.toLightProfiniteFullyFaithful	Mathlib.Topology.Category.LightProfinite.Basic	P	constant (no input): O(1)	P
+LightProfinite.isTerminalPUnit	Mathlib.Topology.Category.LightProfinite.Limits	P	constant (no input): O(1)	P
+CondensedSet.LocallyConstant.functorFullyFaithful	Mathlib.Condensed.Discrete.LocallyConstant	P	constant (no input): O(1)	P
+LightCondSet.LocallyConstant.functorFullyFaithful	Mathlib.Condensed.Discrete.LocallyConstant	P	constant (no input): O(1)	P
+Sequential.fullyFaithfulSequentialToTop	Mathlib.Topology.Category.Sequential	P	constant (no input): O(1)	P
+LightCondSet.fullyFaithfulSequentialToLightCondSet	Mathlib.Condensed.Light.TopCatAdjunction	P	constant (no input): O(1)	P
+lightProfiniteToLightCondSetFullyFaithful	Mathlib.Condensed.Light.Functors	P	constant (no input): O(1)	P
+CompactlyGenerated.fullyFaithfulCompactlyGeneratedToTop	Mathlib.Topology.Category.CompactlyGenerated	P	constant (no input): O(1)	P
+CondensedSet.fullyFaithfulCompactlyGeneratedToCondensedSet	Mathlib.Condensed.TopCatAdjunction	P	constant (no input): O(1)	P
+Fin2.add	Mathlib.Data.Fin.Fin2	not P	Fin2 is unary; adding k (in binary) adds k constructors	not P
+Fin2.castSucc	Mathlib.Data.Fin.Fin2	P	same unary term	P
+Fin2.ctorIdx	Mathlib.Data.Fin.Fin2	P	inspect the head constructor	P
+Fin2.equivFin	Mathlib.Data.Fin.Fin2	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Fin2.fs	Mathlib.Data.Fin.Fin2	P	one constructor	P
+Fin2.fz	Mathlib.Data.Fin.Fin2	P	one constructor	P
+Fin2.insertPerm	Mathlib.Data.Fin.Fin2	P	output no larger than the input terms plus one	P
+Fin2.last	Mathlib.Data.Fin.Fin2	not P	unary term of size n; n is given in binary	not P
+Fin2.left	Mathlib.Data.Fin.Fin2	P	same unary term	P
+Fin2.ofFin	Mathlib.Data.Fin.Fin2	not P	binary to unary conversion	not P
+Fin2.ofNat'	Mathlib.Data.Fin.Fin2	not P	binary to unary conversion	not P
+Fin2.optOfNat	Mathlib.Data.Fin.Fin2	not P	binary to unary conversion	not P
+Fin2.remapLeft	Mathlib.Data.Fin.Fin2	not P	can output n + i in unary with n given in binary	not P
+Fin2.rev	Mathlib.Data.Fin.Fin2	not P	n-1-i in unary with n given in binary	not P
+Fin2.toFin	Mathlib.Data.Fin.Fin2	P	unary to binary	P
+Fin2.toNat	Mathlib.Data.Fin.Fin2	P	unary to binary	P
+FP.divNatLtTwoPow	Mathlib.Data.FP.Basic	P	compare n with d * 2^e via bit lengths	P
+Int.shift2	Mathlib.Data.FP.Basic	not P	shifting by e (in binary) produces e extra bits	not P
+Int.bit	Mathlib.Data.Int.Bitwise	P	bitwise	P
+Int.bitwise	Mathlib.Data.Int.Bitwise	P	bitwise (f is a 4-entry table)	P
+Int.bodd	Mathlib.Data.Int.Bitwise	P	parity	P
+Int.div2	Mathlib.Data.Int.Bitwise	P	shift	P
+Int.land	Mathlib.Data.Int.Bitwise	P	bitwise	P
+Int.ldiff	Mathlib.Data.Int.Bitwise	P	bitwise	P
+Int.lnot	Mathlib.Data.Int.Bitwise	P	bitwise	P
+Int.lor	Mathlib.Data.Int.Bitwise	P	bitwise	P
+Int.natBitwise	Mathlib.Data.Int.Bitwise	P	bitwise	P
+Int.xor	Mathlib.Data.Int.Bitwise	P	bitwise	P
+List.Ico	Mathlib.Data.List.Intervals	not P	output has m - n elements	not P
+Nat.dist	Mathlib.Data.Nat.Dist	P	arithmetic	P
+Nat.ceilRoot	Mathlib.Data.Nat.Factorization.Root	open	for large n this is the radical of a; computing the radical has no known poly-time algorithm	open
+Nat.floorRoot	Mathlib.Data.Nat.Factorization.Root	open	for n = 2 this is the largest s with s^2 dividing a; squarefree decomposition is open	open
+List.IsZeckendorfRep	Mathlib.Data.Nat.Fib.Zeckendorf	P	list check	P
+Nat.greatestFib	Mathlib.Data.Nat.Fib.Zeckendorf	P	O(log n) Fibonacci numbers up to n	P
+Nat.zeckendorf	Mathlib.Data.Nat.Fib.Zeckendorf	P	greedy, O(log n) steps	P
+hyperoperation	Mathlib.Data.Nat.Hyperoperation	not P	includes exponentiation and tetration	not P
+Nat.maxPrimeFac	Mathlib.Data.Nat.MaxPrimeFac	open	largest prime factor; factoring-type problem	open
+Ordnode.delta	Mathlib.Data.Ordmap.Ordnode	P	constant (no input): O(1)	P
+Ordnode.ratio	Mathlib.Data.Ordmap.Ordnode	P	constant (no input): O(1)	P
+Ordnode.BalancedSz	Mathlib.Data.Ordmap.Invariants	P	arithmetic comparison	P
+Ordnode.Raised	Mathlib.Data.Ordmap.Invariants	P	arithmetic comparison	P
+PNat.gcdA'	Mathlib.Data.PNat.Xgcd	P	extended Euclid	P
+PNat.gcdB'	Mathlib.Data.PNat.Xgcd	P	extended Euclid	P
+PNat.gcdD	Mathlib.Data.PNat.Xgcd	P	extended Euclid	P
+PNat.gcdW	Mathlib.Data.PNat.Xgcd	P	extended Euclid	P
+PNat.gcdX	Mathlib.Data.PNat.Xgcd	P	extended Euclid	P
+PNat.gcdY	Mathlib.Data.PNat.Xgcd	P	extended Euclid	P
+PNat.gcdZ	Mathlib.Data.PNat.Xgcd	P	extended Euclid	P
+PNat.XgcdType.succ₂	Mathlib.Data.PNat.Xgcd	P	arithmetic	P
+UInt8.isASCIIAlpha	Mathlib.Data.UInt	P	finite type	P
+UInt8.isASCIIAlphanum	Mathlib.Data.UInt	P	finite type	P
+UInt8.isASCIIDigit	Mathlib.Data.UInt	P	finite type	P
+UInt8.isASCIILower	Mathlib.Data.UInt	P	finite type	P
+UInt8.isASCIIUpper	Mathlib.Data.UInt	P	finite type	P
+WType.NatαEquivPUnitSumPUnit	Mathlib.Data.W.Constructions	P	constant (no input): O(1)	P
+FirstOrder.Field.eqZero	Mathlib.ModelTheory.Algebra.Field.CharP	uncertain	defined via Classical.choice (some term representing n), so the definition does not determine its complexity	uncertain
+FirstOrder.Field.genericMonicPoly	Mathlib.ModelTheory.Algebra.Field.IsAlgClosed	not P	free-ring element with n+1 distinct terms	not P
+FirstOrder.Field.genericMonicPolyHasRoot	Mathlib.ModelTheory.Algebra.Field.IsAlgClosed	not P	sentence with n universal quantifiers	not P
+Affine.Simplex.pointIndexEmbedding	Mathlib.Geometry.Euclidean.Circumcenter	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+Affine.Simplex.PointsWithCircumcenterIndex.circumcenterIndex	Mathlib.Geometry.Euclidean.Circumcenter	P	one constructor	P
+Affine.Simplex.PointsWithCircumcenterIndex.ctorIdx	Mathlib.Geometry.Euclidean.Circumcenter	P	inspect the head constructor	P
+Affine.Simplex.PointsWithCircumcenterIndex.pointIndex	Mathlib.Geometry.Euclidean.Circumcenter	P	one constructor	P
+Affine.Simplex.PointsWithCircumcenterIndex.proxyTypeEquiv	Mathlib.Geometry.Euclidean.Circumcenter	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+DihedralGroup.reciprocalFactors	Mathlib.GroupTheory.CommutingProbability	P	recursion halves n, so O(log n) steps	P
+Subgroup.cardCommutatorBound	Mathlib.GroupTheory.Schreier	not P	(n^(2n))^(n^(2n+1)+1)	not P
+RootPairing.EmbeddedG2.allCoeffs	Mathlib.LinearAlgebra.RootSystem.Finite.G2	P	constant (no input): O(1)	P
+Equiv.boolNot	Mathlib.Logic.Equiv.Bool	P	constant (no input): O(1)	P
+Nat.beta	Mathlib.Logic.Godel.GodelBetaFunction	P	unpair and mod	P
+Nat.unbeta	Mathlib.Logic.Godel.GodelBetaFunction	not P	contains the factorial of the largest entry	not P
+FirstOrder.Language.adj	Mathlib.ModelTheory.Graph	P	constant (no input): O(1)	P
+ADEInequality.A	Mathlib.NumberTheory.ADEInequality	P	constant-size multiset	P
+ADEInequality.A'	Mathlib.NumberTheory.ADEInequality	P	constant-size multiset	P
+ADEInequality.Admissible	Mathlib.NumberTheory.ADEInequality	P	finite check	P
+ADEInequality.D'	Mathlib.NumberTheory.ADEInequality	P	constant-size multiset	P
+ADEInequality.E'	Mathlib.NumberTheory.ADEInequality	P	constant-size multiset	P
+ADEInequality.E6	Mathlib.NumberTheory.ADEInequality	P	constant (no input): O(1)	P
+ADEInequality.E7	Mathlib.NumberTheory.ADEInequality	P	constant (no input): O(1)	P
+ADEInequality.E8	Mathlib.NumberTheory.ADEInequality	P	constant (no input): O(1)	P
+ADEInequality.sumInv	Mathlib.NumberTheory.ADEInequality	P	rational arithmetic	P
+Nat.IsAlmostPrime	Mathlib.NumberTheory.AlmostPrime	open	counting prime factors with multiplicity; no poly-time algorithm known (k = 2 is semiprime recognition)	open
+Nat.IsAtMostAlmostPrime	Mathlib.NumberTheory.AlmostPrime	open	counting prime factors; no poly-time algorithm known	open
+Nat.IsSemiprime	Mathlib.NumberTheory.AlmostPrime	open	semiprime recognition; no poly-time algorithm known	open
+ZMod.unitFive	Mathlib.RingTheory.ZMod.UnitsCyclic	not P	the inverse of 5 mod 2^n has about n bits; n is given in binary	not P
+bernoulli	Mathlib.NumberTheory.Bernoulli	not P	the numerator of B_n has about n log n bits	not P
+bernoulli'	Mathlib.NumberTheory.Bernoulli	not P	the numerator of B_n has about n log n bits	not P
+Polynomial.bernoulli	Mathlib.NumberTheory.BernoulliPolynomials	not P	n+1 coefficients	not P
+Nat.primeCounting	Mathlib.NumberTheory.PrimeCounting	open	best algorithms take about n^(2/3) time (exponential in log n); no lower bound known	open
+Nat.primeCounting'	Mathlib.NumberTheory.PrimeCounting	open	same as primeCounting	open
+Nat.primesBelow	Mathlib.NumberTheory.PrimeCounting	not P	about n / ln n elements	not P
+Nat.primesLE	Mathlib.NumberTheory.PrimeCounting	not P	about n / ln n elements	not P
+primorial	Mathlib.NumberTheory.Primorial	not P	n# = e^(n(1+o(1)))	not P
+Nat.FermatPsp	Mathlib.NumberTheory.FermatPsp	P	modular exponentiation plus AKS	P
+Nat.ProbablePrime	Mathlib.NumberTheory.FermatPsp	P	modular exponentiation	P
+Mathlib.Meta.Simproc.FactorsHelper	Mathlib.Tactic.Simproc.Factors	P	check sortedness, primality (AKS) and the product	P
+Nat.IsCarmichael	Mathlib.NumberTheory.CarmichaelNumber	open	Korselt's criterion needs the factorization; no poly-time algorithm known	open
+Nat.lcmUpto	Mathlib.NumberTheory.Chebyshev	not P	lcm(1..n) = e^(n(1+o(1)))	not P
+PadicInt.modPart	Mathlib.NumberTheory.Padics.RingHoms	P	modular arithmetic	P
+Zsqrtd.Nonnegg	Mathlib.NumberTheory.Zsqrtd.Basic	P	arithmetic comparison	P
+Zsqrtd.SqLe	Mathlib.NumberTheory.Zsqrtd.Basic	P	arithmetic comparison	P
+Pell.az	Mathlib.NumberTheory.PellMatiyasevic	P	coercion	P
+Pell.pell	Mathlib.NumberTheory.PellMatiyasevic	not P	x_n is about (a + sqrt(a^2-1))^n, exponentially long in log n	not P
+Pell.xn	Mathlib.NumberTheory.PellMatiyasevic	not P	exponentially long output	not P
+Pell.xz	Mathlib.NumberTheory.PellMatiyasevic	not P	exponentially long output	not P
+Pell.yn	Mathlib.NumberTheory.PellMatiyasevic	not P	exponentially long output	not P
+Pell.yz	Mathlib.NumberTheory.PellMatiyasevic	not P	exponentially long output	not P
+Nat.roughNumbersUpTo	Mathlib.NumberTheory.SmoothNumbers	not P	can contain about N elements	not P
+Nat.smoothNumbersUpTo	Mathlib.NumberTheory.SmoothNumbers	not P	can contain about N elements	not P
+RiemannHypothesis	Mathlib.NumberTheory.LSeries.RiemannZeta	P	constant (no input): O(1)	P
+FermatLastTheorem	Mathlib.NumberTheory.FLT.Basic	P	constant (no input): O(1)	P
+FermatLastTheoremFor	Mathlib.NumberTheory.FLT.Basic	P	known value for every n (Wiles): false exactly for n = 1, 2	P
+PythagoreanTriple	Mathlib.NumberTheory.PythagoreanTriples	P	arithmetic check	P
+PythagoreanTriple.IsClassified	Mathlib.NumberTheory.PythagoreanTriples	P	always true (PythagoreanTriple.classified)	P
+PythagoreanTriple.IsPrimitiveClassified	Mathlib.NumberTheory.PythagoreanTriples	P	candidate m, n come from integer square roots; then check gcd and parity	P
+Fermat42	Mathlib.NumberTheory.FLT.Four	P	always false (not_fermat_42)	P
+Fermat42.Minimal	Mathlib.NumberTheory.FLT.Four	P	always false (no solutions exist)	P
+Rat.infinitePlace	Mathlib.NumberTheory.NumberField.InfinitePlace.Basic	P	constant (no input): O(1)	P
+NumberField.hermiteTheorem.rankOfDiscrBdd	Mathlib.NumberTheory.NumberField.Discriminant.Basic	P	floor(log(9N/4)/log(3pi/4)); a transcendence measure for pi bounds the precision needed by poly(log N) bits	P
+Nat.Abundant	Mathlib.NumberTheory.FactorisationProperties	open	needs sigma(n); no poly-time algorithm known	open
+Nat.Deficient	Mathlib.NumberTheory.FactorisationProperties	open	needs sigma(n); no poly-time algorithm known	open
+Nat.Pseudoperfect	Mathlib.NumberTheory.FactorisationProperties	open	subset sum over divisors; no poly-time algorithm known	open
+Nat.Weird	Mathlib.NumberTheory.FactorisationProperties	open	abundant and not pseudoperfect; no poly-time algorithm known	open
+Nat.abundancyIndex	Mathlib.NumberTheory.FactorisationProperties	open	sigma(n)/n; randomized-equivalent to factoring	open
+legendreSym	Mathlib.NumberTheory.LegendreSymbol.Basic	P	quadratic reciprocity / Euler's criterion	P
+Nat.fermatNumber	Mathlib.NumberTheory.Fermat	not P	2^(2^n) + 1	not P
+jacobiSym	Mathlib.NumberTheory.LegendreSymbol.JacobiSymbol	P	quadratic reciprocity	P
+qrSign	Mathlib.NumberTheory.LegendreSymbol.JacobiSymbol	P	parities	P
+mersenne	Mathlib.NumberTheory.LucasLehmer	not P	2^p - 1 has p bits; input has log p bits	not P
+LucasLehmer.LucasLehmerTest	Mathlib.NumberTheory.LucasLehmer	open	equivalent to primality of 2^p - 1 for p given in binary; no poly(log p) test or lower bound known	open
+LucasLehmer.q	Mathlib.NumberTheory.LucasLehmer	open	minFac(2^p - 1); no poly(log p) algorithm or lower bound known	open
+LucasLehmer.s	Mathlib.NumberTheory.LucasLehmer	not P	s_i is about 4^(2^i)	not P
+LucasLehmer.sMod	Mathlib.NumberTheory.LucasLehmer	not P	output can have about p bits with p given in binary	not P
+LucasLehmer.ωUnit	Mathlib.NumberTheory.LucasLehmer	open	requires q p = minFac(2^p - 1)	open
+LucasLehmer.norm_num_ext.sModNat	Mathlib.NumberTheory.LucasLehmer	open	(2+sqrt 3)^(2^i) mod q: like sequential squaring, believed hard without the factorization of q, but no lower bound known	open
+LucasLehmer.norm_num_ext.sModNatAux	Mathlib.NumberTheory.LucasLehmer	open	sequential squaring mod q	open
+LucasLehmer.norm_num_ext.sModNatTR	Mathlib.NumberTheory.LucasLehmer	open	sequential squaring mod q	open
+LucasLehmer.norm_num_ext.sModNat_aux	Mathlib.NumberTheory.LucasLehmer	open	sequential squaring mod q	open
+LucasLehmer.norm_num_ext.sModNatTR.go	Mathlib.NumberTheory.LucasLehmer	open	sequential squaring mod q	open
+EisensteinSeries.divIntMap	Mathlib.NumberTheory.ModularForms.EisensteinSeries.Defs	P	table map	P
+EisensteinSeries.finGcdMap	Mathlib.NumberTheory.ModularForms.EisensteinSeries.Defs	P	gcd	P
+divisorsAntidiagonalFactors	Mathlib.NumberTheory.TsumDivisorsAntidiagonal	P	projection	P
+Fin.invAccumulate	Mathlib.RingTheory.MvPolynomial.Symmetric.FundamentalTheorem	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+WittVector.wittAdd	Mathlib.RingTheory.WittVector.Defs	not P	the n = 1 polynomial already has p - 1 monomials; p is given in binary	not P
+WittVector.wittMul	Mathlib.RingTheory.WittVector.Defs	not P	the n = 2 polynomial has about p^2/2 monomials (from M_1^p)	not P
+WittVector.wittNSMul	Mathlib.RingTheory.WittVector.Defs	not P	coefficient (k - k^p)/p at n = 1 has about p log k bits	not P
+WittVector.wittNeg	Mathlib.RingTheory.WittVector.Defs	uncertain	for odd p this is -X_n (poly); for p = 2 the size growth in n is unclear	uncertain
+WittVector.wittOne	Mathlib.RingTheory.WittVector.Defs	P	1 or 0	P
+WittVector.wittPow	Mathlib.RingTheory.WittVector.Defs	not P	the n = 1 polynomial has about k monomials	not P
+WittVector.wittSub	Mathlib.RingTheory.WittVector.Defs	not P	the n = 1 polynomial already has p - 1 monomials	not P
+WittVector.wittZSMul	Mathlib.RingTheory.WittVector.Defs	not P	coefficients with about p log |k| bits	not P
+WittVector.wittZero	Mathlib.RingTheory.WittVector.Defs	P	zero polynomial	P
+WittVector.onePoly	Mathlib.RingTheory.WittVector.IsPoly	P	1 or 0	P
+WittVector.frobeniusPoly	Mathlib.RingTheory.WittVector.Frobenius	not P	the n = 1 polynomial has about p monomials	not P
+WittVector.frobeniusPolyAux	Mathlib.RingTheory.WittVector.Frobenius	not P	the n = 1 polynomial has about p monomials	not P
+WittVector.frobeniusPolyRat	Mathlib.RingTheory.WittVector.Frobenius	not P	the n = 1 polynomial has about p monomials	not P
+WittVector.verschiebungPoly	Mathlib.RingTheory.WittVector.Verschiebung	P	a single variable	P
+WittVector.wittMulN	Mathlib.RingTheory.WittVector.MulP	not P	coefficients with about p log n bits	not P
+Polynomial.hermite	Mathlib.RingTheory.Polynomial.Hermite.Basic	not P	about n/2 nonzero coefficients	not P
+Polynomial.shiftedLegendre	Mathlib.RingTheory.Polynomial.ShiftedLegendre	not P	n+1 coefficients	not P
+TruncatedWittVector.zmodEquivTrunc	Mathlib.RingTheory.WittVector.Compare	not P	output is a bundled map/structure (equivalence, embedding, permutation, graph, coloring, simplex) on a finite type of size exponential in the input's bit length, written out as a full table	P
+WittVector.polyOfInterest	Mathlib.RingTheory.WittVector.MulCoeff	not P	contains wittMul p (n+1)	not P
+WittVector.remainder	Mathlib.RingTheory.WittVector.MulCoeff	P	product of two (n+1)-term sums with binary exponents	P
+WittVector.wittPolyProd	Mathlib.RingTheory.WittVector.MulCoeff	P	product of two Witt polynomials, (n+1)^2 monomials	P
+WittVector.wittPolyProdRemainder	Mathlib.RingTheory.WittVector.MulCoeff	not P	equals wittPolyProd - p^n * wittMul p n	not P
+ONote.fastGrowingε₀	Mathlib.SetTheory.Ordinal.Notation	not P	fast-growing hierarchy at ε₀	not P
+Ordinal.toZFSetIso	Mathlib.SetTheory.ZFC.Ordinal	P	constant (no input): O(1)	P
+Inclusion.IntervalDyadicReal.expPartialSumNum	Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Exp	not P	common denominator b^n n! with n given in binary	not P
+Inclusion.IntervalDyadicReal.smallArtanh	Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Log	not P	n-term partial sum with n given in binary	not P
+Inclusion.IntervalDyadicReal.smallArtanh.go	Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Log	not P	binary splitting over [a, b) with bounds given in binary	not P
+Mathlib.Meta.NormNum.findNotPowerCertificateCore	Mathlib.Tactic.NormNum.Irrational	P	bisection, O(log m) steps	P
+Mathlib.Meta.NormNum.jacobiSymNat	Mathlib.Tactic.NormNum.LegendreSymbol	P	quadratic reciprocity	P
+Mathlib.Tactic.Primality.lucasCheck	Mathlib.Tactic.Primality.Lucas	P	modular exponentiation	P
+Mathlib.Tactic.Primality.powMod	Mathlib.Tactic.Primality.Lucas	P	modular exponentiation	P
+Mathlib.Tactic.Primality.normNumBound	Mathlib.Tactic.Primality.Producers	P	constant (no input): O(1)	P
+DeltaGenerated.fullyFaithfulDeltaGeneratedToTop	Mathlib.Topology.Category.DeltaGenerated	P	constant (no input): O(1)	P
